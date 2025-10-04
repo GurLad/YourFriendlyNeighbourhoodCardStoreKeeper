@@ -11,12 +11,28 @@ config_version=5
 [application]
 
 config/name="Your Friendly Neighbourhood Card Store Keeper"
-config/features=PackedStringArray("4.5", "Mobile")
+config/features=PackedStringArray("4.5", "C#", "Mobile")
 config/icon="res://icon.svg"
 
 [dotnet]
 
 project/assembly_name="Your Friendly Neighbourhood Card Store Keeper"
+
+[file_customization]
+
+folder_colors={
+"res://Fonts/": "red",
+"res://Scenes/": "orange",
+"res://Scripts/": "yellow",
+"res://Scripts/Cards/": "green",
+"res://Scripts/Customers/": "teal",
+"res://Scripts/GodotUtils/": "blue",
+"res://Scripts/Inventory/": "purple",
+"res://Scripts/Loaders/": "pink",
+"res://Scripts/UI/": "red",
+"res://Sound/": "orange",
+"res://Sprites/": "yellow"
+}
 
 [rendering]
 
