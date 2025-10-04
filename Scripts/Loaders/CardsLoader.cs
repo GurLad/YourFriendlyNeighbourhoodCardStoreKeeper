@@ -14,7 +14,7 @@ public partial class CardsLoader : Node
             "Fluffy Pirate",
             Rarity.Common,
             "FluffyPirate",
-            "Summon Hamster",
+            "Hamster",
             "\a\"Yaaaaaar! I'm a-pirate!\"",
             2,
             2,
@@ -50,7 +50,7 @@ public partial class CardsLoader : Node
 
     public static Texture2D GetArt(string artPath)
     {
-        string path = "@res://Sprites/CardArt/" + artPath;
+        string path = "res://Sprites/CardArt/" + artPath + ".png";
         if (ResourceLoader.Exists(path)) return ResourceLoader.Load<Texture2D>(path);
         return Instance.missingArt;
     }

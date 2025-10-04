@@ -48,11 +48,18 @@ public partial class CardRenderer : Node
         }
         Desc.Text = desc;
         Mana.Text = data.Cost.ToString();
-        Power.Text = data.Power.ToString();
-        Toughness.Text = data.Toughness.ToString();
+        Power.Text = data.Power >= 0 ? data.Power.ToString() : "";
+        Toughness.Text = data.Toughness >= 0 ? data.Toughness.ToString() : "";
         Image.Texture = data.Art;
         FoilFilter.Visible = data.Foil;
         FoilFilter.Texture = MaskRarityFrames[(int)data.Rarity];
         CardFrame.Texture = (data.Junk ? JunkRarityFrames : RarityFrames)[(int)data.Rarity];
+
+        // Dumb fix
+        if (data.Rarity == Rarity.Uncommon)
+        {
+            Name.Text = " " + Name.Text;
+            Type.Text = " " + Type.Text;
+        }
     }
 }
