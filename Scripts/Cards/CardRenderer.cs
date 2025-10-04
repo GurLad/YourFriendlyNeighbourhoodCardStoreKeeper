@@ -24,6 +24,14 @@ public partial class CardRenderer : Node
     [Export] private Color FlavourTextModulate;
     [Export] private Color NormalTextModulate;
 
+    public override void _Ready()
+    {
+        base._Ready();
+        // TEMP
+
+        Render(CardsLoader.GetCard(ExtensionMethods.RNG.Next(0, CardsLoader.Count)));
+    }
+
     public void Render(CardData data)
     {
         Name.Text = data.Name;

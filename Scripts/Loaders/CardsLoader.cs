@@ -43,6 +43,8 @@ public partial class CardsLoader : Node
         cards.ForEach(a => a.Art = GetArt(a.ArtPath));
     }
 
+    public static int Count => Instance.cards.Count;
+
     public static CardData GetCard(int id) => Instance.cards[id];
 
     public static Texture2D GetArt(string artPath) => ResourceLoader.Load<Texture2D>("@res://Sprites/CardArt/" + artPath) ?? Instance.missingArt;

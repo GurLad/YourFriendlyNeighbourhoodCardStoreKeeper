@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://d4ebnmmp11yhb"]
+
+[ext_resource type="Texture2D" uid="uid://dgrdxfodscdc7" path="res://Sprites/CardFrames/Common.png" id="1_n0met"]
+[ext_resource type="Material" uid="uid://kc0c2w7ag8l8" path="res://Shaders/FoilShaderMaterial.tres" id="2_7xqwd"]
+[ext_resource type="Texture2D" uid="uid://dxs4o0x7si0mg" path="res://Sprites/CardFrames/MaskCommon.png" id="2_qgii3"]
+
+[node name="CardRenderer" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Frame" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -64.0
+offset_right = 48.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_n0met")
+stretch_mode = 2
+
+[node name="FoilFilter" type="TextureRect" parent="."]
+material = ExtResource("2_7xqwd")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -64.0
+offset_right = 48.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_qgii3")
+stretch_mode = 2

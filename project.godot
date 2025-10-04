@@ -30,8 +30,9 @@ folder_colors={
 "res://Scripts/Inventory/": "purple",
 "res://Scripts/Loaders/": "pink",
 "res://Scripts/UI/": "red",
-"res://Sound/": "orange",
-"res://Sprites/": "yellow"
+"res://Shaders/": "orange",
+"res://Sound/": "yellow",
+"res://Sprites/": "green"
 }
 
 [rendering]

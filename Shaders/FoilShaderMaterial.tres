@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://kc0c2w7ag8l8"]
+
+[ext_resource type="Shader" uid="uid://bptkk8a6sv7ul" path="res://Shaders/FoilShader.gdshader" id="1_ec0b5"]
+
+[resource]
+shader = ExtResource("1_ec0b5")
+shader_parameter/rate = -0.5
+shader_parameter/slant = 0.5
+shader_parameter/alpha = 0.15
