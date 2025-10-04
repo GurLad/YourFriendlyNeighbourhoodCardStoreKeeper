@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class InventoryCardRenderer : Node
+public partial class InventoryCardRenderer : Control
 {
     [Export] private CardRenderer cardRenderer;
     [Export] private Button buySellButton;

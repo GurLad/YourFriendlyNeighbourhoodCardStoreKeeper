@@ -1,6 +1,8 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
-public partial class InventoryData : Node
+public class InventoryData
 {
+    public List<AInventoryCard> Cards { get; } = new List<AInventoryCard>();
 }

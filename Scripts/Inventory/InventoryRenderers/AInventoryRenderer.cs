@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public abstract partial class AInventoryRenderer : Control
 {
     [Export] private PackedScene sceneCardRenderer;
+    [Export] private MultiPageGridContainer gridContainer;
 
     [ExportCategory("Interploator vars")]
     [Export] private float ShowHideTime = 0.3f;
@@ -23,9 +24,8 @@ public abstract partial class AInventoryRenderer : Control
         TotalMouseBlock.Block();
         StoreController.Pause();
         interpolator.Interpolate(ShowHideTime,
-            new Interpolator.InterpolateObject(
-                a => Modulate = a,
-                Modulate,
+            Interpolator.InterpolateObject.ModulateFadeInterpolate(
+                this,
                 Colors.White,
                 Easing.EaseInOutSin
             ));
@@ -37,9 +37,8 @@ public abstract partial class AInventoryRenderer : Control
         TotalMouseBlock.Block();
         StoreController.Pause();
         interpolator.Interpolate(ShowHideTime,
-            new Interpolator.InterpolateObject(
-                a => Modulate = a,
-                Modulate,
+            Interpolator.InterpolateObject.ModulateFadeInterpolate(
+                this,
                 Colors.Transparent,
                 Easing.EaseInOutSin
             ));
@@ -53,6 +52,7 @@ public abstract partial class AInventoryRenderer : Control
         InitButton(renderer);
         renderer.OnButtonPressed += OnButtonPressed;
         renderers.Add(renderer);
+        gridContainer.AddItem(renderer);
         return renderer;
     }
 
@@ -60,6 +60,8 @@ public abstract partial class AInventoryRenderer : Control
     {
         renderers.ForEach(a => a.UpdateCanPress());
     }
+
+    protected abstract List<AInventoryCard> Filter(InventoryData data);
 
     protected abstract void Render(List<AInventoryCard> datas);
 
