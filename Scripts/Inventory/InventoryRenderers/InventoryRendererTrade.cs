@@ -4,21 +4,31 @@ using System.Collections.Generic;
 
 public partial class InventoryRendererTrade : AInventoryRenderer
 {
-    [Export] private GridContainer cardsGrid;
+    private InventoryData inventory;
 
     protected override List<AInventoryCard> Filter(InventoryData data) => data.Cards.FindAll(a => a is InventoryIDCard);
 
-    protected override void Render(List<AInventoryCard> datas)
+    public override void Render(InventoryData inventory)
     {
-        foreach (InventoryIDCard data in datas.ConvertAll(a => (InventoryIDCard)a))
+        this.inventory = inventory;
+        foreach (InventoryIDCard data in inventory.Cards.ConvertAll(a => (InventoryIDCard)a))
         {
-            InventoryCardRenderer renderer = RenderItem(data.Data);
-            cardsGrid.AddChild(renderer);
+            InventoryCardRenderer renderer = RenderItem(data);
         }
     }
 
-    protected override string InitButton(InventoryCardRenderer renderer)
+    protected override void InitButton(InventoryCardRenderer renderer)
     {
-        throw new NotImplementedException();
+        renderer.InitButton(
+            "Buy (" + renderer.Card.Data.Price + "$)",
+            () => MoneyController.CurrentAmount >= renderer.Card.Data.Price,
+            () =>
+            {
+                inventory.Cards.Remove(renderer.Card);
+                gridContainer.RemoveItem(renderer);
+                MoneyController.SpendMoney(renderer.Card.Data.Price);
+                PlayerInventoryController.AddCard(renderer.Card);
+            }
+        );
     }
 }

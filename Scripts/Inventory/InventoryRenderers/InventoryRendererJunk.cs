@@ -6,12 +6,12 @@ public partial class InventoryRendererJunk : AInventoryRenderer
 {
     protected override List<AInventoryCard> Filter(InventoryData data) => data.Cards.FindAll(a => a is InventoryJunkCard);
 
-    protected override void Render(List<AInventoryCard> datas)
+    public override void Render(InventoryData inventory)
     {
         throw new NotImplementedException();
     }
 
-    protected override string InitButton(InventoryCardRenderer renderer)
+    protected override void InitButton(InventoryCardRenderer renderer)
     {
         throw new NotImplementedException();
     }

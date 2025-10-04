@@ -7,15 +7,17 @@ public partial class InventoryCardRenderer : Control
     [Export] private Button buySellButton;
     [Export] private Label newLabel;
 
+    public AInventoryCard Card { get; private set; }
+
     private bool inited = false;
     private Func<bool> canPress = null;
 
     [Signal]
     public delegate void OnButtonPressedEventHandler();
 
-    public void Render(CardData data, bool isNew)
+    public void Render(AInventoryCard card, bool isNew)
     {
-        cardRenderer.Render(data);
+        cardRenderer.Render((Card = card).Data);
         newLabel.Visible = isNew;
     }
 

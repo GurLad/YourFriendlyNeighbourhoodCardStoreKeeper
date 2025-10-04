@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 public abstract partial class AInventoryRenderer : Control
 {
+    [Export] protected MultiPageGridContainer gridContainer;
     [Export] private PackedScene sceneCardRenderer;
-    [Export] private MultiPageGridContainer gridContainer;
 
     [ExportCategory("Interploator vars")]
     [Export] private float ShowHideTime = 0.3f;
@@ -45,10 +45,10 @@ public abstract partial class AInventoryRenderer : Control
         interpolator.OnFinish = TotalMouseBlock.Unblock;
     }
 
-    protected InventoryCardRenderer RenderItem(CardData data, bool isNew = false)
+    protected InventoryCardRenderer RenderItem(AInventoryCard card, bool isNew = false)
     {
         InventoryCardRenderer renderer = sceneCardRenderer.Instantiate<InventoryCardRenderer>();
-        renderer.Render(data, isNew);
+        renderer.Render(card, isNew);
         InitButton(renderer);
         renderer.OnButtonPressed += OnButtonPressed;
         renderers.Add(renderer);
@@ -61,9 +61,9 @@ public abstract partial class AInventoryRenderer : Control
         renderers.ForEach(a => a.UpdateCanPress());
     }
 
+    public abstract void Render(InventoryData inventory);
+
     protected abstract List<AInventoryCard> Filter(InventoryData data);
 
-    protected abstract void Render(List<AInventoryCard> datas);
-
-    protected abstract string InitButton(InventoryCardRenderer renderer);
+    protected abstract void InitButton(InventoryCardRenderer renderer);
 }
