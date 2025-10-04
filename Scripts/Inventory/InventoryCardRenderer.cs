@@ -24,7 +24,7 @@ public partial class InventoryCardRenderer : Control
     private CardData data;
     public CardData Data
     {
-        get => Card.Data ?? data;
+        get => card?.Data ?? data;
         private set => data = value;
     }
 

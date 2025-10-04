@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bisko1xy6pjyw"]
+[gd_scene load_steps=8 format=3 uid="uid://bisko1xy6pjyw"]
 
 [ext_resource type="FontFile" uid="uid://d1lf6n8cp7jk4" path="res://Fonts/Born2bSportyV2.ttf" id="1_fb1wb"]
 [ext_resource type="Script" uid="uid://bvohfqubj5nyf" path="res://Scripts/Inventory/InventoryCardRenderer.cs" id="1_oejf1"]
@@ -11,6 +11,13 @@ texture = ExtResource("3_ojy4q")
 texture_margin_left = 6.0
 texture_margin_right = 6.0
 axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dhkvd"]
+texture = ExtResource("3_ojy4q")
+texture_margin_left = 6.0
+texture_margin_right = 6.0
+axis_stretch_vertical = 1
+modulate_color = Color(1, 1, 1, 0.45882353)
 
 [node name="InventoryCardRenderer" type="VBoxContainer" node_paths=PackedStringArray("cardRenderer", "buySellButton", "buySellButtonLabel", "newLabel")]
 offset_right = 16.0
@@ -55,6 +62,10 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_ojy4q")
 theme_override_styles/normal = SubResource("StyleBoxTexture_fb1wb")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_fb1wb")
+theme_override_styles/hover = SubResource("StyleBoxTexture_fb1wb")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_dhkvd")
+theme_override_styles/focus = SubResource("StyleBoxTexture_fb1wb")
 clip_text = true
 
 [node name="Label" type="Label" parent="Button"]

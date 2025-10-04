@@ -27,13 +27,14 @@ public partial class MultiPageGridContainer : Control
         base._Ready();
         AddChild(interpolator);
         interpolator.InterruptMode = Interpolator.Mode.Error;
-        CreateGrid();
+        CreateGrid().Modulate = Colors.White;
     }
 
     private GridContainer CreateGrid()
     {
         GridContainer grid = (GridContainer)baseGrid.Duplicate();
         grid.Visible = true;
+        grid.Modulate = Colors.Transparent;
         grids.Add(grid);
         gridsContainer.AddChild(grid);
         return grid;
