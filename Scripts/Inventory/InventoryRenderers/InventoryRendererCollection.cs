@@ -29,7 +29,6 @@ public partial class InventoryRendererCollection : AInventoryRenderer
             if (matching.Count > 0)
             {
                 InventoryIDCard best = matching.Find(a => a.Foil) ?? matching[0];
-                GD.Print(best.Foil + " - " + best.Data.Foil);
                 renderData = best.Data.Clone();
                 renderData.Price = matching.Count > 1 ? matching.FindAll(a => a != best).Sum(a => a.Data.Price) : 0;
                 owned = true;
@@ -52,7 +51,10 @@ public partial class InventoryRendererCollection : AInventoryRenderer
     {
         renderer.InitButton(
             renderer.Data.Price > 0 ? "Sell Copies (" + renderer.Data.Price + "$)" : "No Duplicates",
-            () => renderer.Data.Price > 0,
+            () =>
+            {
+                return renderer.Data.Price > 0;
+            },
             () =>
             {
                 PlayerInventoryController.TrySell(() =>
@@ -64,6 +66,7 @@ public partial class InventoryRendererCollection : AInventoryRenderer
                     MoneyController.GainMoney(renderer.Data.Price);
                     renderer.Data.Price = 0;
                     renderer.UpdateButtonText("No Duplicates");
+                    renderer.UpdateCanPress();
                 });
             }
         );

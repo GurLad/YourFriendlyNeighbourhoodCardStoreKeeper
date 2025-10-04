@@ -37,7 +37,7 @@ public class CardData
         {
             if (price < 0)
             {
-                price = 5 * ((int)Rarity + (Rarity == Rarity.Rare ? 1 : 0));
+                price = 5 * (1 + (int)Rarity + (Rarity == Rarity.Rare ? 1 : 0));
                 if (Foil) price *= 2;
             }
             return price;
@@ -93,6 +93,7 @@ public class CardData
             Toughness,
             Foil
         );
+        clone.ID = ID;
         clone.Junk = Junk;
         clone.art = art;
         clone.price = price;

@@ -28,6 +28,7 @@ public partial class MultiPageGridContainer : Control
         AddChild(interpolator);
         interpolator.InterruptMode = Interpolator.Mode.Error;
         CreateGrid().Modulate = Colors.White;
+        EnableDisableNextPrevButtons();
 
         nextButton.Pressed += NextGrid;
         prevButton.Pressed += PrevGrid;

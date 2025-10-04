@@ -27,6 +27,7 @@ public partial class InventoryRendererJunk : AInventoryRenderer
                     inventory.Cards.Remove(renderer.Card);
                     gridContainer.RemoveItem(renderer);
                     MoneyController.GainMoney(renderer.Card.Data.Price);
+                    OnButtonPressed();
                 });
             }
         );
