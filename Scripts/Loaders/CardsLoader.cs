@@ -23,7 +23,7 @@ public partial class CardsLoader : Node
         new CardData(
             "Hidden Squirrel",
             Rarity.Common,
-            "HiddenSquirrel",
+            "SquirrelSurprise",
             "Instant",
             "Create a tapped and attacking 1/1 squirrel token.",
             2
@@ -53,13 +53,13 @@ public partial class CardsLoader : Node
             Rarity.Common,
             "HauntedHallway",
             "Instant",
-            "Attacking creatures get -2/-2 this turn.",
+            "Attacking summons get -2/-2 this turn.",
             3
         ),
         new CardData(
             "Underpaid Intern",
             Rarity.Common,
-            "PostMorterm",
+            "PostMortem",
             "Hamster",
             "Tap to draw a card and flip a coin. If you lose the flip, this hamster dies.",
             3,
@@ -89,7 +89,7 @@ public partial class CardsLoader : Node
             Rarity.Common,
             "RoundAndRound",
             "Enchantment",
-            "Tap enchanted creature at the beginning of each turn.",
+            "Tap enchanted summon at the beginning of each turn.",
             2
         ),
         new CardData(
@@ -105,7 +105,7 @@ public partial class CardsLoader : Node
             Rarity.Common,
             "GoHam",
             "Instant",
-            "Attacking creatures get +3/+0 this turn.",
+            "Attacking summons get +3/+0 this turn.",
             4
         ),
         new CardData(
@@ -123,7 +123,7 @@ public partial class CardsLoader : Node
             Rarity.Common,
             "WinterNap",
             "Instant",
-            "Return target creature to its owner's hand.",
+            "Return target summon to its owner's hand.",
             1
         ),
         new CardData(
@@ -159,13 +159,13 @@ public partial class CardsLoader : Node
             Rarity.Common,
             "ColossalDreadmaw",
             "Squirrel",
-            "Trample (This creature can deal excess combat damage to the player it's attacking.)",
+            "Trample (This summon can deal excess combat damage to the player it's attacking.)",
             6,
             6,
             6
         ),
         new CardData(
-            "Hamster Artificer",
+            "Artificer",
             Rarity.Uncommon,
             "HamsterArtificer",
             "Hamster",
@@ -179,7 +179,7 @@ public partial class CardsLoader : Node
             Rarity.Uncommon,
             "UnlikelyAllies",
             "Sorcery",
-            "Return a Hamster and a Squirrel from your graveyard to the battlefield.",
+            "Return a Hamster and a Squirrel from your graveyard to play.",
             5
         ),
         new CardData(
@@ -193,15 +193,15 @@ public partial class CardsLoader : Node
         new CardData(
             "Night Ambush",
             Rarity.Uncommon,
-            "NightAmbush",
+            "StylishDistraction",
             "Instant",
-            "Destroy target attacking or blocking creature.",
+            "Destroy target attacking or blocking summon.",
             1
         ),
         new CardData(
             "Dread Summoner",
             Rarity.Uncommon,
-            "DreadSummoner",
+            "DreadNecromancer",
             "Hamster",
             "When summoned, create a 1/1 Skeleton token.",
             1,
@@ -239,7 +239,7 @@ public partial class CardsLoader : Node
             Rarity.Uncommon,
             "Backstab",
             "Instant",
-            "Target attacking creature fights another target attacking creature.",
+            "Target attacking summon fights another target attacking summon.",
             3
         ),
         new CardData(
@@ -253,7 +253,7 @@ public partial class CardsLoader : Node
         new CardData(
             "Sudden Adoption",
             Rarity.Uncommon,
-            "SuddenAdoption",
+            "AggressiveAdoption",
             "Instant",
             "Gain control of target summon spell.",
             4
@@ -311,15 +311,15 @@ public partial class CardsLoader : Node
             Rarity.Rare,
             "SwordOfLight",
             "Equipment Item",
-            "Equipped creature gains +2/+2 for each Hamster you control.",
+            "Equipped summon gains +2/+2 for each Hamster you control.",
             5
         ),
         new CardData(
             "Darkness Blade",
             Rarity.Rare,
-            "Blade of Darkness",
+            "BladeOfDarkness",
             "Equipment Item",
-            "Choose a number X. Equipped creature and creatures you don't control both get +X/+X.",
+            "Choose a number X. Equipped summon and all enemy summons get\n+X/+X.",
             5
         ),
         new CardData(
@@ -327,7 +327,7 @@ public partial class CardsLoader : Node
             Rarity.Rare,
             "Horror",
             "Sorcery",
-            "A player takes 1 damage, discards 2 cards, sacrifices 3 creatures, and loses the game",
+            "A player takes 1 damage, discards 2 cards, sacrifices 3 summons, and loses the game",
             9
         ),
         new CardData(
@@ -343,7 +343,7 @@ public partial class CardsLoader : Node
             Rarity.Rare,
             "EllaRealmtraveler",
             "Realmtraveler",
-            "Tap to start a subgame. The loser of the subgame loses 20 life.",
+            "Tap to start a subgame. The loser of the subgame loses 20 life.\n",
             7,
             7,
             7
@@ -351,9 +351,9 @@ public partial class CardsLoader : Node
         new CardData(
             "Happy Rainbows",
             Rarity.Rare,
-            "HappyRainbows",
+            "SunshineRainbows",
             "Hamster",
-            "When summoned, destroy all other creatures.",
+            "When summoned, destroy all other summons.",
             6,
             9,
             1

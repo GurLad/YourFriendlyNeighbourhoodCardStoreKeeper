@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d2mlq0g0nblfn"
-path="res://.godot/imported/Legend Mercenary.png-f74727463684ffaeafe1b3d74afdb4f2.ctex"
+path="res://.godot/imported/LegendMercenary.png-809afdb18a8eb12eddedfa98f758dc8c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/CardArt/Legend Mercenary.png"
-dest_files=["res://.godot/imported/Legend Mercenary.png-f74727463684ffaeafe1b3d74afdb4f2.ctex"]
+source_file="res://Sprites/CardArt/LegendMercenary.png"
+dest_files=["res://.godot/imported/LegendMercenary.png-809afdb18a8eb12eddedfa98f758dc8c.ctex"]
 
 [params]
 

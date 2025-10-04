@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c6hjmmgryqgf2"
-path="res://.godot/imported/RoundAndound.png-4c667552f7e5ec50e18c6bc02f6b72bf.ctex"
+path="res://.godot/imported/RoundAndRound.png-e0bb3d6d157d9ade37f0a5902c9bee11.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/CardArt/RoundAndound.png"
-dest_files=["res://.godot/imported/RoundAndound.png-4c667552f7e5ec50e18c6bc02f6b72bf.ctex"]
+source_file="res://Sprites/CardArt/RoundAndRound.png"
+dest_files=["res://.godot/imported/RoundAndRound.png-e0bb3d6d157d9ade37f0a5902c9bee11.ctex"]
 
 [params]
 
