@@ -19,6 +19,7 @@ public class InventoryJunkCard : AInventoryCard
             ExtensionMethods.RNG.Next(-1, 10),
             foil ?? ExtensionMethods.RNG.NextDouble() <= 0.125f
         );
+        data.Junk = true;
     }
 
     protected override bool EqualInternal(AInventoryCard other)

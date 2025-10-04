@@ -11,13 +11,23 @@ public partial class CardsLoader : Node
     private List<CardData> cards = new List<CardData>()
     {
         new CardData(
-            "HAMSTR/X",
+            "Fluffy Pirate",
             Rarity.Common,
+            "FluffyPirate",
+            "Summon Hamster",
+            "\a\"Yaaaaaar! I'm a-pirate!\"",
+            2,
+            2,
+            2
+        ),
+        new CardData(
+            "HAMSTR/X",
+            Rarity.Uncommon,
             "HAMSTRIX",
             "Sorcery",
             "Summon three 3/1 Hamster tokens.",
             5
-        )
+        ),
     };
 
     public override void _Ready()
@@ -30,8 +40,10 @@ public partial class CardsLoader : Node
         }
         Instance = this;
 
-        cards.ForEach(a => a.Art = ResourceLoader.Load<Texture2D>("@res://Sprites/CardArt/" + a.ArtPath) ?? missingArt);
+        cards.ForEach(a => a.Art = GetArt(a.ArtPath));
     }
 
     public static CardData GetCard(int id) => Instance.cards[id];
+
+    public static Texture2D GetArt(string artPath) => ResourceLoader.Load<Texture2D>("@res://Sprites/CardArt/" + artPath) ?? Instance.missingArt;
 }

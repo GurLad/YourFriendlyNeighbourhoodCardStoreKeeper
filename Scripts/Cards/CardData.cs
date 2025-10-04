@@ -21,7 +21,14 @@ public class CardData
     public int Toughness { get; init; } = -1;
 
     public bool Foil { get; set; } = false;
-    public Texture2D Art { get; set; }
+    public bool Junk { get; set; } = false;
+
+    private Texture2D art { get; set; }
+    public Texture2D Art
+    {
+        get => art ??= CardsLoader.GetArt(ArtPath);
+        set => art = value;
+    }
 
     public CardData(string name, Rarity rarity, string artPath, string type, string desc, int cost)
     {
