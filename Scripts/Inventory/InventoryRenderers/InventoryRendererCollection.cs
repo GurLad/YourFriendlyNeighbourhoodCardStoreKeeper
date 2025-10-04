@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public partial class InventoryRendererCollection : AInventoryRenderer
 {
+    [Export] private Color lockedModulate = Colors.Black;
+
     private InventoryData inventory;
 
     public override void Render(InventoryData inventory)
@@ -15,18 +17,24 @@ public partial class InventoryRendererCollection : AInventoryRenderer
         {
             CardData renderData = null;
             List<InventoryIDCard> matching = relevant.FindAll(a => a.ID == i);
+            bool owned = false;
             if (matching.Count > 0)
             {
                 InventoryIDCard best = matching.Find(a => a.Foil) ?? matching[0];
                 renderData = best.Data.Clone();
                 renderData.Price = matching.Count > 1 ? matching.FindAll(a => a != best).Sum(a => a.Data.Price) : 0;
+                owned = true;
             }
             else
             {
                 renderData = allCards[i].Clone();
                 renderData.Price = 0;
             }
-            RenderItem(renderData, inventory.IsNewCard(i));
+            InventoryCardRenderer renderer = RenderItem(renderData, inventory.IsNewCard(i));
+            if (!owned)
+            {
+                renderer.Modulate = lockedModulate;
+            }
         }
     }
 

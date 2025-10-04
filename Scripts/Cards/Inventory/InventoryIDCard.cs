@@ -9,12 +9,12 @@ public class InventoryIDCard : AInventoryCard
     private CardData data { get; init; }
     public override CardData Data => CardsLoader.GetCard(ID);
 
-    public InventoryIDCard(int id, bool foil)
+    public InventoryIDCard(int id, bool? foil = null)
     {
         ID = id;
-        Foil = foil;
+        Foil = foil ?? ExtensionMethods.RNG.NextDouble() <= 0.125f;
         data = CardsLoader.GetCard(ID).Clone();
-        if (foil)
+        if (Foil)
         {
             data.Foil = true;
             data.Price = -1;

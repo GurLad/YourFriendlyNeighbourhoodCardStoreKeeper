@@ -66,28 +66,28 @@ public static class ExtensionMethods
         return (float)(random.NextDouble() * (maxValue - minValue) + minValue);
     }
 
-    // public static T RandomItemInList<T>(this List<T> list)
-    // {
-    //     return list.Count > 0 ? list[rng.Next(0, list.Count)] : default;
-    // }
+    public static T RandomItemInList<T>(this List<T> list)
+    {
+        return list.Count > 0 ? list[RNG.Next(0, list.Count)] : default;
+    }
 
-    // public static T RandomItemInList<T>(this T[] list)
-    // {
-    //     return list.Length > 0 ? list[rng.Next(0, list.Length)] : default;
-    // }
+    public static T RandomItemInList<T>(this T[] list)
+    {
+        return list.Length > 0 ? list[RNG.Next(0, list.Length)] : default;
+    }
 
-    // public static List<T> Shuffle<T>(this List<T> list)
-    // {
-    //     List<T> temp = list.FindAll(a => true);
-    //     list = new List<T>();
-    //     while (temp.Count > 0)
-    //     {
-    //         int i = rng.Next(0, temp.Count);
-    //         list.Add(temp[i]);
-    //         temp.RemoveAt(i);
-    //     }
-    //     return list;
-    // }
+    public static List<T> Shuffle<T>(this List<T> list)
+    {
+        List<T> temp = list.FindAll(a => true);
+        list = new List<T>();
+        while (temp.Count > 0)
+        {
+            int i = RNG.Next(0, temp.Count);
+            list.Add(temp[i]);
+            temp.RemoveAt(i);
+        }
+        return list;
+    }
 
     // Timers
 

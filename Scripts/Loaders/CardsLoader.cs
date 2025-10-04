@@ -400,6 +400,21 @@ public partial class CardsLoader : Node
 
     public static List<CardData> GetAllCards() => Instance.cards.ConvertAll(a => a);
 
+    public static CardData RandomCard(Rarity? forceRarity = null)
+    {
+        if (forceRarity != null)
+        {
+            return Instance.cards.FindAll(a => a.Rarity == (forceRarity ?? a.Rarity)).RandomItemInList();
+        }
+        else
+        {
+            double res = ExtensionMethods.RNG.NextDouble();
+            if (res >= 0.9f) return RandomCard(Rarity.Rare);
+            if (res >= 0.6f) return RandomCard(Rarity.Uncommon);
+            return RandomCard(Rarity.Common);
+        }
+    }
+
     public static Texture2D GetArt(string artPath)
     {
         string path = "res://Sprites/CardArt/" + artPath + ".png";
