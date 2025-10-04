@@ -28,6 +28,7 @@ public partial class CardsLoader : Node
             "Summon three 3/1 Hamster tokens.",
             5
         ),
+         // A player takes 1 damage, discards 2 cards, sacrifices 3 creatures, and loses the game
     };
 
     public override void _Ready()

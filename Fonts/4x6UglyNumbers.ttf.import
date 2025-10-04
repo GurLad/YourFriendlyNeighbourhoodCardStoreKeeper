@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bfmrwnia06q0e"
-path="res://.godot/imported/4x6Numbers.ttf-1626702d0882156decb9e2fe4dc28af7.fontdata"
+uid="uid://b52dth8s4yoes"
+path="res://.godot/imported/4x6UglyNumbers.ttf-b2ededce25c8e7cadcc52046eea0d8db.fontdata"
 
 [deps]
 
-source_file="res://Fonts/4x6Numbers.ttf"
-dest_files=["res://.godot/imported/4x6Numbers.ttf-1626702d0882156decb9e2fe4dc28af7.fontdata"]
+source_file="res://Fonts/4x6UglyNumbers.ttf"
+dest_files=["res://.godot/imported/4x6UglyNumbers.ttf-b2ededce25c8e7cadcc52046eea0d8db.fontdata"]
 
 [params]
 
@@ -24,7 +24,7 @@ force_autohinter=false
 modulate_color_glyphs=false
 hinting=0
 subpixel_positioning=0
-keep_rounding_remainders=false
+keep_rounding_remainders=true
 oversampling=0.0
 Fallbacks=null
 fallbacks=[]

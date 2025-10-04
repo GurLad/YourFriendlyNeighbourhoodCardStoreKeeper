@@ -7,7 +7,6 @@
 [ext_resource type="Material" uid="uid://kc0c2w7ag8l8" path="res://Shaders/FoilShaderMaterial.tres" id="2_7xqwd"]
 [ext_resource type="Texture2D" uid="uid://dpcqqbe70m47o" path="res://Sprites/CardArt/HAMSTRIX.png" id="2_jrr73"]
 [ext_resource type="Texture2D" uid="uid://dxs4o0x7si0mg" path="res://Sprites/CardFrames/MaskCommon.png" id="2_qgii3"]
-[ext_resource type="FontFile" uid="uid://bfmrwnia06q0e" path="res://Fonts/4x6Numbers.ttf" id="3_vlb1y"]
 [ext_resource type="FontFile" uid="uid://d7a3purs8sv" path="res://Fonts/3x5Mk2MinSpace.ttf" id="4_5v2jq"]
 [ext_resource type="Texture2D" uid="uid://cfa72nmahb08u" path="res://Sprites/CardFrames/Rare.png" id="5_71bab"]
 [ext_resource type="Texture2D" uid="uid://b42w1ynp1fmwu" path="res://Sprites/CardFrames/JunkCommon.png" id="6_88kem"]
@@ -15,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dka66o6yrupri" path="res://Sprites/CardFrames/JunkRare.png" id="8_ostvy"]
 [ext_resource type="Texture2D" uid="uid://ixsvy82lda53" path="res://Sprites/CardFrames/MaskUncommon.png" id="10_fpqva"]
 [ext_resource type="Texture2D" uid="uid://f8meiikglphv" path="res://Sprites/CardFrames/MaskRare.png" id="11_criqp"]
+[ext_resource type="FontFile" uid="uid://b52dth8s4yoes" path="res://Fonts/4x6UglyNumbers.ttf" id="15_88kem"]
 
 [node name="CardRenderer" type="Control" node_paths=PackedStringArray("Name", "Type", "Desc", "Mana", "Power", "Toughness", "Image", "CardFrame", "FoilFilter")]
 layout_mode = 3
@@ -76,7 +76,7 @@ stretch_mode = 3
 
 [node name="Type" type="Label" parent="Frame/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Summon Hamster"
+text = "Hamster"
 text_overrun_behavior = 3
 
 [node name="Control2" type="Control" parent="Frame/MarginContainer/VBoxContainer"]
@@ -93,7 +93,7 @@ text = "A player takes 1 damage, discards 2 cards, sacrifices 3 creatures, and l
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
-text_overrun_behavior = 3
+text_overrun_behavior = 2
 
 [node name="Cost" type="Label" parent="Frame"]
 layout_mode = 1
@@ -105,9 +105,9 @@ offset_top = 2.0
 offset_right = -2.0
 offset_bottom = 14.0
 grow_horizontal = 0
-theme_override_fonts/font = ExtResource("3_vlb1y")
+theme_override_fonts/font = ExtResource("15_88kem")
 theme_override_font_sizes/font_size = 6
-text = "8"
+text = "2"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -121,9 +121,10 @@ offset_top = -12.0
 offset_right = 16.0
 offset_bottom = -2.0
 grow_vertical = 0
-theme_override_fonts/font = ExtResource("3_vlb1y")
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("15_88kem")
 theme_override_font_sizes/font_size = 6
-text = "8"
+text = "2"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -140,9 +141,9 @@ offset_right = -2.0
 offset_bottom = -1.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_fonts/font = ExtResource("3_vlb1y")
+theme_override_fonts/font = ExtResource("15_88kem")
 theme_override_font_sizes/font_size = 6
-text = "8"
+text = "2"
 horizontal_alignment = 1
 vertical_alignment = 1
 

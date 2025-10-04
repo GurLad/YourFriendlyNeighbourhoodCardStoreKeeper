@@ -37,7 +37,7 @@ public partial class CardRenderer : Node
         Name.Text = data.Name;
         Type.Text = data.Type;
         string desc = data.Desc;
-        if (desc.StartsWith("\a"))
+        if (desc.StartsWith('\a'))
         {
             Desc.SelfModulate = FlavourTextModulate;
             desc = desc.Substring(1);
