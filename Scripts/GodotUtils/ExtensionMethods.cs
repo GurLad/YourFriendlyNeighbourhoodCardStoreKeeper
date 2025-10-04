@@ -2,7 +2,6 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using System.Text.Json;
 
 public static class ExtensionMethods
@@ -244,7 +243,7 @@ public static class ExtensionMethods
         return result;
     }
 
-    public static S Sum<T, S>(this List<T> list, Func<T, S> toNum) where S : INumber<S>
+    public static S Sum<T, S>(this List<T> list, Func<T, S> toNum) where S : System.Numerics.INumber<S>
     {
         S result = default;
         list.ForEach(a => result += toNum(a));

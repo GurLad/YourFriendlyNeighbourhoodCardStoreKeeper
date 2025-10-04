@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4i3pnw631kbi"]
+
+[ext_resource type="Script" uid="uid://bbfimggdfxfxq" path="res://Scripts/Inventory/InventoryRenderers/InventoryRendererCollection.cs" id="1_qx1aq"]
+[ext_resource type="PackedScene" uid="uid://bvqmhs4j6oojj" path="res://Scenes/UI/MultiPageGird.tscn" id="1_tlkg5"]
+[ext_resource type="PackedScene" uid="uid://bisko1xy6pjyw" path="res://Scenes/Renderers/InventoryCardRenderer.tscn" id="2_u75ti"]
+
+[node name="InventoryRendererCollection" type="Control" node_paths=PackedStringArray("gridContainer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qx1aq")
+lockedModulate = Color(1, 1, 1, 0.6627451)
+gridContainer = NodePath("MultiPageGird")
+sceneCardRenderer = ExtResource("2_u75ti")
+
+[node name="MultiPageGird" parent="." instance=ExtResource("1_tlkg5")]
+layout_mode = 1

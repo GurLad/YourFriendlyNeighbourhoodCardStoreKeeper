@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://bisko1xy6pjyw"]
+
+[ext_resource type="FontFile" uid="uid://d1lf6n8cp7jk4" path="res://Fonts/Born2bSportyV2.ttf" id="1_fb1wb"]
+[ext_resource type="Script" uid="uid://bvohfqubj5nyf" path="res://Scripts/Inventory/InventoryCardRenderer.cs" id="1_oejf1"]
+[ext_resource type="PackedScene" uid="uid://d4ebnmmp11yhb" path="res://Scenes/Renderers/CardRenderer.tscn" id="1_ojy4q"]
+[ext_resource type="FontFile" uid="uid://cyylcxs1wedke" path="res://Fonts/TinyUnicode.ttf" id="2_ojy4q"]
+[ext_resource type="Texture2D" uid="uid://bkxlnieiuo4xs" path="res://Sprites/UI/GemButtonSmall.png" id="3_ojy4q"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fb1wb"]
+texture = ExtResource("3_ojy4q")
+texture_margin_left = 6.0
+texture_margin_right = 6.0
+axis_stretch_vertical = 1
+
+[node name="InventoryCardRenderer" type="VBoxContainer" node_paths=PackedStringArray("cardRenderer", "buySellButton", "buySellButtonLabel", "newLabel")]
+offset_right = 16.0
+offset_bottom = 24.0
+script = ExtResource("1_oejf1")
+cardRenderer = NodePath("CardRenderer")
+buySellButton = NodePath("Button")
+buySellButtonLabel = NodePath("Button/Label")
+newLabel = NodePath("CardRenderer/New")
+
+[node name="CardRenderer" parent="." instance=ExtResource("1_ojy4q")]
+layout_mode = 2
+
+[node name="New" type="RichTextLabel" parent="CardRenderer"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -8.0
+offset_right = 20.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/default_color = Color(0.91764706, 0.6784314, 0.92941177, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = ExtResource("1_fb1wb")
+bbcode_enabled = true
+text = "[wave amp=19 freq=6.5 connected=true]NEW!!![/wave]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_ojy4q")
+theme_override_styles/normal = SubResource("StyleBoxTexture_fb1wb")
+clip_text = true
+
+[node name="Label" type="Label" parent="Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_ojy4q")
+text = "Sell Copies (9999$)"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -6,6 +6,8 @@ public partial class PlayerInventoryController : Node
 {
     private static PlayerInventoryController Instance;
 
+    public static InventoryData Inventory => Instance.inventory;
+
     private InventoryData inventory = new InventoryData();
 
     public override void _Ready()

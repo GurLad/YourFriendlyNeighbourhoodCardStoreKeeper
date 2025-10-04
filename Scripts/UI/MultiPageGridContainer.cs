@@ -7,8 +7,8 @@ public partial class MultiPageGridContainer : Control
     [ExportCategory("Nodes")]
     [Export] private GridContainer baseGrid;
     [Export] private Container gridsContainer;
-    [Export] private Button nextButton;
-    [Export] private Button prevButton;
+    [Export] private BaseButton nextButton;
+    [Export] private BaseButton prevButton;
 
     [ExportCategory("Vars")]
     [Export] private int maxItemsPerPage = 8;
@@ -27,13 +27,13 @@ public partial class MultiPageGridContainer : Control
         base._Ready();
         AddChild(interpolator);
         interpolator.InterruptMode = Interpolator.Mode.Error;
-        CreateGrid().Visible = true;
+        CreateGrid();
     }
 
     private GridContainer CreateGrid()
     {
         GridContainer grid = (GridContainer)baseGrid.Duplicate();
-        grid.Visible = false;
+        grid.Visible = true;
         grids.Add(grid);
         gridsContainer.AddChild(grid);
         return grid;

@@ -17,6 +17,7 @@
 [ext_resource type="FontFile" uid="uid://b52dth8s4yoes" path="res://Fonts/4x6UglyNumbers.ttf" id="15_88kem"]
 
 [node name="CardRenderer" type="Control" node_paths=PackedStringArray("Name", "Type", "Desc", "Mana", "Power", "Toughness", "Image", "CardFrame", "FoilFilter")]
+custom_minimum_size = Vector2(96, 128)
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("1_xk32w")

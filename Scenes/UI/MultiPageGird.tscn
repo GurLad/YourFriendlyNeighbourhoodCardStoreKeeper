@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvqmhs4j6oojj"]
+
+[ext_resource type="Script" uid="uid://b12mxahsme4sf" path="res://Scripts/UI/MultiPageGridContainer.cs" id="1_eoxwf"]
+[ext_resource type="Texture2D" uid="uid://cg2al8lyp8bid" path="res://Sprites/UI/LeftRightButton.png" id="1_kvpj3"]
+[ext_resource type="Texture2D" uid="uid://8bah0hce2njo" path="res://Sprites/UI/LeftRightButtonPressed.png" id="2_eoxwf"]
+[ext_resource type="Texture2D" uid="uid://s4okb3p8skiv" path="res://Sprites/UI/LeftRightButtonHighlight.png" id="3_sxogy"]
+
+[node name="MultiPageGird" type="HBoxContainer" node_paths=PackedStringArray("baseGrid", "gridsContainer", "nextButton", "prevButton")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_eoxwf")
+baseGrid = NodePath("CenterContainer/BaseGrid")
+gridsContainer = NodePath("CenterContainer")
+nextButton = NodePath("Prev")
+prevButton = NodePath("Next")
+
+[node name="Prev" type="TextureButton" parent="."]
+layout_mode = 2
+texture_normal = ExtResource("1_kvpj3")
+texture_pressed = ExtResource("2_eoxwf")
+texture_hover = ExtResource("3_sxogy")
+stretch_mode = 3
+
+[node name="CenterContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BaseGrid" type="GridContainer" parent="CenterContainer"]
+visible = false
+layout_mode = 2
+columns = 4
+
+[node name="Next" type="TextureButton" parent="."]
+layout_mode = 2
+texture_normal = ExtResource("1_kvpj3")
+texture_pressed = ExtResource("2_eoxwf")
+texture_hover = ExtResource("3_sxogy")
+stretch_mode = 3
+flip_h = true

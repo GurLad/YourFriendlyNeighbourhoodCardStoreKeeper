@@ -5,7 +5,8 @@ public partial class InventoryCardRenderer : Control
 {
     [Export] private CardRenderer cardRenderer;
     [Export] private Button buySellButton;
-    [Export] private Label newLabel;
+    [Export] private Label buySellButtonLabel;
+    [Export] private RichTextLabel newLabel;
 
     private AInventoryCard card;
     public AInventoryCard Card
@@ -54,7 +55,7 @@ public partial class InventoryCardRenderer : Control
         }
         inited = true;
         this.canPress = canPress;
-        buySellButton.Text = text;
+        buySellButtonLabel.Text = text;
         buySellButton.Pressed += onPressed;
         buySellButton.Pressed += () => EmitSignal(SignalName.OnButtonPressed);
         UpdateCanPress();
@@ -62,5 +63,5 @@ public partial class InventoryCardRenderer : Control
 
     public void UpdateCanPress() => buySellButton.Disabled = !canPress();
 
-    public void UpdateButtonText(string newVal) => buySellButton.Text = newVal;
+    public void UpdateButtonText(string newVal) => buySellButtonLabel.Text = newVal;
 }

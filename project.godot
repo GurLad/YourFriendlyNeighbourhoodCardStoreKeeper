@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 CardsLoader="*res://Scenes/Loaders/CardsLoader.tscn"
+DebugAllLoader="*res://Scenes/Loaders/DebugAllLoader.tscn"
 
 [display]
 

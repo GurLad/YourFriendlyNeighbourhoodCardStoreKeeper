@@ -8,6 +8,14 @@ public partial class InventoryRendererCollection : AInventoryRenderer
 
     private InventoryData inventory;
 
+    public override void _Ready()
+    {
+        base._Ready();
+        // TEMP
+
+        Render(PlayerInventoryController.Inventory);
+    }
+
     public override void Render(InventoryData inventory)
     {
         this.inventory = inventory;
@@ -41,7 +49,7 @@ public partial class InventoryRendererCollection : AInventoryRenderer
     protected override void InitButton(InventoryCardRenderer renderer)
     {
         renderer.InitButton(
-            renderer.Data.Price > 0 ? "Sell Duplicates (" + renderer.Data.Price + "$)" : "No Duplicates",
+            renderer.Data.Price > 0 ? "Sell Copies (" + renderer.Data.Price + "$)" : "No Duplicates",
             () => renderer.Data.Price > 0,
             () =>
             {
