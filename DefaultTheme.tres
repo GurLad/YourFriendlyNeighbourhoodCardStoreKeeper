@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bw2shwfv7sv7u"]
+
+[ext_resource type="FontFile" uid="uid://fm5wvn4p8p45" path="res://Fonts/FindersKeepers.ttf" id="1_ihngy"]
+
+[resource]
+default_font = ExtResource("1_ihngy")

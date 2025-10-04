@@ -14,6 +14,16 @@ config/name="Your Friendly Neighbourhood Card Store Keeper"
 config/features=PackedStringArray("4.5", "C#", "Mobile")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/size/resizable=false
+window/size/window_width_override=1920
+window/size/window_height_override=1080
+window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
+
 [dotnet]
 
 project/assembly_name="Your Friendly Neighbourhood Card Store Keeper"
@@ -35,6 +45,43 @@ folder_colors={
 "res://Sprites/": "green"
 }
 
+[gui]
+
+theme/default_font_antialiasing=0
+theme/default_font_hinting=0
+theme/default_font_subpixel_positioning=0
+theme/custom="uid://bw2shwfv7sv7u"
+
+[importer_defaults]
+
+font_data_dynamic={
+"Compress": null,
+"Fallbacks": null,
+"Rendering": null,
+"allow_system_fallback": true,
+"antialiasing": 0,
+"compress": true,
+"disable_embedded_bitmaps": true,
+"fallbacks": [],
+"force_autohinter": false,
+"generate_mipmaps": false,
+"hinting": 0,
+"keep_rounding_remainders": true,
+"language_support": {},
+"modulate_color_glyphs": false,
+"msdf_pixel_range": 8,
+"msdf_size": 48,
+"multichannel_signed_distance_field": false,
+"opentype_features": {},
+"oversampling": 0.0,
+"preload": [],
+"script_support": {},
+"subpixel_positioning": 0
+}
+
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true
