@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://b4sahcy723egt"]
+[gd_scene load_steps=3 format=3 uid="uid://b4sahcy723egt"]
 
 [ext_resource type="Script" uid="uid://3sa34ya45ibe" path="res://Scripts/Loaders/CardsLoader.cs" id="1_ilg5f"]
+[ext_resource type="Texture2D" uid="uid://boob4qv45ge1x" path="res://Sprites/CardArt/Test.png" id="2_uu5t3"]
 
 [node name="CardsLoader" type="Node"]
 script = ExtResource("1_ilg5f")
+missingArt = ExtResource("2_uu5t3")

@@ -1,17 +1,40 @@
-[gd_scene load_steps=8 format=3 uid="uid://d4ebnmmp11yhb"]
+[gd_scene load_steps=16 format=3 uid="uid://d4ebnmmp11yhb"]
 
 [ext_resource type="Texture2D" uid="uid://dgrdxfodscdc7" path="res://Sprites/CardFrames/Common.png" id="1_n0met"]
 [ext_resource type="Theme" uid="uid://cicwyo4744hgk" path="res://CardTheme.tres" id="1_xk32w"]
+[ext_resource type="Script" uid="uid://dywkaayiffi6t" path="res://Scripts/Cards/CardRenderer.cs" id="2_2c4k5"]
+[ext_resource type="Texture2D" uid="uid://y0wmn0u45edw" path="res://Sprites/CardFrames/Uncommon.png" id="2_5v2jq"]
 [ext_resource type="Material" uid="uid://kc0c2w7ag8l8" path="res://Shaders/FoilShaderMaterial.tres" id="2_7xqwd"]
 [ext_resource type="Texture2D" uid="uid://dpcqqbe70m47o" path="res://Sprites/CardArt/HAMSTRIX.png" id="2_jrr73"]
 [ext_resource type="Texture2D" uid="uid://dxs4o0x7si0mg" path="res://Sprites/CardFrames/MaskCommon.png" id="2_qgii3"]
 [ext_resource type="FontFile" uid="uid://bfmrwnia06q0e" path="res://Fonts/4x6Numbers.ttf" id="3_vlb1y"]
 [ext_resource type="FontFile" uid="uid://d7a3purs8sv" path="res://Fonts/3x5Mk2MinSpace.ttf" id="4_5v2jq"]
+[ext_resource type="Texture2D" uid="uid://cfa72nmahb08u" path="res://Sprites/CardFrames/Rare.png" id="5_71bab"]
+[ext_resource type="Texture2D" uid="uid://b42w1ynp1fmwu" path="res://Sprites/CardFrames/JunkCommon.png" id="6_88kem"]
+[ext_resource type="Texture2D" uid="uid://dqjm2mufoq6la" path="res://Sprites/CardFrames/JunkUncommon.png" id="7_e7qly"]
+[ext_resource type="Texture2D" uid="uid://dka66o6yrupri" path="res://Sprites/CardFrames/JunkRare.png" id="8_ostvy"]
+[ext_resource type="Texture2D" uid="uid://ixsvy82lda53" path="res://Sprites/CardFrames/MaskUncommon.png" id="10_fpqva"]
+[ext_resource type="Texture2D" uid="uid://f8meiikglphv" path="res://Sprites/CardFrames/MaskRare.png" id="11_criqp"]
 
-[node name="CardRenderer" type="Control"]
+[node name="CardRenderer" type="Control" node_paths=PackedStringArray("Name", "Type", "Desc", "Mana", "Power", "Toughness", "Image", "CardFrame", "FoilFilter")]
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("1_xk32w")
+script = ExtResource("2_2c4k5")
+Name = NodePath("Frame/MarginContainer/VBoxContainer/Name")
+Type = NodePath("Frame/MarginContainer/VBoxContainer/Type")
+Desc = NodePath("Frame/MarginContainer/VBoxContainer/Desc")
+Mana = NodePath("Frame/Cost")
+Power = NodePath("Frame/Power")
+Toughness = NodePath("Frame/Toughness")
+Image = NodePath("Frame/MarginContainer/VBoxContainer/Art")
+CardFrame = NodePath("Frame")
+FoilFilter = NodePath("FoilFilter")
+RarityFrames = Array[Texture2D]([ExtResource("1_n0met"), ExtResource("2_5v2jq"), ExtResource("5_71bab")])
+JunkRarityFrames = Array[Texture2D]([ExtResource("6_88kem"), ExtResource("7_e7qly"), ExtResource("8_ostvy")])
+MaskRarityFrames = Array[Texture2D]([ExtResource("2_qgii3"), ExtResource("10_fpqva"), ExtResource("11_criqp")])
+NormalTextModulate = Color(0.78039217, 0.8627451, 0.8156863, 1)
+FlavourTextModulate = Color(0.60784316, 0.67058825, 0.69803923, 1)
 
 [node name="Frame" type="TextureRect" parent="."]
 layout_mode = 1
@@ -30,6 +53,7 @@ grow_vertical = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Frame/MarginContainer"]
 layout_mode = 2
@@ -44,14 +68,15 @@ text_overrun_behavior = 3
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Frame/MarginContainer/VBoxContainer"]
+[node name="Art" type="TextureRect" parent="Frame/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(88, 56)
 layout_mode = 2
 texture = ExtResource("2_jrr73")
 stretch_mode = 3
 
 [node name="Type" type="Label" parent="Frame/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Sorcery"
+text = "Summon Hamster"
 text_overrun_behavior = 3
 
 [node name="Control2" type="Control" parent="Frame/MarginContainer/VBoxContainer"]
@@ -59,13 +84,14 @@ custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 
 [node name="Desc" type="Label" parent="Frame/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 29)
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("4_5v2jq")
 theme_override_font_sizes/font_size = 5
 text = "A player takes 1 damage, discards 2 cards, sacrifices 3 creatures, and loses the game"
 horizontal_alignment = 1
+vertical_alignment = 1
 autowrap_mode = 3
 text_overrun_behavior = 3
 

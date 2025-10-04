@@ -47,5 +47,10 @@ public partial class CardsLoader : Node
 
     public static CardData GetCard(int id) => Instance.cards[id];
 
-    public static Texture2D GetArt(string artPath) => ResourceLoader.Load<Texture2D>("@res://Sprites/CardArt/" + artPath) ?? Instance.missingArt;
+    public static Texture2D GetArt(string artPath)
+    {
+        string path = "@res://Sprites/CardArt/" + artPath;
+        if (ResourceLoader.Exists(path)) return ResourceLoader.Load<Texture2D>(path);
+        return Instance.missingArt;
+    }
 }

@@ -21,8 +21,8 @@ public partial class CardRenderer : Node
     [Export] private Texture2D[] MaskRarityFrames;
 
     [ExportCategory("Vars")]
-    [Export] private Color FlavourTextModulate;
     [Export] private Color NormalTextModulate;
+    [Export] private Color FlavourTextModulate;
 
     public override void _Ready()
     {

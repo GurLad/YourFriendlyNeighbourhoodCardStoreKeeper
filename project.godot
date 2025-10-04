@@ -14,6 +14,10 @@ config/name="Your Friendly Neighbourhood Card Store Keeper"
 config/features=PackedStringArray("4.5", "C#", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+CardsLoader="*res://Scenes/Loaders/CardsLoader.tscn"
+
 [display]
 
 window/size/viewport_width=640
