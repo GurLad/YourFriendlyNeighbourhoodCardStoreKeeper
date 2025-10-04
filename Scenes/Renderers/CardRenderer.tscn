@@ -61,7 +61,7 @@ theme_override_constants/separation = 0
 
 [node name="Name" type="Label" parent="Frame/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Very Real Card"
+text = "Colossal Dreadrel"
 text_overrun_behavior = 3
 
 [node name="Control" type="Control" parent="Frame/MarginContainer/VBoxContainer"]
@@ -76,7 +76,7 @@ stretch_mode = 3
 
 [node name="Type" type="Label" parent="Frame/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Hamster"
+text = "Instant Squirrel"
 text_overrun_behavior = 3
 
 [node name="Control2" type="Control" parent="Frame/MarginContainer/VBoxContainer"]
