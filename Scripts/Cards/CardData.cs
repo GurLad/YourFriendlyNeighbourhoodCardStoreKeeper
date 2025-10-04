@@ -29,6 +29,20 @@ public class CardData
         get => art ??= CardsLoader.GetArt(ArtPath);
         set => art = value;
     }
+    private int price = -1;
+    public int Price
+    {
+        get
+        {
+            if (price < 0)
+            {
+                price = 5 * ((int)Rarity + (Rarity == Rarity.Rare ? 1 : 0));
+                if (Foil) price *= 2;
+            }
+            return price;
+        }
+        set => price = value;
+    }
 
     public CardData(string name, Rarity rarity, string artPath, string type, string desc, int cost)
     {
@@ -63,5 +77,24 @@ public class CardData
         Power = power;
         Toughness = toughness;
         Foil = foil;
+    }
+
+    public CardData Clone()
+    {
+        CardData clone = new CardData(
+            Name,
+            Rarity,
+            ArtPath,
+            Type,
+            Desc,
+            Cost,
+            Power,
+            Toughness,
+            Foil
+        );
+        clone.Junk = Junk;
+        clone.art = art;
+        clone.price = price;
+        return clone;
     }
 }

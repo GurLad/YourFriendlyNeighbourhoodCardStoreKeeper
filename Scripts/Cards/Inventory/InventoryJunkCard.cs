@@ -20,6 +20,16 @@ public class InventoryJunkCard : AInventoryCard
             foil ?? ExtensionMethods.RNG.NextDouble() <= 0.125f
         );
         data.Junk = true;
+        data.Price = 1;
+        while (ExtensionMethods.RNG.NextDouble() < (int)data.Rarity * 0.1f && data.Price < 4096)
+        {
+            data.Price *= 2;
+        }
+        if (data.Foil)
+        {
+            data.Price *= 2;
+        }
+        data.Price = Mathf.RoundToInt(Mathf.Clamp(Data.Price * (ExtensionMethods.RNG.NextDouble() + 0.5f), 1, 9999));
     }
 
     protected override bool EqualInternal(AInventoryCard other)
