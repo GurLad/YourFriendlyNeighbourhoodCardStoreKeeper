@@ -28,6 +28,9 @@ public partial class MultiPageGridContainer : Control
         AddChild(interpolator);
         interpolator.InterruptMode = Interpolator.Mode.Error;
         CreateGrid().Modulate = Colors.White;
+
+        nextButton.Pressed += NextGrid;
+        prevButton.Pressed += PrevGrid;
     }
 
     private GridContainer CreateGrid()
@@ -84,6 +87,7 @@ public partial class MultiPageGridContainer : Control
         interpolator.OnFinish = () =>
         {
             currentGrid = target;
+            EnableDisableNextPrevButtons();
             interpolator.Interpolate(movePageTime,
                 Interpolator.InterpolateObject.ModulateFadeInterpolate(
                     grids[currentGrid],
@@ -147,13 +151,23 @@ public partial class MultiPageGridContainer : Control
     {
         if (grids.Count <= 1)
         {
-            nextButton.Visible = prevButton.Visible = false;
+            nextButton.Modulate = prevButton.Modulate = Colors.Transparent;
+            nextButton.Disabled = prevButton.Disabled = true;
         }
         else
         {
-            nextButton.Visible = prevButton.Visible = true;
-            if (currentGrid >= lastGridIndex) nextButton.Visible = false;
-            if (currentGrid <= 0) prevButton.Visible = false;
+            nextButton.Modulate = prevButton.Modulate = Colors.White;
+            nextButton.Disabled = prevButton.Disabled = false;
+            if (currentGrid >= lastGridIndex)
+            {
+                nextButton.Modulate = Colors.Transparent;
+                nextButton.Disabled = true;
+            }
+            if (currentGrid <= 0)
+            {
+                prevButton.Modulate = Colors.Transparent;
+                prevButton.Disabled = true;
+            }
         }
     }
 }

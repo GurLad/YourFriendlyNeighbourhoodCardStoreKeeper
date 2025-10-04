@@ -14,8 +14,8 @@ grow_vertical = 2
 script = ExtResource("1_eoxwf")
 baseGrid = NodePath("CenterContainer/BaseGrid")
 gridsContainer = NodePath("CenterContainer")
-nextButton = NodePath("Prev")
-prevButton = NodePath("Next")
+nextButton = NodePath("Next")
+prevButton = NodePath("Prev")
 
 [node name="Prev" type="TextureButton" parent="."]
 layout_mode = 2
@@ -24,7 +24,7 @@ texture_pressed = ExtResource("2_eoxwf")
 texture_hover = ExtResource("3_sxogy")
 stretch_mode = 3
 
-[node name="CenterContainer" type="MarginContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 
