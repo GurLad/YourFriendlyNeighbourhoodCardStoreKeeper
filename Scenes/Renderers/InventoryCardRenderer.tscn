@@ -20,6 +20,7 @@ axis_stretch_vertical = 1
 modulate_color = Color(1, 1, 1, 0.45882353)
 
 [node name="InventoryCardRenderer" type="VBoxContainer" node_paths=PackedStringArray("cardRenderer", "buySellButton", "buySellButtonLabel", "newLabel")]
+custom_minimum_size = Vector2(0, 148)
 offset_right = 16.0
 offset_bottom = 24.0
 script = ExtResource("1_oejf1")
@@ -30,6 +31,7 @@ newLabel = NodePath("CardRenderer/New")
 
 [node name="CardRenderer" parent="." instance=ExtResource("1_ojy4q")]
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="New" type="RichTextLabel" parent="CardRenderer"]
 z_index = 1

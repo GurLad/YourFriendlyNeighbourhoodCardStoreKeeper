@@ -29,6 +29,7 @@ public partial class InventoryRendererCollection : AInventoryRenderer
             if (matching.Count > 0)
             {
                 InventoryIDCard best = matching.Find(a => a.Foil) ?? matching[0];
+                GD.Print(best.Foil + " - " + best.Data.Foil);
                 renderData = best.Data.Clone();
                 renderData.Price = matching.Count > 1 ? matching.FindAll(a => a != best).Sum(a => a.Data.Price) : 0;
                 owned = true;
@@ -42,6 +43,7 @@ public partial class InventoryRendererCollection : AInventoryRenderer
             if (!owned)
             {
                 renderer.Modulate = lockedModulate;
+                renderer.HideButton();
             }
         }
     }

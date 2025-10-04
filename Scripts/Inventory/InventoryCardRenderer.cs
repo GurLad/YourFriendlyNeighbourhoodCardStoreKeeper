@@ -64,4 +64,6 @@ public partial class InventoryCardRenderer : Control
     public void UpdateCanPress() => buySellButton.Disabled = !canPress();
 
     public void UpdateButtonText(string newVal) => buySellButtonLabel.Text = newVal;
+
+    public void HideButton() => buySellButton.Visible = false;
 }

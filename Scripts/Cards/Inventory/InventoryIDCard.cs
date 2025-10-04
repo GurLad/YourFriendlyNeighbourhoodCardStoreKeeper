@@ -7,7 +7,7 @@ public class InventoryIDCard : AInventoryCard
     public bool Foil { get; init; }
 
     private CardData data { get; init; }
-    public override CardData Data => CardsLoader.GetCard(ID);
+    public override CardData Data => data;
 
     public InventoryIDCard(int id, bool? foil = null)
     {
