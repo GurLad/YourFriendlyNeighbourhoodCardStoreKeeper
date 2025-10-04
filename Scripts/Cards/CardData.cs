@@ -22,6 +22,7 @@ public class CardData
 
     public bool Foil { get; set; } = false;
     public bool Junk { get; set; } = false;
+    public int ID { get; set; } = -1;
 
     private Texture2D art { get; set; }
     public Texture2D Art

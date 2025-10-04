@@ -7,7 +7,25 @@ public partial class InventoryCardRenderer : Control
     [Export] private Button buySellButton;
     [Export] private Label newLabel;
 
-    public AInventoryCard Card { get; private set; }
+    private AInventoryCard card;
+    public AInventoryCard Card
+    {
+        get
+        {
+            if (card == null)
+            {
+                GD.PushError("[InventoryCardRenderer]: Trying to get cardless renderer data!");
+            }
+            return card;
+        }
+        private set => card = value;
+    }
+    private CardData data;
+    public CardData Data
+    {
+        get => Card.Data ?? data;
+        private set => data = value;
+    }
 
     private bool inited = false;
     private Func<bool> canPress = null;
@@ -18,6 +36,12 @@ public partial class InventoryCardRenderer : Control
     public void Render(AInventoryCard card, bool isNew)
     {
         cardRenderer.Render((Card = card).Data);
+        newLabel.Visible = isNew;
+    }
+
+    public void Render(CardData data, bool isNew)
+    {
+        cardRenderer.Render(Data = data);
         newLabel.Visible = isNew;
     }
 
@@ -37,4 +61,6 @@ public partial class InventoryCardRenderer : Control
     }
 
     public void UpdateCanPress() => buySellButton.Disabled = !canPress();
+
+    public void UpdateButtonText(string newVal) => buySellButton.Text = newVal;
 }

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class PlayerInventoryController : Node
 {
@@ -19,4 +20,10 @@ public partial class PlayerInventoryController : Node
 
     public static void AddCard(AInventoryCard card) => Instance.inventory.Cards.Add(card);
     public static void LoseCard(AInventoryCard card) => Instance.inventory.Cards.Remove(card);
+
+    public static void TrySell(Action onSuccess)
+    {
+        // TBA: Confirm box
+        onSuccess();
+    }
 }

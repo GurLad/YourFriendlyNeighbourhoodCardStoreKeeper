@@ -391,11 +391,14 @@ public partial class CardsLoader : Node
         Instance = this;
 
         cards.ForEach(a => a.Art = GetArt(a.ArtPath));
+        cards.ForEach((a, i) => a.ID = i);
     }
 
     public static int Count => Instance.cards.Count;
 
     public static CardData GetCard(int id) => Instance.cards[id];
+
+    public static List<CardData> GetAllCards() => Instance.cards.ConvertAll(a => a);
 
     public static Texture2D GetArt(string artPath)
     {

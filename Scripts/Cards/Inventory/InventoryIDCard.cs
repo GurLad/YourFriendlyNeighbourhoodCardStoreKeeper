@@ -20,13 +20,4 @@ public class InventoryIDCard : AInventoryCard
             data.Price = -1;
         }
     }
-
-    protected override bool EqualInternal(AInventoryCard other)
-    {
-        if (other is InventoryIDCard inventoryIDCard)
-        {
-            return inventoryIDCard.ID == ID;
-        }
-        return false;
-    }
 }

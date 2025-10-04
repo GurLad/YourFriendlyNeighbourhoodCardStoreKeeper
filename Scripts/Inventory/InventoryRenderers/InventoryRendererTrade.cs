@@ -6,12 +6,10 @@ public partial class InventoryRendererTrade : AInventoryRenderer
 {
     private InventoryData inventory;
 
-    protected override List<AInventoryCard> Filter(InventoryData data) => data.Cards.FindAll(a => a is InventoryIDCard);
-
     public override void Render(InventoryData inventory)
     {
         this.inventory = inventory;
-        foreach (InventoryIDCard data in inventory.Cards.ConvertAll(a => (InventoryIDCard)a))
+        foreach (InventoryIDCard data in inventory.Cards.FindAll(a => a is InventoryIDCard).ConvertAll(a => (InventoryIDCard)a))
         {
             InventoryCardRenderer renderer = RenderItem(data);
         }

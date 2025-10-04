@@ -31,9 +31,4 @@ public class InventoryJunkCard : AInventoryCard
         }
         data.Price = Mathf.RoundToInt(Mathf.Clamp(Data.Price * (ExtensionMethods.RNG.NextDouble() + 0.5f), 1, 9999));
     }
-
-    protected override bool EqualInternal(AInventoryCard other)
-    {
-        return Equals(other);
-    }
 }

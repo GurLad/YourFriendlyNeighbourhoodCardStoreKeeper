@@ -45,6 +45,17 @@ public abstract partial class AInventoryRenderer : Control
         interpolator.OnFinish = TotalMouseBlock.Unblock;
     }
 
+    protected InventoryCardRenderer RenderItem(CardData card, bool isNew = false)
+    {
+        InventoryCardRenderer renderer = sceneCardRenderer.Instantiate<InventoryCardRenderer>();
+        renderer.Render(card, isNew);
+        InitButton(renderer);
+        renderer.OnButtonPressed += OnButtonPressed;
+        renderers.Add(renderer);
+        gridContainer.AddItem(renderer);
+        return renderer;
+    }
+
     protected InventoryCardRenderer RenderItem(AInventoryCard card, bool isNew = false)
     {
         InventoryCardRenderer renderer = sceneCardRenderer.Instantiate<InventoryCardRenderer>();
@@ -62,8 +73,6 @@ public abstract partial class AInventoryRenderer : Control
     }
 
     public abstract void Render(InventoryData inventory);
-
-    protected abstract List<AInventoryCard> Filter(InventoryData data);
 
     protected abstract void InitButton(InventoryCardRenderer renderer);
 }

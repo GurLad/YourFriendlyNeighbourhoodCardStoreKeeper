@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text.Json;
 
 public static class ExtensionMethods
@@ -243,8 +244,15 @@ public static class ExtensionMethods
         return result;
     }
 
+    public static S Sum<T, S>(this List<T> list, Func<T, S> toNum) where S : INumber<S>
+    {
+        S result = default;
+        list.ForEach(a => result += toNum(a));
+        return result;
+    }
+
     // Dictionary extensions
-	
+
     public static S SafeGet<T, S>(this Dictionary<T, S> dictionary, T key, S defaultValue = default)
     {
         return dictionary.ContainsKey(key) ? dictionary[key] : defaultValue;
