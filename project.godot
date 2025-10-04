@@ -43,10 +43,11 @@ folder_colors={
 "res://Scripts/GodotUtils/": "blue",
 "res://Scripts/Inventory/": "purple",
 "res://Scripts/Loaders/": "pink",
-"res://Scripts/UI/": "red",
-"res://Shaders/": "orange",
-"res://Sound/": "yellow",
-"res://Sprites/": "green"
+"res://Scripts/Store/": "red",
+"res://Scripts/UI/": "orange",
+"res://Shaders/": "yellow",
+"res://Sound/": "green",
+"res://Sprites/": "teal"
 }
 
 [gui]
