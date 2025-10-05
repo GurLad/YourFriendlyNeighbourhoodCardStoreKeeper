@@ -20,9 +20,11 @@ public partial class PlayerInventoryController : Node
         Instance = this;
 
         // TEMP
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 70; i++)
         {
-            inventory.Cards.Add(new InventoryIDCard(CardsLoader.RandomCard().ID));
+            inventory.Cards.Add(new InventoryIDCard(CardsLoader.RandomCard(Rarity.Common).ID));
+            inventory.Cards.Add(new InventoryIDCard(CardsLoader.RandomCard(Rarity.Uncommon).ID));
+            inventory.Cards.Add(new InventoryIDCard(CardsLoader.RandomCard(Rarity.Rare).ID));
         }
     }
 
