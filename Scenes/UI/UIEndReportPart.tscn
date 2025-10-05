@@ -29,6 +29,10 @@ theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_7y2o1")
 text = "40 Cards Collected"
 
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="Label2" type="Label" parent="."]
 modulate = Color(0.11764706, 0.7372549, 0.4509804, 1)
 custom_minimum_size = Vector2(64, 64)
