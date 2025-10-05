@@ -7,6 +7,7 @@ public abstract partial class ACustomer : Sprite2D
     private enum State
     {
         None,
+        Spawning,
         Queue,
         Playing,
         Toilet,
@@ -17,10 +18,11 @@ public abstract partial class ACustomer : Sprite2D
     }
 
     [Export] public Color Color { get; set; } = Colors.White;
-    [Export] private float fadeOutTime { get; set; } = 0.2f;
+    [Export] private float fadeTime { get; set; } = 0.2f;
     [Export] private float speed { get; set; } = 5f;
 
     public Chair Chair { private get; set; } = null;
+    public StoreQueue Queue { private get; set; } = null;
 
     protected abstract Vector2 queueWaitTimeRange { get; }
     protected abstract Vector2 playTimeRange { get; }
@@ -29,9 +31,13 @@ public abstract partial class ACustomer : Sprite2D
     protected abstract Vector2 toiletTimeRange { get; }
 
     private List<Action> actionQueue { get; } = new List<Action>();
-    private State fullState { get; set; } = State.Queue;
+    private State fullState { get; set; } = State.None;
     private State state => fullState & ~State.Pathing;
-    private bool pathing => (fullState & State.Pathing) != State.None;
+    private bool pathing
+    {
+        get => (fullState & State.Pathing) != State.None;
+        set => fullState = value ? (fullState | State.Pathing) : (fullState & ~State.Pathing);
+    }
 
     private float queueWaitTime { get; set; }
     private float playTime { get; set; }
@@ -59,9 +65,58 @@ public abstract partial class ACustomer : Sprite2D
         interpolator.InterruptMode = Interpolator.Mode.Error;
     }
 
+    public void Spawn()
+    {
+        if (fullState != State.None)
+        {
+            GD.PushError("[Customer AI]: Spawning during another state!");
+        }
+        fullState = State.Spawning | State.Pathing;
+        interpolator.Interpolate(fadeTime,
+            Interpolator.InterpolateObject.ModulateFadeInterpolate(
+                    this,
+                    Colors.White
+                ));
+        interpolator.OnFinish = () =>
+        {
+            pathing = false;
+            TryActionFromQueue();
+        };
+    }
+
     public void EnterQueue()
     {
+        if (state != State.Spawning)
+        {
+            GD.PushError("[Customer AI]: EnterQueue when not spawning!");
+        }
+        if (pathing)
+        {
+            actionQueue.Add(EnterQueue);
+            return;
+        }
+        fullState = State.Queue;
         queueTimer.Start();
+    }
+
+    public void UpdateQueuePos(Vector2I newPos)
+    {
+        if (state == State.Spawning)
+        {
+            actionQueue.Add(() => UpdateQueuePos(newPos));
+            return;
+        }
+        if (state != State.Queue)
+        {
+            GD.PushError("[Customer AI]: UpdateQueuePos when not in queue!");
+        }
+        if (pathing)
+        {
+            interpolator.Stop(false);
+        }
+        pathing = true;
+        interpolator.InterpolateMoveOnPath(this, speed, Position, newPos);
+        interpolator.OnFinish = () => pathing = false;
     }
 
     public void LeaveStore()
@@ -78,7 +133,7 @@ public abstract partial class ACustomer : Sprite2D
         interpolator.InterpolateMoveOnPath(this, speed, Position, PathExtensions.ENTRANCE_POS);
         interpolator.OnFinish = () =>
         {
-            interpolator.Interpolate(fadeOutTime,
+            interpolator.Interpolate(fadeTime,
                 Interpolator.InterpolateObject.ModulateFadeInterpolate(
                     this,
                     Colors.Transparent
@@ -87,9 +142,18 @@ public abstract partial class ACustomer : Sprite2D
         };
     }
 
+    private void TryActionFromQueue()
+    {
+        while (!pathing && actionQueue.Count > 0)
+        {
+            actionQueue[0].Invoke();
+            actionQueue.RemoveAt(0);
+        }
+    }
+
     private void OnQueueTimerOver()
     {
-        if (state != State.Queue && state != State.Pathing)
+        if (state != State.Queue)
         {
             GD.PushError("[Customer AI]: OnQueueTimerOver when not in queue!");
         }
@@ -97,6 +161,7 @@ public abstract partial class ACustomer : Sprite2D
         {
             GD.PushError("[Customer AI]: OnQueueTimerOver when sitting!");
         }
+        LeaveStore();
     }
 
     private void OnPlayTimerOver()

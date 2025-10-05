@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public static class PathExtensions
 {
     public static readonly Vector2I ENTRANCE_POS = new Vector2I(19, 3);
-    public static readonly Vector2I QUEUE_END_POS = new Vector2I(13, 3);
+    public static readonly Vector2I QUEUE_START_POS = new Vector2I(13, 3);
     public static readonly Vector2I TOILET_POS = new Vector2I(9, 1);
 
     public static void Init()
