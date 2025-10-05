@@ -9,6 +9,7 @@ public abstract partial class ACustomer : Sprite2D
         None,
         Spawning,
         Queue,
+        Sitting,
         Playing,
         Toilet,
         Crying,
@@ -18,10 +19,11 @@ public abstract partial class ACustomer : Sprite2D
     }
 
     [ExportCategory("Nodes")]
-    [Export] private Area2D mouseArea { get; set; }
+    [Export] private DraggableCustomer dragger { get; set; }
 
     [ExportCategory("Vars")]
     [Export] public Color Color { get; set; } = Colors.White;
+    [Export] private Color draggingModulate { get; set; } = new Color(1, 1, 1, 0.5f);
     [Export] private float fadeTime { get; set; } = 0.1f;
     [Export] private float speed { get; set; } = 5f;
 
@@ -77,8 +79,12 @@ public abstract partial class ACustomer : Sprite2D
         AddChild(interpolator);
         interpolator.InterruptMode = Interpolator.Mode.Error;
 
-        mouseArea.MouseEntered += OnMouseEntered;
-        mouseArea.MouseExited += OnMouseExited;
+        dragger.Init(this);
+        dragger.MouseEntered += OnMouseEntered;
+        dragger.MouseExited += OnMouseExited;
+        dragger.OnPickedUp += OnPickedUp;
+        dragger.OnDropped += OnDropped;
+        dragger.OnCancelled += OnCancelled;
 
         Position = PathExtensions.ENTRANCE_POS.ToPos();
         Modulate = Colors.Transparent;
@@ -125,10 +131,10 @@ public abstract partial class ACustomer : Sprite2D
             return;
         }
         if (state == State.Spawning)
-            {
-                actionQueue.Add(() => UpdateQueuePos(newPos));
-                return;
-            }
+        {
+            actionQueue.Add(() => UpdateQueuePos(newPos));
+            return;
+        }
         if (state != State.Queue)
         {
             GD.PushError("[Customer AI]: UpdateQueuePos when not in queue!");
@@ -163,6 +169,26 @@ public abstract partial class ACustomer : Sprite2D
                 ));
             interpolator.OnFinish = QueueFree;
         };
+    }
+
+    public void SitDown(Chair chair)
+    {
+        if (state != State.Queue)
+        {
+            GD.PushError("[Customer AI]: SitDown when not in queue!");
+        }
+        if (pathing)
+        {
+            interpolator.Stop(false);
+        }
+        pathing = false;
+        fullState = State.Sitting;
+        Chair = chair;
+        Position = chair.Position;
+        RotationDegrees = chair.FlipH ? 0 : 180;
+        queueTimer.Stop();
+        bladderTimer.Start();
+        playTimer.Start();
     }
 
     public virtual float GetWinPerformance() => rating + ExtensionMethods.RNG.NextFloat(-1f, 1f) * ratingVariance;
@@ -216,4 +242,8 @@ public abstract partial class ACustomer : Sprite2D
     {
         UITooltipController.Current.HideTooltip(this);
     }
+
+    private void OnPickedUp() => Modulate = draggingModulate;
+    private void OnDropped() => Modulate = Colors.White;
+    private void OnCancelled() => Modulate = Colors.White;
 }

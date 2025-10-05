@@ -7,6 +7,8 @@ public partial class Chair : Sprite2D
 
     private ACustomer customer = null;
 
+    public bool CanHold(Draggable draggable) => draggable is DraggableCustomer && IsEmpty;
+
     public void AttachCustomer(ACustomer customer)
     {
         if (!IsEmpty)
@@ -15,8 +17,8 @@ public partial class Chair : Sprite2D
             return;
         }
         this.customer = customer;
-        customer.Chair = this;
         Modulate = customer.Color;
+        customer.SitDown(this);
     }
 
     public void DetachCustomer()
