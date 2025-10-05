@@ -21,6 +21,18 @@ public partial class StoreQueue : Node
             return;
         }
         customers.Add(customer);
+        customer.EnterQueue();
+        UpdatePositions();
+    }
 
+    public void RemoveCustomer(ACustomer customer)
+    {
+        customers.Remove(customer);
+        UpdatePositions();
+    }
+
+    public void UpdatePositions()
+    {
+        customers.ForEach((a, i) => a.UpdateQueuePos(queueStartPos + Vector2I.Right * i));
     }
 }

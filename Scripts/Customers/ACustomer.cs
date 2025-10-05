@@ -61,6 +61,7 @@ public abstract partial class ACustomer : Sprite2D
         playTimer.WaitTime = playTime = playTimeRange.RandomValueInRange();
         bladderTimer.WaitTime = bladder = bladderRange.RandomValueInRange();
         toiletTimer.WaitTime = toiletTime = toiletTimeRange.RandomValueInRange();
+        queueTimer.OneShot = playTimer.OneShot = bladderTimer.OneShot = toiletTimer.OneShot = false;
         // Normal dist. is too much for now
         rating = (ratingRange.RandomValueInRange() + ratingRange.RandomValueInRange()) / 2;
 
@@ -104,11 +105,15 @@ public abstract partial class ACustomer : Sprite2D
 
     public void UpdateQueuePos(Vector2I newPos)
     {
-        if (state == State.Spawning)
+        if (newPos.ToV2().DistanceTo(Position) <= 0.01f)
         {
-            actionQueue.Add(() => UpdateQueuePos(newPos));
             return;
         }
+        if (state == State.Spawning)
+            {
+                actionQueue.Add(() => UpdateQueuePos(newPos));
+                return;
+            }
         if (state != State.Queue)
         {
             GD.PushError("[Customer AI]: UpdateQueuePos when not in queue!");
