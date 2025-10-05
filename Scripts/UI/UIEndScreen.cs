@@ -93,6 +93,7 @@ public partial class UIEndScreen : Control
         parts.ForEach(a =>
         {
             UIEndScreenPart part = scenePart.Instantiate<UIEndScreenPart>();
+            partHolder.AddChild(part);
             part.Clear();
             screenParts.Add(part);
         });
@@ -146,7 +147,7 @@ public partial class UIEndScreen : Control
         }
         int val = parts[current].Item1();
         int index = 0;
-        while (val >= parts[current].Item3[index].Thresold && index + 1 < parts[current].Item3.Count) index++;
+        while (val > parts[current].Item3[index].Thresold && index + 1 < parts[current].Item3.Count) index++;
         screenParts[current].Show(val + parts[current].Item2, parts[current].Item3[index].Text, 0, ShowPart);
         current++;
     }

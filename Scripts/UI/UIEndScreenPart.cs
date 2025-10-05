@@ -34,7 +34,7 @@ public partial class UIEndScreenPart : Node
             interpolator.OnFinish = () =>
             {
                 message.Modulate = colors[Mathf.Clamp(color, 0, colors.Length - 1)];
-                message.RotationDegrees = ExtensionMethods.RNG.Next(-30, 30);
+                //message.RotationDegrees = ExtensionMethods.RNG.Next(-30, 30);
                 finish?.Invoke();
             };
         };
