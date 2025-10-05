@@ -88,6 +88,8 @@ public abstract partial class ACustomer : Sprite2D
 
         Position = PathExtensions.ENTRANCE_POS.ToPos();
         Modulate = Colors.Transparent;
+
+        SoundController.Current.PlaySFX("Enter");
     }
 
     public void Spawn()
@@ -188,7 +190,7 @@ public abstract partial class ACustomer : Sprite2D
         pathing = false;
         fullState = State.Sitting;
         Chair = chair;
-        Position = chair.Position;
+        GlobalPosition = chair.GlobalPosition + chair.PosMod;
         RotationDegrees = chair.FlipH ? 0 : 180;
         queueTimer.Stop();
         bladderTimer.Start();

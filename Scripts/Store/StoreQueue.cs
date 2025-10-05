@@ -22,6 +22,7 @@ public partial class StoreQueue : Node
             return;
         }
         customers.Add(customer);
+        customer.Queue = this;
         customer.EnterQueue();
         UpdatePositions();
     }

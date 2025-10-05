@@ -42,8 +42,6 @@ script = ExtResource("10_pgfoo")
 texture = ExtResource("10_r1s76")
 centered = false
 
-[node name="Customers" type="Node2D" parent="Objects"]
-
 [node name="Objects" type="Node2D" parent="Objects"]
 
 [node name="Table1" parent="Objects/Objects" instance=ExtResource("11_47c1y")]
@@ -57,5 +55,7 @@ position = Vector2(289, 208)
 
 [node name="Table4" parent="Objects/Objects" instance=ExtResource("11_47c1y")]
 position = Vector2(289, 304)
+
+[node name="Customers" type="Node2D" parent="Objects"]
 
 [node name="UITooltipsController" parent="." instance=ExtResource("11_r1s76")]

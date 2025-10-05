@@ -5,10 +5,11 @@
 [ext_resource type="Script" uid="uid://dm8nycfg2qpkh" path="res://Scripts/Store/Chair.cs" id="2_j5b3m"]
 [ext_resource type="Script" uid="uid://d0pcpyu5eqirb" path="res://Scripts/Store/ChairControl.cs" id="3_4h1n3"]
 
-[node name="Chair1" type="Sprite2D"]
+[node name="Chair1" type="Sprite2D" node_paths=PackedStringArray("chairControl")]
 material = ExtResource("1_2beve")
 texture = ExtResource("1_5n03e")
 script = ExtResource("2_j5b3m")
+chairControl = NodePath("DropPoint")
 
 [node name="DropPoint" type="Control" parent="." node_paths=PackedStringArray("Sprite")]
 layout_mode = 3

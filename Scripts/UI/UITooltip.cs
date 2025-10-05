@@ -7,6 +7,12 @@ public partial class UITooltip : FadeTransition
 
     private bool shown = false;
 
+    public override void _Ready()
+    {
+        base._Ready();
+        interpolator.InterruptMode = Interpolator.Mode.Allowed;
+    }
+
     public void SetText(string text)
     {
         Label.Text = text;

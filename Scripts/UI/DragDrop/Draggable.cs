@@ -39,7 +39,7 @@ public partial class Draggable : Control
         MouseExited += OnMouseExited;
     }
 
-    protected void InitMaterial(Material material)
+    protected Material InitMaterial(Material material)
     {
         material = (Material)material.Duplicate();
         ShaderMaterial = material is ShaderMaterial sm ? sm : null;
@@ -50,6 +50,7 @@ public partial class Draggable : Control
         }
         ShaderMaterial.Set("outlineColor", HoverOutline);
         RenderHighlight();
+        return material;
     }
 
     public void CancelDrop()

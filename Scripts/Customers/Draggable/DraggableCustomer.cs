@@ -8,6 +8,6 @@ public partial class DraggableCustomer : Draggable
     public void Init(ACustomer customer)
     {
         Customer = customer;
-        InitMaterial(customer.Material);
+        Customer.Material = InitMaterial(customer.Material);
     }
 }
