@@ -1,0 +1,14 @@
+[gd_scene load_steps=7 format=3 uid="uid://b4ukujvlcyx4u"]
+
+[ext_resource type="Texture2D" uid="uid://01khwat1fcab" path="res://Sprites/Store/Player.png" id="1_bvawp"]
+[ext_resource type="Script" uid="uid://yyd3b7vcco8w" path="res://Scripts/Store/Player.cs" id="2_7qc6w"]
+[ext_resource type="Texture2D" uid="uid://co7q8kmodr3ci" path="res://Sprites/Store/PlayerEvil.png" id="3_kfxul"]
+[ext_resource type="Texture2D" uid="uid://8v1tma3qksv2" path="res://Sprites/Store/PlayerEvil2.png" id="4_vrc71"]
+[ext_resource type="Texture2D" uid="uid://c4y6dx2hwscf3" path="res://Sprites/Store/PlayerEvil3.png" id="5_475y4"]
+[ext_resource type="Texture2D" uid="uid://s7w4ibg56r4d" path="res://Sprites/Store/PlayerEvil4.png" id="6_6pvuo"]
+
+[node name="Player" type="Sprite2D"]
+texture = ExtResource("1_bvawp")
+script = ExtResource("2_7qc6w")
+sprites = Array[Texture2D]([ExtResource("1_bvawp"), ExtResource("3_kfxul"), ExtResource("4_vrc71"), ExtResource("5_475y4"), ExtResource("6_6pvuo")])
+thresolds = PackedInt32Array(0, 10, 20, 40, 80)
