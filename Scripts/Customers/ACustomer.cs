@@ -23,7 +23,6 @@ public abstract partial class ACustomer : Sprite2D
 
     [ExportCategory("Vars")]
     [Export] public Color Color { get; set; } = Colors.White;
-    [Export] private Color draggingModulate { get; set; } = new Color(1, 1, 1, 0.5f);
     [Export] private float fadeTime { get; set; } = 0.1f;
     [Export] private float speed { get; set; } = 5f;
 
@@ -80,6 +79,7 @@ public abstract partial class ACustomer : Sprite2D
         interpolator.InterruptMode = Interpolator.Mode.Error;
 
         dragger.Init(this);
+        dragger.CanDrag = false;
         dragger.MouseEntered += OnMouseEntered;
         dragger.MouseExited += OnMouseExited;
         dragger.OnPickedUp += OnPickedUp;
@@ -121,6 +121,7 @@ public abstract partial class ACustomer : Sprite2D
             return;
         }
         fullState = State.Queue;
+        dragger.CanDrag = true;
         queueTimer.Start();
     }
 
@@ -181,6 +182,9 @@ public abstract partial class ACustomer : Sprite2D
         {
             interpolator.Stop(false);
         }
+        dragger.CanDrag = false;
+        dragger.RenderHighlight(true);
+        Queue.RemoveCustomer(this);
         pathing = false;
         fullState = State.Sitting;
         Chair = chair;
@@ -243,7 +247,7 @@ public abstract partial class ACustomer : Sprite2D
         UITooltipController.Current.HideTooltip(this);
     }
 
-    private void OnPickedUp() => Modulate = draggingModulate;
-    private void OnDropped() => Modulate = Colors.White;
-    private void OnCancelled() => Modulate = Colors.White;
+    private void OnPickedUp() { }
+    private void OnDropped() { }
+    private void OnCancelled() { }
 }

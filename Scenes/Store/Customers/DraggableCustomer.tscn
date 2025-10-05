@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bskeiye5e0a4n"]
+
+[ext_resource type="Script" uid="uid://b8ss6qjrqgm8a" path="res://Scripts/Customers/Draggable/DraggableCustomer.cs" id="1_gcysl"]
+
+[node name="DraggableCustomer" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_gcysl")

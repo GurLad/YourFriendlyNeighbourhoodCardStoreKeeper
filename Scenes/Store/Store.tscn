@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://chnoj3xka8xf0"]
+[gd_scene load_steps=14 format=3 uid="uid://chnoj3xka8xf0"]
 
 [ext_resource type="Script" uid="uid://bnccerywo70ms" path="res://Scripts/Store/Singletons/MoneyController.cs" id="1_avijh"]
 [ext_resource type="Script" uid="uid://ckwdh43etlygo" path="res://Scripts/Store/Singletons/StoreController.cs" id="1_xt8ip"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bux7avla14lbb" path="res://Scenes/Store/Customers/CustomerKid.tscn" id="6_r1s76"]
 [ext_resource type="PackedScene" uid="uid://c7mkb5s173c6v" path="res://Scenes/Store/Customers/CustomerLeech.tscn" id="7_47c1y"]
 [ext_resource type="PackedScene" uid="uid://dsbc3p8adxne0" path="res://Scenes/Store/Customers/CustomerPro.tscn" id="8_pgfoo"]
+[ext_resource type="Script" uid="uid://ce14d4ojeqpoj" path="res://Scripts/UI/UIBackdrop.cs" id="10_pgfoo"]
 [ext_resource type="Texture2D" uid="uid://bi5yd577wjv1o" path="res://Sprites/Store/Background/Full3.png" id="10_r1s76"]
 [ext_resource type="PackedScene" uid="uid://dahkj3oix1kw0" path="res://Scenes/Store/Table.tscn" id="11_47c1y"]
 [ext_resource type="PackedScene" uid="uid://c6i1i3qo4q3jt" path="res://Scenes/UI/UITooltipsController.tscn" id="11_r1s76"]
@@ -31,6 +32,9 @@ rate = Vector2(1, 2.5)
 
 [node name="Queue" type="Node" parent="."]
 script = ExtResource("5_m1qpk")
+
+[node name="UIBackdrop" type="Node" parent="."]
+script = ExtResource("10_pgfoo")
 
 [node name="Objects" type="Node2D" parent="."]
 

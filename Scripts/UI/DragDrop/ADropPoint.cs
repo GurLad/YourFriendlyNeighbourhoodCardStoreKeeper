@@ -12,11 +12,11 @@ public abstract partial class ADropPoint : Control
         CanDropHover = CanDrop | Hover
     }
 
-    [Export] private TextureRect Icon;
+    [Export] private Sprite2D Sprite;
     [ExportCategory("Highlight")]
-    [Export] private Color EmptyOutline { get; set; }
-    [Export] private Color CanDropOutline { get; set; }
-    [Export] private Color HoverOutline { get; set; }
+    [Export] private Color EmptyOutline { get; set; } = Colors.Transparent;
+    [Export] private Color CanDropOutline { get; set; } = Colors.White;
+    [Export] private Color HoverOutline { get; set; } = Colors.Yellow;
 
     private HighlightMode Highlight;
     private ShaderMaterial ShaderMaterial;
@@ -27,8 +27,8 @@ public abstract partial class ADropPoint : Control
         UICursor.Current.OnPickedUpDraggable += CursorPickedUpDraggable;
         UICursor.Current.OnDroppedDraggable += CursorDroppedDraggable;
         UICursor.Current.OnCancelledDraggable += CursorCancelledDraggable;
-        Icon.Material = (Material)Icon.Material.Duplicate();
-        ShaderMaterial = Icon.Material is ShaderMaterial sm ? sm : null;
+        Sprite.Material = (Material)Sprite.Material.Duplicate();
+        ShaderMaterial = Sprite.Material is ShaderMaterial sm ? sm : null;
         if (ShaderMaterial == null)
         {
             GD.PushError("[UIDraggable]: No shader material!");

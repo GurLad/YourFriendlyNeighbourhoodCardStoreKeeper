@@ -13,11 +13,11 @@ public partial class Draggable : Control
     [ExportCategory("Vars")]
     [Export] public Texture2D DragIcon { get; private set; }
     [ExportCategory("Vars - Highlight")]
-    [Export] private Color BaseModulate { get; set; }
+    [Export] private Color BaseModulate { get; set; } = Colors.White;
     [Export] private float HeldOpacity { get; set; } = 0.6f;
-    [Export] private Color HoverOutline { get; set; }
+    [Export] private Color HoverOutline { get; set; } = Colors.White;
 
-    protected bool CanDrag { get; set; } = true;
+    public bool CanDrag { get; set; } = true;
 
     private HighlightMode Highlight;
     private ShaderMaterial ShaderMaterial;
@@ -34,8 +34,15 @@ public partial class Draggable : Control
     public override void _Ready()
     {
         base._Ready();
-        Material = (Material)Material.Duplicate();
-        ShaderMaterial = Material is ShaderMaterial sm ? sm : null;
+
+        MouseEntered += OnMouseEntered;
+        MouseExited += OnMouseExited;
+    }
+
+    protected void InitMaterial(Material material)
+    {
+        material = (Material)material.Duplicate();
+        ShaderMaterial = material is ShaderMaterial sm ? sm : null;
         if (ShaderMaterial == null)
         {
             GD.PushError("[ADraggable]: No shader material!");
@@ -43,9 +50,6 @@ public partial class Draggable : Control
         }
         ShaderMaterial.Set("outlineColor", HoverOutline);
         RenderHighlight();
-
-        MouseEntered += OnMouseEntered;
-        MouseExited += OnMouseExited;
     }
 
     public void CancelDrop()
@@ -54,11 +58,15 @@ public partial class Draggable : Control
         RenderHighlight();
     }
 
-    public void RenderHighlight()
+    public void RenderHighlight(bool force = false)
     {
-        if (!CanDrag)
+        if (!CanDrag && !force)
         {
             return;
+        }
+        else
+        {
+            Highlight = HighlightMode.None;
         }
         ShaderMaterial.SetShaderParameter("modulate", new Color(BaseModulate, (Highlight & HighlightMode.Held) != HighlightMode.None ? HeldOpacity : 1));
         ShaderMaterial.SetShaderParameter("showOutline", (Highlight & HighlightMode.Hover) != HighlightMode.None && UICursor.Current.HeldDraggable == null);
