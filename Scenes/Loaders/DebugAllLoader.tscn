@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://b60cg3vomq27x"]
 
-[ext_resource type="Script" uid="uid://bnccerywo70ms" path="res://Scripts/Store/MoneyController.cs" id="1_vlcg5"]
-[ext_resource type="Script" uid="uid://clqlybhlmralo" path="res://Scripts/Store/PlayerInventoryController.cs" id="2_sh2dy"]
-[ext_resource type="Script" uid="uid://ckwdh43etlygo" path="res://Scripts/Store/StoreController.cs" id="3_kejd8"]
+[ext_resource type="Script" uid="uid://bnccerywo70ms" path="res://Scripts/Store/Singletons/MoneyController.cs" id="1_vlcg5"]
+[ext_resource type="Script" uid="uid://clqlybhlmralo" path="res://Scripts/Store/Singletons/PlayerInventoryController.cs" id="2_sh2dy"]
+[ext_resource type="Script" uid="uid://ckwdh43etlygo" path="res://Scripts/Store/Singletons/StoreController.cs" id="3_kejd8"]
 [ext_resource type="Script" uid="uid://dgynikmdpltqk" path="res://Scripts/UI/TotalMouseBlock.cs" id="4_sh2dy"]
 
 [node name="DebugAllLoader" type="Node"]

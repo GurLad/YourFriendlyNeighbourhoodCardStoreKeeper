@@ -14,6 +14,9 @@ public partial class StoreController : Node
             Instance.QueueFree();
         }
         Instance = this;
+
+        // Whatevs
+        PathExtensions.Init();
     }
 
     private void SetPaused(bool paused)

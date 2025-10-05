@@ -15,6 +15,11 @@ public static class ExtensionMethods
         return new Vector2I(Mathf.RoundToInt(vector2.X), Mathf.RoundToInt(vector2.Y));
     }
 
+    public static Vector2 ToV2(this Vector2I vector2)
+    {
+        return new Vector2(vector2.X, vector2.Y);
+    }
+
     public static float Distance(this Vector2I origin, Vector2I target)
     {
         return Mathf.Sqrt(Mathf.Pow(origin.X - target.X, 2) + Mathf.Pow(origin.Y - target.Y, 2));
@@ -252,6 +257,13 @@ public static class ExtensionMethods
     {
         S result = default;
         list.ForEach(a => result += toNum(a));
+        return result;
+    }
+
+    public static S Sum<T, S>(this List<T> list, Func<T, int, S> toNum) where S : System.Numerics.INumber<S>
+    {
+        S result = default;
+        list.ForEach((a, i) => result += toNum(a, i));
         return result;
     }
 

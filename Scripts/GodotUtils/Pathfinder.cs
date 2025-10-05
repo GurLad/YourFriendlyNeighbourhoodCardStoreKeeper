@@ -6,6 +6,8 @@ using Godot;
 
 public static class Pathfinder
 {
+    private const bool POST_PROCESS = true;
+
     private static int[,] map;
     private static int[,] objects;
     private static Vector2I size;
@@ -184,24 +186,24 @@ public static class Pathfinder
             totalPath.Add(current);
         }
         // Post-process path
-        //if (totalPath.Count > 2) // No need to squash if it's just 2 steps...
-        //{
-        //    int curr = 0, next = 2;
-        //    while (next < totalPath.Count)
-        //    {
-        //        if (!HasLineOfSight(totalPath[curr], totalPath[next]))
-        //        {
-        //            Squash(totalPath, curr, next);
-        //            curr++;
-        //            next = curr + 2; // Must have a line of sight with neighbors, so no need to check them
-        //        }
-        //        else
-        //        {
-        //            next++;
-        //        }
-        //    }
-        //    Squash(totalPath, curr, next);
-        //}
+        if (POST_PROCESS && totalPath.Count > 2) // No need to squash if it's just 2 steps...
+        {
+           int curr = 0, next = 2;
+           while (next < totalPath.Count)
+           {
+               if (!HasLineOfSight(totalPath[curr], totalPath[next]))
+               {
+                   Squash(totalPath, curr, next);
+                   curr++;
+                   next = curr + 2; // Must have a line of sight with neighbors, so no need to check them
+               }
+               else
+               {
+                   next++;
+               }
+           }
+           Squash(totalPath, curr, next);
+        }
         // Reverse & convert path
         List<Vector2I> reversed = new List<Vector2I>();
         for (int i = totalPath.Count - 1; i >= 0; i--)
