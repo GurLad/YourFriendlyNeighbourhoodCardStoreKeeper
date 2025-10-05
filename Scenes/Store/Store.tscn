@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://chnoj3xka8xf0"]
+[gd_scene load_steps=24 format=3 uid="uid://chnoj3xka8xf0"]
 
 [ext_resource type="Script" uid="uid://bnccerywo70ms" path="res://Scripts/Store/Singletons/MoneyController.cs" id="1_avijh"]
 [ext_resource type="Script" uid="uid://ckwdh43etlygo" path="res://Scripts/Store/Singletons/StoreController.cs" id="1_xt8ip"]
@@ -18,6 +18,9 @@
 [ext_resource type="Texture2D" uid="uid://bdwt5wdwsh6sk" path="res://Sprites/UI/CollectionButtonHighlight.png" id="15_pvqui"]
 [ext_resource type="Script" uid="uid://ckg81cqvh7y2w" path="res://Scripts/UI/UICollectionButton.cs" id="16_rohpe"]
 [ext_resource type="PackedScene" uid="uid://dtep40ck21qo0" path="res://Scenes/Renderers/Inventory/InventoryPanelFull.tscn" id="17_tijtf"]
+[ext_resource type="Texture2D" uid="uid://dsivp4s3txsak" path="res://Sprites/Tutorial/Tutorial1.png" id="18_keqyn"]
+[ext_resource type="Texture2D" uid="uid://2nscus780ud3" path="res://Sprites/Tutorial/Tutorial2.png" id="19_bap4c"]
+[ext_resource type="Texture2D" uid="uid://cvjiou41qhnab" path="res://Sprites/Tutorial/Tutorial3.png" id="20_rohpe"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tijtf"]
 texture = ExtResource("14_72flu")
@@ -109,5 +112,55 @@ offset_left = -252.0
 offset_top = -176.0
 offset_right = 252.0
 offset_bottom = 176.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 453.0
+offset_top = 146.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="UI/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="TextureRect" type="TextureRect" parent="UI/VBoxContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("18_keqyn")
+
+[node name="Label" type="Label" parent="UI/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(114, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 2
+text = "Drag customers into tables to let them play."
+autowrap_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="UI/VBoxContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("19_bap4c")
+
+[node name="Label2" type="Label" parent="UI/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(114, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 2
+text = "When they take breaks, click on their wallet to steal their cards."
+autowrap_mode = 3
+
+[node name="TextureRect3" type="TextureRect" parent="UI/VBoxContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("20_rohpe")
+
+[node name="Label3" type="Label" parent="UI/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(114, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 2
+text = "Don't let them - or their opponent - catch you in the act!"
+autowrap_mode = 3
 
 [node name="UITooltipsController" parent="." instance=ExtResource("11_r1s76")]

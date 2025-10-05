@@ -44,6 +44,7 @@ public partial class UITooltipController : Node
 
     public UITooltip ShowTooltip(Vector2 pos, Vector2 size, string text, bool upright)
     {
+        return null;
         UITooltip tooltip = upright ? TooltipUpright : TooltipSideways;
         tooltip.GlobalPosition = pos + tooltip.Size / 2 - size -
             (upright ?
