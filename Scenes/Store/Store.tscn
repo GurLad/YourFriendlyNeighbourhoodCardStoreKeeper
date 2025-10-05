@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://chnoj3xka8xf0"]
+[gd_scene load_steps=15 format=3 uid="uid://chnoj3xka8xf0"]
 
 [ext_resource type="Script" uid="uid://bnccerywo70ms" path="res://Scripts/Store/Singletons/MoneyController.cs" id="1_avijh"]
 [ext_resource type="Script" uid="uid://ckwdh43etlygo" path="res://Scripts/Store/Singletons/StoreController.cs" id="1_xt8ip"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bi5yd577wjv1o" path="res://Sprites/Store/Background/Full3.png" id="10_r1s76"]
 [ext_resource type="PackedScene" uid="uid://dahkj3oix1kw0" path="res://Scenes/Store/Table.tscn" id="11_47c1y"]
 [ext_resource type="PackedScene" uid="uid://c6i1i3qo4q3jt" path="res://Scenes/UI/UITooltipsController.tscn" id="11_r1s76"]
+[ext_resource type="PackedScene" uid="uid://b4ukujvlcyx4u" path="res://Scenes/Store/Player.tscn" id="13_1xgtk"]
 
 [node name="Store" type="Node"]
 script = ExtResource("1_xt8ip")
@@ -57,5 +58,9 @@ position = Vector2(289, 208)
 position = Vector2(289, 304)
 
 [node name="Customers" type="Node2D" parent="Objects"]
+
+[node name="Player" parent="Objects" node_paths=PackedStringArray("tables") instance=ExtResource("13_1xgtk")]
+position = Vector2(48, 80)
+tables = [NodePath("../Objects/Table1"), NodePath("../Objects/Table2"), NodePath("../Objects/Table3"), NodePath("../Objects/Table4")]
 
 [node name="UITooltipsController" parent="." instance=ExtResource("11_r1s76")]

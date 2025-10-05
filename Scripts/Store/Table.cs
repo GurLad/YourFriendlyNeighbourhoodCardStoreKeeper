@@ -6,7 +6,7 @@ using System.Linq;
 public partial class Table : Node2D
 {
     [Export] private Sprite2D sprite;
-    [Export] private Chair[] chairs;
+    [Export] public Chair[] chairs;
     [ExportCategory("Vars")]
     [Export] private Texture2D emptyTable;
     [Export] private Texture2D gameTable;

@@ -23,6 +23,12 @@ public partial class Chair : Sprite2D
     [Signal]
     public delegate void OnCustomerDetachedEventHandler(ACustomer customer);
 
+    [Signal]
+    public delegate void OnLeftClickEventHandler(Chair chair);
+
+    [Signal]
+    public delegate void OnRightClickEventHandler(Chair chair);
+
     public override void _Ready()
     {
         base._Ready();
@@ -32,6 +38,10 @@ public partial class Chair : Sprite2D
             PosMod = new Vector2(-PosMod.X, PosMod.Y);
             walletGraphic.Offset = new Vector2(-walletGraphic.Offset.X, walletGraphic.Offset.Y);
         }
+
+        chairControl.MouseEntered += OnMouseEntered;
+        chairControl.MouseExited += OnMouseExited;
+        chairControl.GuiInput += OnGuiInput;
     }
 
     public bool CanHold(Draggable draggable) => draggable is DraggableCustomer && IsEmpty;
@@ -46,6 +56,7 @@ public partial class Chair : Sprite2D
         Customer = customer;
         CustomerSitting = true;
         chairControl.ShaderModulate = customer.Color;
+        chairControl.MouseDefaultCursorShape = Control.CursorShape.PointingHand;
         customer.SitDown(this);
         EmitSignal(SignalName.OnCustomerAttached, customer);
     }
@@ -60,6 +71,7 @@ public partial class Chair : Sprite2D
         EmitSignal(SignalName.OnCustomerDetached, Customer);
         Customer = null;
         chairControl.ShaderModulate = Colors.White;
+        chairControl.MouseDefaultCursorShape = Control.CursorShape.Arrow;
     }
 
     public void CustomerStartBreak()
@@ -91,4 +103,42 @@ public partial class Chair : Sprite2D
     public void PauseGame() => EmitSignal(SignalName.OnCustomerPaused, Customer);
 
     public void ResumeGame() => EmitSignal(SignalName.OnCustomerResumed, Customer);
+
+    protected virtual void OnMouseEntered()
+    {
+        if (!IsEmpty)
+        {
+            if (CustomerSitting)
+            {
+                UITooltipController.Current.ShowTooltip(this, "Trade", true);
+            }
+            else
+            {
+                UITooltipController.Current.ShowTooltip(this, "Rob", true);
+            }
+        }
+    }
+
+    protected virtual void OnMouseExited()
+    {
+        if (!IsEmpty)
+        {
+            UITooltipController.Current.HideTooltip(this);
+        }
+    }
+
+    protected virtual void OnGuiInput(InputEvent @event)
+    {
+        if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed && !mouseEvent.IsEcho())
+        {
+            if (mouseEvent.ButtonIndex == MouseButton.Left || mouseEvent.ButtonIndex == MouseButton.Middle)
+            {
+                EmitSignal(SignalName.OnLeftClick, this);
+            }
+            else if (mouseEvent.ButtonIndex == MouseButton.Right)
+            {
+                EmitSignal(SignalName.OnRightClick, this);
+            }
+        }
+    }
 }

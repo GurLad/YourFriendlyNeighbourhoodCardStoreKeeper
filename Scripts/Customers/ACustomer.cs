@@ -197,6 +197,7 @@ public abstract partial class ACustomer : Sprite2D
             interpolator.Stop(false);
         }
         dragger.CanDrag = false;
+        dragger.Visible = false;
         dragger.RenderHighlight(true);
         Queue.RemoveCustomer(this);
         pathing = false;
