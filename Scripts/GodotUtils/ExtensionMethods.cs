@@ -65,6 +65,11 @@ public static class ExtensionMethods
         return (float)(random.NextDouble() * (maxValue - minValue) + minValue);
     }
 
+    public static float RandomValueInRange(this Vector2 v2)
+    {
+        return RNG.NextFloat(v2);
+    }
+
     public static T RandomItemInList<T>(this List<T> list)
     {
         return list.Count > 0 ? list[RNG.Next(0, list.Count)] : default;

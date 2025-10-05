@@ -36,7 +36,7 @@ project/assembly_name="Your Friendly Neighbourhood Card Store Keeper"
 [file_customization]
 
 folder_colors={
-"res://Fonts/": "red",
+"res://Fonts/": "pink",
 "res://Scenes/": "orange",
 "res://Scripts/": "yellow",
 "res://Scripts/Cards/": "green",
