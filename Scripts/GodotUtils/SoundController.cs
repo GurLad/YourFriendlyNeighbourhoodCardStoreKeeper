@@ -16,9 +16,9 @@ public partial class SoundController : Node
         AddChild(player = new AudioStreamPlayer());
     }
 
-    public void PlaySFX(AudioStream sfx)
+    public void PlaySFX(AudioStream sfx, bool overrideCurrent = true)
     {
-        if (player.Playing)
+        if (player.Playing && overrideCurrent)
         {
             GD.PushWarning("SFX overlap!");
         }
@@ -26,11 +26,11 @@ public partial class SoundController : Node
         player.Play();
     }
 
-    public void PlaySFX(string name)
+    public void PlaySFX(string name, bool overrideCurrent = true)
     {
     	if (sfxDict.ContainsKey(name))
         {
-            PlaySFX(sfxDict[name]);
+            PlaySFX(sfxDict[name], overrideCurrent);
         }
         else
         {

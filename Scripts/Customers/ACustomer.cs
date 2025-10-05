@@ -27,7 +27,7 @@ public abstract partial class ACustomer : Sprite2D
     [Export] private float fadeTime { get; set; } = 0.2f;
     [Export] private float speed { get; set; } = 5f;
 
-    public Chair Chair { private get; set; } = null;
+    public Chair Chair { get; set; } = null;
     public StoreQueue Queue { private get; set; } = null;
     public InventoryData Inventory { get; } = new InventoryData();
 
@@ -103,7 +103,16 @@ public abstract partial class ACustomer : Sprite2D
         Position = PathExtensions.ENTRANCE_POS.ToPos();
         Scale = Vector2.Zero;
 
-        SoundController.Current.PlaySFX("Enter");
+        // Blergh
+        Stats.OnTheftDetected += LeaveStore;
+
+        SoundController.Current.PlaySFX("Enter", false);
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+        Stats.OnTheftDetected -= LeaveStore;
     }
 
     public void Spawn()

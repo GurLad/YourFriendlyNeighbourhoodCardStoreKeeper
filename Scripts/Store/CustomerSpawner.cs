@@ -18,6 +18,14 @@ public partial class CustomerSpawner : Node
         spawnTimer.OneShot = false;
         spawnTimer.Timeout += TrySpawn;
         spawnTimer.Start();
+
+        Stats.OnTheftDetected += PauseForTheft;
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+        Stats.OnTheftDetected -= PauseForTheft;
     }
 
     private void TrySpawn()
@@ -31,5 +39,12 @@ public partial class CustomerSpawner : Node
         customerHolder.AddChild(newCustomer);
         newCustomer.Spawn();
         queue.InsertCustomer(newCustomer);
+    }
+
+    private void PauseForTheft()
+    {
+        spawnTimer.Stop();
+        spawnTimer.WaitTime = 5; // Hardocidng weeee
+        spawnTimer.Start();
     }
 }
