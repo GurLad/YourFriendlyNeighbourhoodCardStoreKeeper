@@ -117,6 +117,20 @@ public partial class MultiPageGridContainer : Control
         }
     }
 
+    public void ClearAllItems()
+    {
+        items.ForEach(a => a.QueueFree());
+        grids.ForEach(a => a.QueueFree());
+        grids.Clear();
+        items.Clear();
+        currentGrid = 0;
+
+        GridContainer grid = CreateGrid();
+        grid.Modulate = Colors.White;
+        grid.Visible = true;
+        EnableDisableNextPrevButtons();
+    }
+
     public void RemoveItem(Control item)
     {
         if (items.Contains(item))

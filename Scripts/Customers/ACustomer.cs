@@ -182,11 +182,15 @@ public abstract partial class ACustomer : Sprite2D
             // Miss the commotion
             return;
         }
-        if (pathing)
+        if (state == State.Leaving)
         {
-            interpolator.Stop(false);
+            return;
         }
-        if (Queue != null && state == State.Queue)
+        if (pathing)
+            {
+                interpolator.Stop(false);
+            }
+        if (Queue != null)
         {
             Queue.RemoveCustomer(this);
         }

@@ -11,19 +11,16 @@ public partial class InventoryRendererCollection : AInventoryRenderer
     public override void _Ready()
     {
         base._Ready();
-        // TEMP
-
-        Render(PlayerInventoryController.Inventory);
     }
 
     public override void _Process(double delta)
     {
         base._Process(delta);
-        GD.Print(gridContainer.Size);
     }
 
     public override void Render(InventoryData inventory)
     {
+        gridContainer.ClearAllItems();
         this.inventory = inventory;
         List<InventoryIDCard> relevant = inventory.Cards.FindAll(a => a is InventoryIDCard).ConvertAll(a => (InventoryIDCard)a);
         List<CardData> allCards = CardsLoader.GetAllCards();

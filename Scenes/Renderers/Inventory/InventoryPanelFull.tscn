@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=3 uid="uid://dtep40ck21qo0"]
+
+[ext_resource type="Texture2D" uid="uid://u70hn0hsk632" path="res://Sprites/UI/Panels/PanelGreenLight.png" id="1_sd0d3"]
+[ext_resource type="FontFile" uid="uid://b4d6lvfaihdaa" path="res://Fonts/VCRFont.ttf" id="2_d2cmn"]
+[ext_resource type="Script" uid="uid://bbfimggdfxfxq" path="res://Scripts/Inventory/InventoryRenderers/InventoryRendererCollection.cs" id="2_lto20"]
+[ext_resource type="PackedScene" uid="uid://bisko1xy6pjyw" path="res://Scenes/Renderers/InventoryCardRenderer.tscn" id="3_c3yjq"]
+[ext_resource type="Texture2D" uid="uid://d043ncwgbdqgq" path="res://Sprites/UI/Panels/PanelGreenDark.png" id="3_lto20"]
+[ext_resource type="PackedScene" uid="uid://bvqmhs4j6oojj" path="res://Scenes/UI/MultiPageGird.tscn" id="6_lto20"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bap4c"]
+texture = ExtResource("1_sd0d3")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rohpe"]
+texture = ExtResource("3_lto20")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[node name="InventoryPanelFull" type="PanelContainer" node_paths=PackedStringArray("gridContainer")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_bap4c")
+script = ExtResource("2_lto20")
+gridContainer = NodePath("VBoxContainer/PanelContainer/InventoryRendererCollection/MultiPageGird")
+sceneCardRenderer = ExtResource("3_c3yjq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_d2cmn")
+text = "Return to Revenge of the Squirrels Remastered"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 2
+bbcode_enabled = true
+text = "Selling cards is the only way to gain money, but it's [wave amp=19 freq=6.5 connected=true]BLASHPHEMY!![/wave]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_rohpe")
+
+[node name="InventoryRendererCollection" type="MarginContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="MultiPageGird" parent="VBoxContainer/PanelContainer/InventoryRendererCollection" instance=ExtResource("6_lto20")]
+custom_minimum_size = Vector2(468, 300)
+layout_mode = 2

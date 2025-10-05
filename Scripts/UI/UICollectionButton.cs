@@ -8,18 +8,36 @@ public partial class UICollectionButton : Button
     [Export] private float openCloseTime = 0.5f;
 
     private Interpolator interpolator = new Interpolator();
+    private bool visible = false;
 
     public override void _Ready()
     {
         base._Ready();
         Pressed += TryOpenClose;
 
+        displayFull.PivotOffset = new Vector2(504.0f, 352.0f) / 2;
         Text = PlayerInventoryController.CountUnique() + "/40";
         AddChild(interpolator);
         PlayerInventoryController.GainedCard += () => Text = PlayerInventoryController.CountUnique() + "/40";
     }
 
     private void TryOpenClose()
+    {
+        if (!visible)
+        {
+            display.Render(PlayerInventoryController.Inventory);
+            display.Visible = true;
+            display.AnimateShow();
+            visible = true;
+        }
+        else
+        {
+            display.AnimateHide();
+            visible = false;
+        }
+    }
+
+    private void TryOpenClose2()
     {
         if (interpolator.Active)
         {
@@ -35,10 +53,10 @@ public partial class UICollectionButton : Button
                 new Interpolator.InterpolateObject(
                     a => displayFull.Scale = Vector2.One * a,
                     displayFull.Scale.X,
-                    1,
+                    0,
                     Easing.EaseInBack
                 ));
-            displayFull.Visible = true;
+            hide = true;
         }
         else
         {
@@ -46,10 +64,10 @@ public partial class UICollectionButton : Button
                 new Interpolator.InterpolateObject(
                     a => displayFull.Scale = Vector2.One * a,
                     displayFull.Scale.X,
-                    0,
+                    1,
                     Easing.EaseOutBack
                 ));
-            hide = true;
+            displayFull.Visible = true;
         }
         interpolator.OnFinish = () =>
         {

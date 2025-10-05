@@ -29,8 +29,11 @@ public partial class StoreQueue : Node
 
     public void RemoveCustomer(ACustomer customer)
     {
-        customers.Remove(customer);
-        UpdatePositions();
+        if (customers.Contains(customer))
+        {
+            customers.Remove(customer);
+            UpdatePositions();
+        }
     }
 
     public void UpdatePositions()

@@ -17,10 +17,13 @@ public abstract partial class AInventoryRenderer : Control
     {
         base._Ready();
         AddChild(interpolator);
+
+        Modulate = Colors.Transparent;
     }
 
     public void AnimateShow()
     {
+        Visible = true;
         TotalMouseBlock.Block();
         StoreController.Pause();
         interpolator.Interpolate(ShowHideTime,
@@ -42,7 +45,7 @@ public abstract partial class AInventoryRenderer : Control
                 Colors.Transparent,
                 Easing.EaseInOutSin
             ));
-        interpolator.OnFinish = TotalMouseBlock.Unblock;
+        interpolator.OnFinish = () => { TotalMouseBlock.Unblock(); Visible = false; };
     }
 
     protected InventoryCardRenderer RenderItem(CardData card, bool isNew = false)
