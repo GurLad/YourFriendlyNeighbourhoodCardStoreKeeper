@@ -29,11 +29,13 @@ transitionMode = 0
 [node name="UICursor" type="CenterContainer" parent="." node_paths=PackedStringArray("Renderer")]
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 script = ExtResource("5_6kq6g")
 Renderer = NodePath("Renderer")
 
 [node name="Renderer" type="TextureRect" parent="UICursor"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="SceneTransition" type="ColorRect" parent="."]
 anchors_preset = 15

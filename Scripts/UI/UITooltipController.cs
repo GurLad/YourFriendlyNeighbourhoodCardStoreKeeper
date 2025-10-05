@@ -24,12 +24,20 @@ public partial class UITooltipController : Node
 
     public UITooltip ShowTooltip(Sprite2D source, string text, bool upright)
     {
+        if (lastSource == source)
+        {
+            return null;
+        }
         lastSource = source;
         return ShowTooltip(source.GlobalPosition, source.Texture.GetSize(), text, upright);
     }
 
     public UITooltip ShowTooltip(Control source, string text, bool upright)
     {
+        if (lastSource == source)
+        {
+            return null;
+        }
         lastSource = source;
         return ShowTooltip(source.GlobalPosition, source.Size, text, upright);
     }

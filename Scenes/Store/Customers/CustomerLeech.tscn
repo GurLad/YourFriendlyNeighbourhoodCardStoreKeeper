@@ -13,3 +13,7 @@ dragger = NodePath("Area2D")
 Color = Color(0.8352941, 0.8784314, 0.29411766, 1)
 
 [node name="Area2D" parent="." instance=ExtResource("3_vw738")]
+offset_left = -28.0
+offset_top = -28.0
+offset_right = -4.0
+offset_bottom = -4.0

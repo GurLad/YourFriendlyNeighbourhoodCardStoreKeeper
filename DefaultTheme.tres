@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=4 format=3 uid="uid://bw2shwfv7sv7u"]
 
+[ext_resource type="FontFile" uid="uid://fm5wvn4p8p45" path="res://Fonts/FindersKeepers.ttf" id="1_ihngy"]
 [ext_resource type="Texture2D" uid="uid://6qdd0roeprhw" path="res://Sprites/UI/Panels/PanelBrownDark.png" id="1_jnd74"]
-[ext_resource type="FontFile" uid="uid://cbvpu5p4qvrnu" path="res://Fonts/BetterPixels.ttf" id="2_jnd74"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kspi0"]
 texture = ExtResource("1_jnd74")
@@ -11,5 +11,5 @@ texture_margin_right = 4.0
 texture_margin_bottom = 4.0
 
 [resource]
-default_font = ExtResource("2_jnd74")
+default_font = ExtResource("1_ihngy")
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_kspi0")
