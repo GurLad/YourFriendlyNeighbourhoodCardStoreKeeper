@@ -13,7 +13,7 @@ config_version=5
 config/name="Your Friendly Neighbourhood Card Store Keeper"
 run/main_scene="uid://damx8hg02gig5"
 config/features=PackedStringArray("4.5", "C#", "Mobile")
-config/icon="res://icon.svg"
+config/icon="uid://01khwat1fcab"
 
 [autoload]
 
@@ -24,6 +24,7 @@ DebugAllLoader="res://Scenes/Loaders/DebugAllLoader.tscn"
 
 window/size/viewport_width=640
 window/size/viewport_height=360
+window/size/mode=4
 window/size/resizable=false
 window/size/window_width_override=1920
 window/size/window_height_override=1080
