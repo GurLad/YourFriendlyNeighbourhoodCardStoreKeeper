@@ -70,7 +70,7 @@ public abstract partial class ACustomer : Sprite2D
 
         queueTimer.WaitTime = queueWaitTime = queueWaitTimeRange.RandomValueInRange();
         playTimer.WaitTime = playTime = playTimeRange.RandomValueInRange();
-        bladderTimer.WaitTime = bladder = 1;//bladderRange.RandomValueInRange();
+        bladderTimer.WaitTime = bladder = bladderRange.RandomValueInRange();
         toiletTimer.WaitTime = toiletTime = toiletTimeRange.RandomValueInRange();
         queueTimer.OneShot = playTimer.OneShot = bladderTimer.OneShot = toiletTimer.OneShot = false;
         // Normal dist. is too much for now
