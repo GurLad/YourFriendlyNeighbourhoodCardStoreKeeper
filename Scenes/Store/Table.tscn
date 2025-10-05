@@ -1,9 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://dahkj3oix1kw0"]
+[gd_scene load_steps=5 format=3 uid="uid://dahkj3oix1kw0"]
 
+[ext_resource type="Script" uid="uid://63o0niqqjtv5" path="res://Scripts/Store/Table.cs" id="1_g10sr"]
 [ext_resource type="PackedScene" uid="uid://b06fuc4i3oul5" path="res://Scenes/Store/Chair.tscn" id="1_gjsn5"]
 [ext_resource type="Texture2D" uid="uid://d2kdtd7mvomin" path="res://Sprites/Store/Table.png" id="2_fmam6"]
+[ext_resource type="Texture2D" uid="uid://xqer2kwl11f7" path="res://Sprites/Store/GameTable.png" id="3_vcssr"]
 
-[node name="Table" type="Node2D"]
+[node name="Table" type="Node2D" node_paths=PackedStringArray("sprite", "chairs")]
+script = ExtResource("1_g10sr")
+sprite = NodePath("TableSprite")
+chairs = [NodePath("Chair1"), NodePath("Chair2")]
+emptyTable = ExtResource("2_fmam6")
+gameTable = ExtResource("3_vcssr")
 
 [node name="Chair1" parent="." instance=ExtResource("1_gjsn5")]
 position = Vector2(-54, -5)

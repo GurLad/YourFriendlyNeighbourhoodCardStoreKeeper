@@ -10,6 +10,18 @@ public partial class Chair : Sprite2D
 
     private ACustomer customer = null;
 
+    [Signal]
+    public delegate void OnCustomerAttachedEventHandler(ACustomer customer);
+
+    [Signal]
+    public delegate void OnCustomerPausedEventHandler(ACustomer customer);
+
+    [Signal]
+    public delegate void OnCustomerResumedEventHandler(ACustomer customer);
+
+    [Signal]
+    public delegate void OnCustomerDetachedEventHandler(ACustomer customer);
+
     public override void _Ready()
     {
         base._Ready();
@@ -32,6 +44,7 @@ public partial class Chair : Sprite2D
         this.customer = customer;
         chairControl.ShaderModulate = customer.Color;
         customer.SitDown(this);
+        EmitSignal(SignalName.OnCustomerAttached, customer);
     }
 
     public void DetachCustomer()
@@ -41,7 +54,12 @@ public partial class Chair : Sprite2D
             GD.PushError("[Chair]: Empty detach!");
             return;
         }
+        EmitSignal(SignalName.OnCustomerDetached, customer);
         customer = null;
         chairControl.ShaderModulate = Colors.White;
     }
+
+    public void PauseGame() => EmitSignal(SignalName.OnCustomerPaused, customer);
+    
+    public void ResumeGame() => EmitSignal(SignalName.OnCustomerResumed, customer);
 }

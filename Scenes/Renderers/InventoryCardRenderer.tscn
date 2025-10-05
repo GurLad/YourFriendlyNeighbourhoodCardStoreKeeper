@@ -1,13 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://bisko1xy6pjyw"]
+[gd_scene load_steps=10 format=3 uid="uid://bisko1xy6pjyw"]
 
 [ext_resource type="FontFile" uid="uid://d1lf6n8cp7jk4" path="res://Fonts/Born2bSportyV2.ttf" id="1_fb1wb"]
 [ext_resource type="Script" uid="uid://bvohfqubj5nyf" path="res://Scripts/Inventory/InventoryCardRenderer.cs" id="1_oejf1"]
 [ext_resource type="PackedScene" uid="uid://d4ebnmmp11yhb" path="res://Scenes/Renderers/CardRenderer.tscn" id="1_ojy4q"]
 [ext_resource type="FontFile" uid="uid://cyylcxs1wedke" path="res://Fonts/TinyUnicode.ttf" id="2_ojy4q"]
 [ext_resource type="Texture2D" uid="uid://bkxlnieiuo4xs" path="res://Sprites/UI/GemButtonSmall.png" id="3_ojy4q"]
+[ext_resource type="Texture2D" uid="uid://dok2xwqrcb5es" path="res://Sprites/UI/GemButtonSmallHighlight.png" id="6_i2rbw"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fb1wb"]
 texture = ExtResource("3_ojy4q")
+texture_margin_left = 6.0
+texture_margin_right = 6.0
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xd6ol"]
+texture = ExtResource("6_i2rbw")
 texture_margin_left = 6.0
 texture_margin_right = 6.0
 axis_stretch_vertical = 1
@@ -66,7 +73,7 @@ theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_ojy4q")
 theme_override_styles/normal = SubResource("StyleBoxTexture_fb1wb")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_fb1wb")
-theme_override_styles/hover = SubResource("StyleBoxTexture_fb1wb")
+theme_override_styles/hover = SubResource("StyleBoxTexture_xd6ol")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_dhkvd")
 theme_override_styles/focus = SubResource("StyleBoxTexture_fb1wb")
 clip_text = true
