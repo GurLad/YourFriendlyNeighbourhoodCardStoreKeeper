@@ -96,6 +96,9 @@ public partial class UIEndScreen : Control
             part.Clear();
             screenParts.Add(part);
         });
+
+        visible = false;
+        Scale = Vector2.Zero;
     }
 
     public void ShowM()

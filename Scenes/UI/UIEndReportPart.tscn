@@ -1,14 +1,35 @@
-[gd_scene load_steps=2 format=3 uid="uid://xnpcfy8b5jj8"]
+[gd_scene load_steps=4 format=3 uid="uid://xnpcfy8b5jj8"]
 
 [ext_resource type="Script" uid="uid://dcntbq5xuaorh" path="res://Scripts/UI/UIEndScreenPart.cs" id="1_u0lxp"]
+[ext_resource type="FontFile" uid="uid://5orcbu327rix" path="res://Fonts/TomAndJerry.ttf" id="2_7y2o1"]
+[ext_resource type="FontFile" uid="uid://cyylcxs1wedke" path="res://Fonts/TinyUnicode.ttf" id="3_hdrfe"]
 
-[node name="EndReportPart" type="HBoxContainer"]
+[node name="EndReportPart" type="HBoxContainer" node_paths=PackedStringArray("what", "message")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 64
 script = ExtResource("1_u0lxp")
+what = NodePath("Label")
+message = NodePath("Label2")
+colors = PackedColorArray(0.11764706, 0.7372549, 0.4509804, 1)
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_7y2o1")
+text = "40 Cards Collected"
+
+[node name="Label2" type="Label" parent="."]
+modulate = Color(0.11764706, 0.7372549, 0.4509804, 1)
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("3_hdrfe")
+text = "You belong in super hell 2 deluxe remastered"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3

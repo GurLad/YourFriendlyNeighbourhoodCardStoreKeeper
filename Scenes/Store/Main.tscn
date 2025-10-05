@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://damx8hg02gig5"]
+[gd_scene load_steps=14 format=3 uid="uid://damx8hg02gig5"]
 
 [ext_resource type="Script" uid="uid://bmlno7k7s8qp3" path="res://Scripts/GodotUtils/MusicController.cs" id="1_8a6dy"]
 [ext_resource type="Script" uid="uid://m83u5pu0lowk" path="res://Scripts/GodotUtils/Transitions/FadeTransition.cs" id="1_8kx8p"]
@@ -11,6 +11,8 @@
 [ext_resource type="AudioStream" uid="uid://kqiw2xhxvvdo" path="res://Sound/SFX/PickUp.mp3" id="6_kv3w6"]
 [ext_resource type="AudioStream" uid="uid://dg32qax7xk3qx" path="res://Sound/SFX/Drop.mp3" id="7_lhpaj"]
 [ext_resource type="AudioStream" uid="uid://ua10i8l4g5n0" path="res://Sound/SFX/Enter.mp3" id="8_da7q6"]
+[ext_resource type="AudioStream" uid="uid://ckyq2aqrya3ka" path="res://Sound/SFX/Steal.mp3" id="9_da7q6"]
+[ext_resource type="AudioStream" uid="uid://ckh5hvqyj471t" path="res://Sound/SFX/Detected.mp3" id="10_qsjnq"]
 
 [node name="Main" type="Node" node_paths=PackedStringArray("scenesNode")]
 script = ExtResource("1_pgbhj")
@@ -31,9 +33,11 @@ transitionMode = 0
 [node name="SoundController" type="Node" parent="."]
 script = ExtResource("5_fn5kr")
 sfxDict = Dictionary[String, AudioStream]({
+"Detected": ExtResource("10_qsjnq"),
 "Drop": ExtResource("7_lhpaj"),
 "Enter": ExtResource("8_da7q6"),
-"PickUp": ExtResource("6_kv3w6")
+"PickUp": ExtResource("6_kv3w6"),
+"Steal": ExtResource("9_da7q6")
 })
 
 [node name="SceneController" type="Node" parent="."]

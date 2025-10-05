@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://chnoj3xka8xf0"]
+[gd_scene load_steps=31 format=3 uid="uid://chnoj3xka8xf0"]
 
 [ext_resource type="Script" uid="uid://bnccerywo70ms" path="res://Scripts/Store/Singletons/MoneyController.cs" id="1_avijh"]
 [ext_resource type="Script" uid="uid://ckwdh43etlygo" path="res://Scripts/Store/Singletons/StoreController.cs" id="1_xt8ip"]
@@ -21,12 +21,35 @@
 [ext_resource type="Texture2D" uid="uid://dsivp4s3txsak" path="res://Sprites/Tutorial/Tutorial1.png" id="18_keqyn"]
 [ext_resource type="Texture2D" uid="uid://2nscus780ud3" path="res://Sprites/Tutorial/Tutorial2.png" id="19_bap4c"]
 [ext_resource type="Texture2D" uid="uid://cvjiou41qhnab" path="res://Sprites/Tutorial/Tutorial3.png" id="20_rohpe"]
+[ext_resource type="FontFile" uid="uid://cyylcxs1wedke" path="res://Fonts/TinyUnicode.ttf" id="21_vhpmh"]
+[ext_resource type="Texture2D" uid="uid://bkxlnieiuo4xs" path="res://Sprites/UI/GemButtonSmall.png" id="22_b3xo5"]
+[ext_resource type="Texture2D" uid="uid://dok2xwqrcb5es" path="res://Sprites/UI/GemButtonSmallHighlight.png" id="23_yroih"]
+[ext_resource type="PackedScene" uid="uid://dy0bs5w53yv7j" path="res://Scenes/UI/UIEndReport.tscn" id="24_b3xo5"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tijtf"]
 texture = ExtResource("14_72flu")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_keqyn"]
 texture = ExtResource("15_pvqui")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jip8j"]
+texture = ExtResource("22_b3xo5")
+texture_margin_left = 6.0
+texture_margin_right = 6.0
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ia354"]
+texture = ExtResource("23_yroih")
+texture_margin_left = 6.0
+texture_margin_right = 6.0
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7kgnw"]
+texture = ExtResource("22_b3xo5")
+texture_margin_left = 6.0
+texture_margin_right = 6.0
+axis_stretch_vertical = 1
+modulate_color = Color(1, 1, 1, 0.45882353)
 
 [node name="Store" type="Node"]
 script = ExtResource("1_xt8ip")
@@ -162,5 +185,50 @@ size_flags_horizontal = 3
 theme_override_constants/outline_size = 2
 text = "Don't let them - or their opponent - catch you in the act!"
 autowrap_mode = 3
+
+[node name="Control" type="Control" parent="UI/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="UI/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_vertical = 8
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("21_vhpmh")
+theme_override_styles/normal = SubResource("StyleBoxTexture_jip8j")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_jip8j")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ia354")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_7kgnw")
+theme_override_styles/focus = SubResource("StyleBoxTexture_jip8j")
+clip_text = true
+
+[node name="Label" type="Label" parent="UI/VBoxContainer/Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("21_vhpmh")
+text = "Finish Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UIEndReport" parent="UI" node_paths=PackedStringArray("showButton") instance=ExtResource("24_b3xo5")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.5
+offset_top = -27.5
+offset_right = 71.5
+offset_bottom = 27.5
+showButton = NodePath("../VBoxContainer/Button")
 
 [node name="UITooltipsController" parent="." instance=ExtResource("11_r1s76")]

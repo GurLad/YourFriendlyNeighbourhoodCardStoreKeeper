@@ -1,11 +1,101 @@
-[gd_scene format=3 uid="uid://dy0bs5w53yv7j"]
+[gd_scene load_steps=14 format=3 uid="uid://dy0bs5w53yv7j"]
 
-[node name="UIEndReport" type="PanelContainer"]
+[ext_resource type="Texture2D" uid="uid://wvn5npe7k0wy" path="res://Sprites/UI/Panels/PanelBlueLight.png" id="1_yusrw"]
+[ext_resource type="Script" uid="uid://bn5hu86fk3qo2" path="res://Scripts/UI/UIEndScreen.cs" id="2_f66oi"]
+[ext_resource type="PackedScene" uid="uid://xnpcfy8b5jj8" path="res://Scenes/UI/UIEndReportPart.tscn" id="3_4n3ab"]
+[ext_resource type="FontFile" uid="uid://b4d6lvfaihdaa" path="res://Fonts/VCRFont.ttf" id="4_4yxp6"]
+[ext_resource type="Texture2D" uid="uid://dxatxjud3lxyc" path="res://Sprites/UI/Panels/PanelBlueDark.png" id="5_f66oi"]
+[ext_resource type="FontFile" uid="uid://cyylcxs1wedke" path="res://Fonts/TinyUnicode.ttf" id="6_046ic"]
+[ext_resource type="Texture2D" uid="uid://bkxlnieiuo4xs" path="res://Sprites/UI/GemButtonSmall.png" id="7_3fg3v"]
+[ext_resource type="Texture2D" uid="uid://dok2xwqrcb5es" path="res://Sprites/UI/GemButtonSmallHighlight.png" id="8_ejhrr"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_046ic"]
+texture = ExtResource("1_yusrw")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4n3ab"]
+texture = ExtResource("5_f66oi")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wvqe1"]
+texture = ExtResource("7_3fg3v")
+texture_margin_left = 6.0
+texture_margin_right = 6.0
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g8qqh"]
+texture = ExtResource("8_ejhrr")
+texture_margin_left = 6.0
+texture_margin_right = 6.0
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4ye6l"]
+texture = ExtResource("7_3fg3v")
+texture_margin_left = 6.0
+texture_margin_right = 6.0
+axis_stretch_vertical = 1
+modulate_color = Color(1, 1, 1, 0.45882353)
+
+[node name="UIEndReport" type="PanelContainer" node_paths=PackedStringArray("partHolder", "hideButton")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_046ic")
+script = ExtResource("2_f66oi")
+scenePart = ExtResource("3_4n3ab")
+partHolder = NodePath("VBoxContainer/PanelContainer/VBoxContainer")
+hideButton = NodePath("VBoxContainer/Button")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("4_4yxp6")
+text = "FINAL RESULT"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_4n3ab")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("6_046ic")
+theme_override_styles/normal = SubResource("StyleBoxTexture_wvqe1")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wvqe1")
+theme_override_styles/hover = SubResource("StyleBoxTexture_g8qqh")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_4ye6l")
+theme_override_styles/focus = SubResource("StyleBoxTexture_wvqe1")
+clip_text = true
+
+[node name="Label" type="Label" parent="VBoxContainer/Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("6_046ic")
+text = "Close"
+horizontal_alignment = 1
+vertical_alignment = 1
