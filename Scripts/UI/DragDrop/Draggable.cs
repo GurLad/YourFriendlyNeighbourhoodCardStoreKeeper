@@ -11,7 +11,7 @@ public partial class Draggable : Control
     }
 
     [ExportCategory("Vars")]
-    [Export] public Texture2D DragIcon { get; private set; }
+    [Export] public Texture2D DragIcon { get; protected set; }
     [ExportCategory("Vars - Highlight")]
     [Export] private Color BaseModulate { get; set; } = Colors.White;
     [Export] private float HeldOpacity { get; set; } = 0.6f;
@@ -53,19 +53,13 @@ public partial class Draggable : Control
         return material;
     }
 
-    public void CancelDrop()
-    {
-        Highlight &= ~HighlightMode.Held;
-        RenderHighlight();
-    }
-
     public void RenderHighlight(bool force = false)
     {
         if (!CanDrag && !force)
         {
             return;
         }
-        else
+        else if (!CanDrag)
         {
             Highlight = HighlightMode.None;
         }
@@ -114,6 +108,8 @@ public partial class Draggable : Control
 
     public virtual void Cancelled()
     {
+        Highlight &= ~HighlightMode.Held;
+        RenderHighlight();
         EmitSignal(SignalName.OnCancelled);
     }
 }

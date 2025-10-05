@@ -9,5 +9,6 @@ public partial class DraggableCustomer : Draggable
     {
         Customer = customer;
         Customer.Material = InitMaterial(customer.Material);
+        DragIcon = Customer.Texture;
     }
 }

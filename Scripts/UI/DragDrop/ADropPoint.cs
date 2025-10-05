@@ -21,6 +21,11 @@ public abstract partial class ADropPoint : Control
     private HighlightMode Highlight;
     private ShaderMaterial ShaderMaterial;
 
+    public Color ShaderModulate
+    {
+        set => ShaderMaterial.SetShaderParameter("modulate", value);
+    }
+
     public override void _Ready()
     {
         base._Ready();
@@ -42,7 +47,7 @@ public abstract partial class ADropPoint : Control
 
     public void RenderHighlight()
     {
-        ShaderMaterial.SetShaderParameter("showOutline", Highlight != HighlightMode.None);
+        ShaderMaterial.SetShaderParameter("showOutline", Highlight != HighlightMode.None && Highlight != HighlightMode.Empty);
         ShaderMaterial.SetShaderParameter("outlineColor",
             (Highlight & HighlightMode.Hover) != HighlightMode.None ?
                 HoverOutline :

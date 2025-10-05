@@ -30,7 +30,7 @@ public partial class Chair : Sprite2D
             return;
         }
         this.customer = customer;
-        Modulate = customer.Color;
+        chairControl.ShaderModulate = customer.Color;
         customer.SitDown(this);
     }
 
@@ -42,6 +42,6 @@ public partial class Chair : Sprite2D
             return;
         }
         customer = null;
-        Modulate = Colors.White;
+        chairControl.ShaderModulate = Colors.White;
     }
 }
