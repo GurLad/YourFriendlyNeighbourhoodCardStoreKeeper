@@ -18,7 +18,7 @@ public abstract partial class ACustomer : Sprite2D
     }
 
     [Export] public Color Color { get; set; } = Colors.White;
-    [Export] private float fadeTime { get; set; } = 0.2f;
+    [Export] private float fadeTime { get; set; } = 0.1f;
     [Export] private float speed { get; set; } = 5f;
 
     public Chair Chair { private get; set; } = null;

@@ -7,9 +7,10 @@ public partial class StoreQueue : Node
     [Export] private Vector2I queueStartPos = PathExtensions.QUEUE_START_POS;
     [Export] private Vector2I queueEndPos = PathExtensions.ENTRANCE_POS + Vector2I.Left;
 
-    private float capacity => queueEndPos.X - queueStartPos.X + 1;
+    private int capacity => queueEndPos.X - queueStartPos.X + 1;
 
     public bool Full => customers.Count >= capacity;
+    public int Count => customers.Count;
 
     private List<ACustomer> customers = new List<ACustomer>();
 

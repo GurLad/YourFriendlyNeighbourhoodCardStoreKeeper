@@ -25,7 +25,7 @@ script = ExtResource("4_r3bft")
 queue = NodePath("../Queue")
 customerScenes = Array[PackedScene]([ExtResource("5_3u0ap"), ExtResource("6_r1s76"), ExtResource("7_47c1y"), ExtResource("8_pgfoo")])
 customerHolder = NodePath("../Objects/Customers")
-rate = Vector2(1, 2)
+rate = Vector2(1, 2.5)
 
 [node name="Queue" type="Node" parent="."]
 script = ExtResource("5_m1qpk")

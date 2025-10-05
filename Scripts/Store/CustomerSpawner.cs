@@ -14,7 +14,7 @@ public partial class CustomerSpawner : Node
     {
         base._Ready();
         AddChild(spawnTimer);
-        spawnTimer.WaitTime = rate.RandomValueInRange();
+        spawnTimer.WaitTime = rate.RandomValueInRange() * (queue.Count + 1);
         spawnTimer.OneShot = false;
         spawnTimer.Timeout += TrySpawn;
         spawnTimer.Start();
@@ -22,7 +22,7 @@ public partial class CustomerSpawner : Node
 
     private void TrySpawn()
     {
-        spawnTimer.WaitTime = rate.RandomValueInRange();
+        spawnTimer.WaitTime = rate.RandomValueInRange() * (queue.Count + 1);
         if (queue.Full)
         {
             return;
