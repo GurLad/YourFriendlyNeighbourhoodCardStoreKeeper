@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bf2ceokoata2y"]
+
+[ext_resource type="Texture2D" uid="uid://grpw8fcfgifd" path="res://Sprites/Store/Casual.png" id="1_hi2nr"]
+[ext_resource type="Script" uid="uid://ci4wi1wvsxs6j" path="res://Scripts/Customers/CustomerCasual.cs" id="1_mwqdw"]
+
+[node name="CustomerCasual" type="Sprite2D"]
+texture = ExtResource("1_hi2nr")
+script = ExtResource("1_mwqdw")
+Color = Color(0.11764706, 0.7372549, 0.4509804, 1)

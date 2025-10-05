@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bux7avla14lbb"]
+
+[ext_resource type="Texture2D" uid="uid://sibveuvnxlqn" path="res://Sprites/Store/Kid.png" id="1_i5kc1"]
+[ext_resource type="Script" uid="uid://x6h41s483ia6" path="res://Scripts/Customers/CustomerKid.cs" id="2_a07uo"]
+
+[node name="CustomerKid" type="Sprite2D"]
+texture = ExtResource("1_i5kc1")
+script = ExtResource("2_a07uo")
+Color = Color(0.3019608, 0.60784316, 0.9019608, 1)

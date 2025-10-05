@@ -30,6 +30,8 @@ public abstract partial class ACustomer : Sprite2D
     protected abstract Vector2 bladderRange { get; }
     protected abstract Vector2 toiletTimeRange { get; }
 
+    protected abstract float ratingVariance { get; }
+
     private List<Action> actionQueue { get; } = new List<Action>();
     private State fullState { get; set; } = State.None;
     private State state => fullState & ~State.Pathing;
@@ -59,7 +61,8 @@ public abstract partial class ACustomer : Sprite2D
         playTimer.WaitTime = playTime = playTimeRange.RandomValueInRange();
         bladderTimer.WaitTime = bladder = bladderRange.RandomValueInRange();
         toiletTimer.WaitTime = toiletTime = toiletTimeRange.RandomValueInRange();
-        rating = ratingRange.RandomValueInRange();
+        // Normal dist. is too much for now
+        rating = (ratingRange.RandomValueInRange() + ratingRange.RandomValueInRange()) / 2;
 
         AddChild(interpolator);
         interpolator.InterruptMode = Interpolator.Mode.Error;
@@ -141,6 +144,8 @@ public abstract partial class ACustomer : Sprite2D
             interpolator.OnFinish = QueueFree;
         };
     }
+
+    public virtual float GetWinPerformance() => rating + ExtensionMethods.RNG.NextFloat(-1f, 1f) * ratingVariance;
 
     private void TryActionFromQueue()
     {

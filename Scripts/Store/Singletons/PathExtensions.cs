@@ -50,6 +50,10 @@ public static class PathExtensions
                     }
                     a /= steps[targetStep - 1].DistanceTo(steps[targetStep]);
                     toMove.Position = (1 - a) * steps[targetStep - 1] + a * steps[targetStep];
+                    if (toMove.Position.DistanceTo(steps[targetStep]) > 0.01f)
+                    {
+                        toMove.LookAt(steps[targetStep]);
+                    }
                 },
                 0,
                 totalDist
