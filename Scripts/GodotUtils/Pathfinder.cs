@@ -83,8 +83,9 @@ public static class Pathfinder
         int attempts = 0;
         while (openSet.Count > 0)
         {
-            if (attempts++ >= 500) // WTF is this taking so long
+            if (attempts++ >= 500)
             {
+                GD.PushError("[Pathfinder]: Bad path, aborting");
                 break;
             }
             Point current = openSet[0];
@@ -300,6 +301,16 @@ public static class Pathfinder
         public static bool operator !=(Point a, Point b)
         {
             return !(a == b);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Point p ? p == this : base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return x * 100000 + y;
         }
 
         public Point(Vector2I vector2Int)

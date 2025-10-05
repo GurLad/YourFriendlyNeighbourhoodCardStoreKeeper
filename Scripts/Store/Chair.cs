@@ -30,6 +30,7 @@ public partial class Chair : Sprite2D
         if (FlipH)
         {
             PosMod = new Vector2(-PosMod.X, PosMod.Y);
+            walletGraphic.Offset = new Vector2(-walletGraphic.Offset.X, walletGraphic.Offset.Y);
         }
     }
 

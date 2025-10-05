@@ -70,7 +70,7 @@ public abstract partial class ACustomer : Sprite2D
 
         queueTimer.WaitTime = queueWaitTime = queueWaitTimeRange.RandomValueInRange();
         playTimer.WaitTime = playTime = playTimeRange.RandomValueInRange();
-        bladderTimer.WaitTime = bladder = bladderRange.RandomValueInRange();
+        bladderTimer.WaitTime = bladder = 1;//bladderRange.RandomValueInRange();
         toiletTimer.WaitTime = toiletTime = toiletTimeRange.RandomValueInRange();
         queueTimer.OneShot = playTimer.OneShot = bladderTimer.OneShot = toiletTimer.OneShot = false;
         // Normal dist. is too much for now
@@ -268,7 +268,13 @@ public abstract partial class ACustomer : Sprite2D
         {
             GD.PushError("[Customer AI]: ResumeSitting when not toilet!");
         }
+        if (Chair == null || Chair.Customer != this)
+        {
+            GD.PushError("[Customer AI]: Return from break no chair!");
+        }
         fullState = State.Sitting;
+        GlobalPosition = Chair.GlobalPosition + Chair.PosMod;
+        RotationDegrees = Chair.FlipH ? 0 : 180;
         bladderTimer.Start();
         if (playTimer.Paused)
         {
