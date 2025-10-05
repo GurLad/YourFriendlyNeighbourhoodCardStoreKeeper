@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://chnoj3xka8xf0"]
+
+[ext_resource type="Texture2D" uid="uid://brm0dc7hyynxg" path="res://Sprites/Store/Background/Mockup.png" id="1_8fv3y"]
+[ext_resource type="Script" uid="uid://bnccerywo70ms" path="res://Scripts/Store/Singletons/MoneyController.cs" id="1_avijh"]
+[ext_resource type="Script" uid="uid://ckwdh43etlygo" path="res://Scripts/Store/Singletons/StoreController.cs" id="1_xt8ip"]
+[ext_resource type="Script" uid="uid://clqlybhlmralo" path="res://Scripts/Store/Singletons/PlayerInventoryController.cs" id="2_xt8ip"]
+
+[node name="Store" type="Node"]
+script = ExtResource("1_xt8ip")
+
+[node name="Money" type="Node" parent="."]
+script = ExtResource("1_avijh")
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("2_xt8ip")
+
+[node name="CustomerSpawner" type="Node" parent="."]
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Background" type="Sprite2D" parent="Objects"]
+texture = ExtResource("1_8fv3y")
+centered = false

@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="Your Friendly Neighbourhood Card Store Keeper"
+run/main_scene="uid://damx8hg02gig5"
 config/features=PackedStringArray("4.5", "C#", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
 CardsLoader="*res://Scenes/Loaders/CardsLoader.tscn"
-DebugAllLoader="*res://Scenes/Loaders/DebugAllLoader.tscn"
+DebugAllLoader="res://Scenes/Loaders/DebugAllLoader.tscn"
 
 [display]
 

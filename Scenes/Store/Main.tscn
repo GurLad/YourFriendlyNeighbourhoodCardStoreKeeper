@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://damx8hg02gig5"]
+
+[ext_resource type="Script" uid="uid://bmlno7k7s8qp3" path="res://Scripts/GodotUtils/MusicController.cs" id="1_8a6dy"]
+[ext_resource type="Script" uid="uid://m83u5pu0lowk" path="res://Scripts/GodotUtils/Transitions/FadeTransition.cs" id="1_8kx8p"]
+[ext_resource type="Script" uid="uid://dgynikmdpltqk" path="res://Scripts/UI/TotalMouseBlock.cs" id="1_lmk7b"]
+[ext_resource type="Script" uid="uid://dnooahnb8r33i" path="res://Scripts/GodotUtils/SceneController.cs" id="1_pgbhj"]
+[ext_resource type="PackedScene" uid="uid://kcybnv3yavv1" path="res://Scenes/Game.tscn" id="2_2435o"]
+[ext_resource type="AudioStream" uid="uid://cg8csp2qh0iqm" path="res://Sound/Music/CardboardShenanigans.wav" id="4_1g41w"]
+
+[node name="Main" type="Node" node_paths=PackedStringArray("scenesNode")]
+script = ExtResource("1_pgbhj")
+firstScene = "Game"
+scenes = Dictionary[String, PackedScene]({
+"Game": ExtResource("2_2435o")
+})
+pathTransition = NodePath("SceneTransition")
+scenesNode = NodePath("SceneController")
+
+[node name="MusicController" type="Node" parent="."]
+script = ExtResource("1_8a6dy")
+firstTrack = "Main"
+trackNames = PackedStringArray("Main")
+trackStreams = Array[AudioStream]([ExtResource("4_1g41w")])
+transitionMode = 0
+
+[node name="SceneController" type="Node" parent="."]
+
+[node name="SceneTransition" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("1_8kx8p")
+
+[node name="TotalMouseBlocker" type="Control" parent="."]
+z_index = -1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lmk7b")
