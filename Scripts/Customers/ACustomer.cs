@@ -23,7 +23,7 @@ public abstract partial class ACustomer : Sprite2D
 
     [ExportCategory("Vars")]
     [Export] public Color Color { get; set; } = Colors.White;
-    [Export] private float fadeTime { get; set; } = 0.1f;
+    [Export] private float fadeTime { get; set; } = 0.2f;
     [Export] private float speed { get; set; } = 5f;
 
     public Chair Chair { private get; set; } = null;
@@ -86,8 +86,13 @@ public abstract partial class ACustomer : Sprite2D
         dragger.OnDropped += OnDropped;
         dragger.OnCancelled += OnCancelled;
 
+        queueTimer.Timeout += OnQueueTimerOver;
+        playTimer.Timeout += OnPlayTimerOver;
+        bladderTimer.Timeout += OnBladderTimerOver;
+        toiletTimer.Timeout += OnToiletTimerOver;
+
         Position = PathExtensions.ENTRANCE_POS.ToPos();
-        Modulate = Colors.Transparent;
+        Scale = Vector2.Zero;
 
         SoundController.Current.PlaySFX("Enter");
     }
@@ -100,10 +105,11 @@ public abstract partial class ACustomer : Sprite2D
         }
         fullState = State.Spawning | State.Pathing;
         interpolator.Interpolate(fadeTime,
-            Interpolator.InterpolateObject.ModulateFadeInterpolate(
-                    this,
-                    Colors.White
-                ));
+            new Interpolator.InterpolateObject(
+                a => Scale = Vector2.One * a,
+                Scale.X,
+                1
+            ));
         interpolator.OnFinish = () =>
         {
             pathing = false;
@@ -157,6 +163,10 @@ public abstract partial class ACustomer : Sprite2D
         {
             interpolator.Stop(false);
         }
+        if (Queue != null && state == State.Queue)
+        {
+            Queue.RemoveCustomer(this);
+        }
         fullState = State.Leaving | State.Pathing;
         if (Chair != null)
         {
@@ -166,9 +176,10 @@ public abstract partial class ACustomer : Sprite2D
         interpolator.OnFinish = () =>
         {
             interpolator.Interpolate(fadeTime,
-                Interpolator.InterpolateObject.ModulateFadeInterpolate(
-                    this,
-                    Colors.Transparent
+                new Interpolator.InterpolateObject(
+                    a => Scale = Vector2.One * a,
+                    Scale.X,
+                    0
                 ));
             interpolator.OnFinish = QueueFree;
         };
@@ -218,6 +229,7 @@ public abstract partial class ACustomer : Sprite2D
         {
             GD.PushError("[Customer AI]: OnQueueTimerOver when sitting!");
         }
+        queueTimer.Stop();
         LeaveStore();
     }
 

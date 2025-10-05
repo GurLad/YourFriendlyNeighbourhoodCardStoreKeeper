@@ -52,7 +52,15 @@ public static class PathExtensions
         }
         else
         {
-            steps = new List<Vector2>() { startPos, targetPos };
+            if (startPos.DistanceTo(targetPos) >= 0.01f)
+            {
+                steps = new List<Vector2>() { startPos, targetPos };
+            }
+            else
+            {
+                GD.PushWarning("[PathExtensions]: Empty path!");
+                return;
+            }
         }
         float totalDist = steps.Sum((a, i) => steps[i].DistanceTo(steps[Mathf.Max(0, i - 1)]));
         moveSpeed *= 32;
