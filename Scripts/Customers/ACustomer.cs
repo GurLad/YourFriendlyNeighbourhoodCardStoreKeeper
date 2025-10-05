@@ -177,6 +177,11 @@ public abstract partial class ACustomer : Sprite2D
 
     public void LeaveStore()
     {
+        if (state == State.Toilet && !pathing)
+        {
+            // Miss the commotion
+            return;
+        }
         if (pathing)
         {
             interpolator.Stop(false);
@@ -185,6 +190,10 @@ public abstract partial class ACustomer : Sprite2D
         {
             Queue.RemoveCustomer(this);
         }
+        playTimer.Stop();
+        queueTimer.Stop();
+        bladderTimer.Stop();
+        toiletTimer.Stop();
         fullState = State.Leaving | State.Pathing;
         if (Chair != null)
         {
@@ -336,7 +345,7 @@ public abstract partial class ACustomer : Sprite2D
             playTimer.Paused = true;
         }
         fullState = State.Trading;
-        Chair.CustomerStartBreak();
+        //Chair.CustomerStartBreak();
     }
 
     public void FinishTrade()
@@ -354,7 +363,7 @@ public abstract partial class ACustomer : Sprite2D
             playTimer.Paused = false;
         }
         fullState = State.Sitting;
-        Chair.CustomerEndBreak();
+        //Chair.CustomerEndBreak();
     }
 
     public virtual bool CanSeeTheft(Player player, ACustomer stealingFrom)

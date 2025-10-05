@@ -72,6 +72,7 @@ public partial class Chair : Sprite2D
         Customer = null;
         chairControl.ShaderModulate = Colors.White;
         chairControl.MouseDefaultCursorShape = Control.CursorShape.Arrow;
+        walletGraphic.Visible = false;
     }
 
     public void CustomerStartBreak(bool showWallet = true)

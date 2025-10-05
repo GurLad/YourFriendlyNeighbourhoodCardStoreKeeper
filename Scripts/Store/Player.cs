@@ -55,14 +55,20 @@ public partial class Player : Sprite2D
         {
             robTimer.Stop();
         }
-        if (GlobalPosition.DistanceTo(chair.GlobalPosition) <= 0.01f)
+        PreArrive(chair);
+        Vector2 targetPos = chair.GlobalPosition +
+            (GlobalPosition.Y < chair.GlobalPosition.Y ? 1 : -1) * Vector2.Up * 32;
+        if (GlobalPosition.DistanceTo(targetPos) <= 0.01f)
         {
             OnArrive(chair);
             return;
         }
-        interpolator.InterpolateMoveOnPath(this, 5, GlobalPosition, chair.GlobalPosition +
-            (GlobalPosition.Y < chair.GlobalPosition.Y ? 1 : -1) * Vector2.Up * 32);
+        interpolator.InterpolateMoveOnPath(this, 5, GlobalPosition, targetPos);
         interpolator.OnFinish = () => OnArrive(chair);
+    }
+
+    private void PreArrive(Chair chair)
+    {
         if (!chair.IsEmpty)
         {
             if (chair.CustomerSitting)
@@ -85,6 +91,7 @@ public partial class Player : Sprite2D
             {
                 // TBA
                 chair.Customer.FinishTrade();
+                GD.Print("Traded");
             }
             else if (chair.Customer.Inventory.Cards.Count > 0)
             {
