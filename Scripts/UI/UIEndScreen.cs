@@ -76,7 +76,6 @@ public partial class UIEndScreen : Control
     [Export] private Button hideButton;
 
     private Interpolator interpolator;
-    private bool visible;
     private List<UIEndScreenPart> screenParts = new List<UIEndScreenPart>();
     private int current = 0;
 
@@ -98,7 +97,7 @@ public partial class UIEndScreen : Control
             screenParts.Add(part);
         });
 
-        visible = false;
+        Visible = false;
         Scale = Vector2.Zero;
     }
 
@@ -111,7 +110,7 @@ public partial class UIEndScreen : Control
         }
         screenParts.ForEach(a => a.Clear());
         current = 0;
-        visible = true;
+        Visible = true;
         interpolator.Interpolate(openCloseTime,
             new Interpolator.InterpolateObject(
                 a => Scale = Vector2.One * a,
@@ -133,18 +132,22 @@ public partial class UIEndScreen : Control
             new Interpolator.InterpolateObject(
                 a => Scale = Vector2.One * a,
                 Scale.X,
-                0,
-                Easing.EaseOutBack
+                0.01f,
+                Easing.EaseInBack
             ));
         interpolator.OnFinish = () => Visible = false;
     }
 
     private void ShowPart()
     {
-        if (current >= screenParts.Count)
+        if (!Visible)
         {
             return;
         }
+        if (current >= screenParts.Count)
+            {
+                return;
+            }
         int val = parts[current].Item1();
         int index = 0;
         while (val > parts[current].Item3[index].Thresold && index + 1 < parts[current].Item3.Count) index++;

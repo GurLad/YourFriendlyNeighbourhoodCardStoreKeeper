@@ -20,6 +20,7 @@ public partial class UIEndScreenPart : Node
     {
         what.Modulate = Colors.Transparent;
         message.Modulate = Colors.Transparent;
+        interpolator.Stop(false);
     }
 
     public void Show(string whatt, string messaget, int color, Action finish)

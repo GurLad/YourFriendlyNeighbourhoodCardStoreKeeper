@@ -5,7 +5,7 @@
 [ext_resource type="FontFile" uid="uid://cyylcxs1wedke" path="res://Fonts/TinyUnicode.ttf" id="3_hdrfe"]
 
 [node name="EndReportPart" type="HBoxContainer" node_paths=PackedStringArray("what", "message")]
-custom_minimum_size = Vector2(348, 64)
+custom_minimum_size = Vector2(412, 64)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
