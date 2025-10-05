@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dahkj3oix1kw0"]
+
+[ext_resource type="PackedScene" uid="uid://b06fuc4i3oul5" path="res://Scenes/Store/Chair.tscn" id="1_gjsn5"]
+[ext_resource type="Texture2D" uid="uid://d2kdtd7mvomin" path="res://Sprites/Store/Table.png" id="2_fmam6"]
+
+[node name="Table" type="Node2D"]
+
+[node name="Chair1" parent="." instance=ExtResource("1_gjsn5")]
+position = Vector2(-54, -5)
+
+[node name="Chair2" parent="." instance=ExtResource("1_gjsn5")]
+position = Vector2(52, -5)
+flip_h = true
+
+[node name="TableSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_fmam6")
