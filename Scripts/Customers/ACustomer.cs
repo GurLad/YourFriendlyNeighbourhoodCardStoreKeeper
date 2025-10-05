@@ -209,6 +209,59 @@ public abstract partial class ACustomer : Sprite2D
         playTimer.Start();
     }
 
+    public void TakeBreak()
+    {
+        if (state != State.Playing && state != State.Sitting)
+        {
+            GD.PushError("[Customer AI]: TakeBreak when not sitting/playing!");
+        }
+        if (!playTimer.Paused)
+        {
+            playTimer.Paused = true;
+        }
+        else
+        {
+            GD.PushWarning("[ACustomer]: Messed up play timer?");
+        }
+        fullState = State.Toilet | State.Pathing;
+        interpolator.InterpolateMoveOnPath(this, speed, Position, PathExtensions.TOILET_POS.ToPos());
+        interpolator.OnFinish = () =>
+        {
+            pathing = false;
+            interpolator.Interpolate(fadeTime,
+                new Interpolator.InterpolateObject(
+                    a => Scale = Vector2.One * a,
+                    Scale.X,
+                    0
+                ));
+            interpolator.OnFinish = () => toiletTimer.Start();
+        };
+    }
+
+    private void ReturnFromBreak()
+    {
+        if (state != State.Toilet)
+        {
+            GD.PushError("[Customer AI]: ReturnFromBreak when not toilet!");
+        }
+        if (Chair == null || Chair.Customer != this)
+        {
+            GD.PushError("[Customer AI]: Return from break no chair!");
+        }
+        interpolator.Interpolate(fadeTime,
+            new Interpolator.InterpolateObject(
+                a => Scale = Vector2.One * a,
+                Scale.X,
+                1
+            ));
+        interpolator.OnFinish = () =>
+        {
+            pathing = true;
+            interpolator.InterpolateMoveOnPath(this, speed, Position, Chair.GlobalPosition);
+            interpolator.OnFinish = Chair.CustomerEndBreak;
+        };
+    }
+
     public void ResumeSitting()
     {
         if (state != State.Toilet)
@@ -221,6 +274,10 @@ public abstract partial class ACustomer : Sprite2D
         {
             playTimer.Paused = false;
         }
+        else
+        {
+            GD.PushWarning("[ACustomer]: Messed up play timer?");
+        }
     }
 
     public void StartResumePlaying()
@@ -230,6 +287,27 @@ public abstract partial class ACustomer : Sprite2D
             GD.PushError("[Customer AI]: StartPlaying when not sitting/trading!");
         }
         fullState = State.Playing;
+    }
+
+    public virtual bool CanSeeTheft(Player player, ACustomer stealingFrom)
+    {
+        if (state == State.Sitting || state == State.Playing) // Should be impossible for playing but whatevs
+        {
+            // It's the other one
+            if (stealingFrom != this)
+            {
+                return true;
+            }
+            else
+            {
+                GD.PushError("[ACustomer]: Stealing from a sitting/playing player!");
+            }
+        }
+        else if (state == State.Toilet && pathing && stealingFrom == this)
+        {
+            return Pathfinder.HasLineOfSight(GlobalPosition.ToTile(), player.GlobalPosition.ToTile());
+        }
+        return false;
     }
 
     public virtual float GetWinPerformance() => rating + ExtensionMethods.RNG.NextFloat(-1f, 1f) * ratingVariance;
@@ -273,12 +351,30 @@ public abstract partial class ACustomer : Sprite2D
 
     private void OnBladderTimerOver()
     {
-
+        if (state != State.Playing && state != State.Sitting)
+        {
+            GD.PushError("[Customer AI]: OnBladderTimerOver when not playing!");
+        }
+        if (Chair == null)
+        {
+            GD.PushError("[Customer AI]: OnBladderTimerOver when not chair!");
+        }
+        bladderTimer.Stop();
+        Chair.CustomerStartBreak();
     }
 
     private void OnToiletTimerOver()
     {
-
+        if (state != State.Toilet)
+        {
+            GD.PushError("[Customer AI]: OnToiletTimerOver when not toilet!");
+        }
+        if (Chair == null)
+        {
+            GD.PushError("[Customer AI]: OnToiletTimerOver when not chair!");
+        }
+        toiletTimer.Stop();
+        ReturnFromBreak();
     }
 
     protected virtual void OnMouseEntered()

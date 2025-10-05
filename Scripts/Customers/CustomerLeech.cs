@@ -10,4 +10,13 @@ public partial class CustomerLeech : ACustomer
     protected override Vector2 toiletTimeRange => new Vector2(7, 11);
 
     protected override float ratingVariance => 100;
+
+    public override bool CanSeeTheft(Player player, ACustomer stealingFrom)
+    {
+        if (stealingFrom != this)
+        {
+            return false;
+        }
+        return base.CanSeeTheft(player, stealingFrom);
+    }
 }

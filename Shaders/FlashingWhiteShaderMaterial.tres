@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c25w1v1m88i0o"]
+
+[ext_resource type="Shader" uid="uid://dwbt3c3iun4xb" path="res://Shaders/FlashingWhiteShader.gdshader" id="1_umqmm"]
+
+[resource]
+shader = ExtResource("1_umqmm")
+shader_parameter/rate = 3.0
+shader_parameter/maxAdd = 0.2

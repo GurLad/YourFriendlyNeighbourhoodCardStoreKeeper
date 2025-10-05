@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://b06fuc4i3oul5"]
+[gd_scene load_steps=7 format=3 uid="uid://b06fuc4i3oul5"]
 
 [ext_resource type="Material" uid="uid://cyjyxfqfe7q12" path="res://Shaders/OutlineMaterial.tres" id="1_2beve"]
 [ext_resource type="Texture2D" uid="uid://dnnj3dv27s0dk" path="res://Sprites/Store/Chair.png" id="1_5n03e"]
 [ext_resource type="Script" uid="uid://dm8nycfg2qpkh" path="res://Scripts/Store/Chair.cs" id="2_j5b3m"]
 [ext_resource type="Script" uid="uid://d0pcpyu5eqirb" path="res://Scripts/Store/ChairControl.cs" id="3_4h1n3"]
+[ext_resource type="Material" uid="uid://c25w1v1m88i0o" path="res://Shaders/FlashingWhiteShaderMaterial.tres" id="5_2manx"]
+[ext_resource type="Texture2D" uid="uid://ctsy6hhe7nee2" path="res://Sprites/Store/LeftoverCards.png" id="5_svmxc"]
 
 [node name="Chair1" type="Sprite2D" node_paths=PackedStringArray("chairControl")]
 material = ExtResource("1_2beve")
@@ -21,3 +23,8 @@ offset_bottom = 26.0
 script = ExtResource("3_4h1n3")
 Sprite = NodePath("..")
 HoverOutline = Color(0.9843137, 1, 0.5254902, 1)
+
+[node name="Wallet" type="Sprite2D" parent="."]
+material = ExtResource("5_2manx")
+texture = ExtResource("5_svmxc")
+offset = Vector2(5, 5)

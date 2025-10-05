@@ -5,10 +5,11 @@ public partial class Chair : Sprite2D
 {
     [Export] public Vector2 PosMod { get; set; } = new Vector2(5, 5);
     [Export] private ChairControl chairControl;
+    [Export] private Sprite2D walletGraphic;
 
-    public bool IsEmpty => customer == null;
-
-    private ACustomer customer = null;
+    public bool IsEmpty => Customer == null;
+    public bool CustomerSitting { get; private set; } = true;
+    public ACustomer Customer { get; private set; } = null;
 
     [Signal]
     public delegate void OnCustomerAttachedEventHandler(ACustomer customer);
@@ -41,7 +42,8 @@ public partial class Chair : Sprite2D
             GD.PushError("[Chair]: Double attach!");
             return;
         }
-        this.customer = customer;
+        Customer = customer;
+        CustomerSitting = true;
         chairControl.ShaderModulate = customer.Color;
         customer.SitDown(this);
         EmitSignal(SignalName.OnCustomerAttached, customer);
@@ -54,12 +56,38 @@ public partial class Chair : Sprite2D
             GD.PushError("[Chair]: Empty detach!");
             return;
         }
-        EmitSignal(SignalName.OnCustomerDetached, customer);
-        customer = null;
+        EmitSignal(SignalName.OnCustomerDetached, Customer);
+        Customer = null;
         chairControl.ShaderModulate = Colors.White;
     }
 
-    public void PauseGame() => EmitSignal(SignalName.OnCustomerPaused, customer);
-    
-    public void ResumeGame() => EmitSignal(SignalName.OnCustomerResumed, customer);
+    public void CustomerStartBreak()
+    {
+        if (IsEmpty)
+        {
+            GD.PushError("[Chair]: Empty break!");
+            return;
+        }
+        CustomerSitting = false;
+        walletGraphic.Visible = true;
+        PauseGame();
+        Customer.TakeBreak();
+    }
+
+    public void CustomerEndBreak()
+    {
+        if (IsEmpty)
+        {
+            GD.PushError("[Chair]: Empty end break!");
+            return;
+        }
+        CustomerSitting = true;
+        walletGraphic.Visible = false;
+        Customer.ResumeSitting();
+        ResumeGame();
+    }
+
+    public void PauseGame() => EmitSignal(SignalName.OnCustomerPaused, Customer);
+
+    public void ResumeGame() => EmitSignal(SignalName.OnCustomerResumed, Customer);
 }
