@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bux7avla14lbb"]
+[gd_scene load_steps=4 format=3 uid="uid://bux7avla14lbb"]
 
 [ext_resource type="Texture2D" uid="uid://sibveuvnxlqn" path="res://Sprites/Store/Kid.png" id="1_i5kc1"]
 [ext_resource type="Script" uid="uid://x6h41s483ia6" path="res://Scripts/Customers/CustomerKid.cs" id="2_a07uo"]
+[ext_resource type="PackedScene" uid="uid://bskeiye5e0a4n" path="res://Scenes/Store/Customers/CustomerArea.tscn" id="3_vlmlh"]
 
-[node name="CustomerKid" type="Sprite2D"]
+[node name="CustomerKid" type="Sprite2D" node_paths=PackedStringArray("mouseArea")]
 texture = ExtResource("1_i5kc1")
 script = ExtResource("2_a07uo")
+mouseArea = NodePath("Area2D")
 Color = Color(0.3019608, 0.60784316, 0.9019608, 1)
+
+[node name="Area2D" parent="." instance=ExtResource("3_vlmlh")]

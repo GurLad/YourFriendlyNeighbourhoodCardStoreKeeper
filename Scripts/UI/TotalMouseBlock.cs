@@ -14,6 +14,7 @@ public partial class TotalMouseBlock : Control
             return;
         }
         Instance = this;
+        Unblock();
     }
 
     public static void Block() => Instance.Visible = true;

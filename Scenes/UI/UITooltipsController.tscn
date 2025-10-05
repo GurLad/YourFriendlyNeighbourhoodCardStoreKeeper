@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6i1i3qo4q3jt"]
+
+[ext_resource type="Script" uid="uid://b6rfdjywaytgl" path="res://Scripts/UI/UITooltipController.cs" id="1_57dv1"]
+[ext_resource type="Script" uid="uid://bamnnfvw43q2n" path="res://Scripts/UI/UITooltip.cs" id="1_agtoe"]
+
+[node name="UITooltipsController" type="Control" node_paths=PackedStringArray("TooltipUpright", "TooltipSideways")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_57dv1")
+TooltipUpright = NodePath("UITooltipUpright")
+TooltipSideways = NodePath("UITooltipUpright")
+
+[node name="UITooltipUpright" type="PanelContainer" parent="." node_paths=PackedStringArray("Label")]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("1_agtoe")
+Label = NodePath("Text")
+transitionTime = 0.1
+
+[node name="Text" type="Label" parent="UITooltipUpright"]
+layout_mode = 2

@@ -17,6 +17,10 @@ public abstract partial class ACustomer : Sprite2D
         Pathing = 1 << 8,
     }
 
+    [ExportCategory("Nodes")]
+    [Export] private Area2D mouseArea { get; set; }
+
+    [ExportCategory("Vars")]
     [Export] public Color Color { get; set; } = Colors.White;
     [Export] private float fadeTime { get; set; } = 0.1f;
     [Export] private float speed { get; set; } = 5f;
@@ -43,9 +47,9 @@ public abstract partial class ACustomer : Sprite2D
 
     private float queueWaitTime { get; set; }
     private float playTime { get; set; }
-    private float rating { get; set; }
     private float bladder { get; set; }
     private float toiletTime { get; set; }
+    private int rating { get; set; }
 
     private Timer queueTimer { get; } = new Timer();
     private Timer playTimer { get; } = new Timer();
@@ -68,10 +72,13 @@ public abstract partial class ACustomer : Sprite2D
         toiletTimer.WaitTime = toiletTime = toiletTimeRange.RandomValueInRange();
         queueTimer.OneShot = playTimer.OneShot = bladderTimer.OneShot = toiletTimer.OneShot = false;
         // Normal dist. is too much for now
-        rating = (ratingRange.RandomValueInRange() + ratingRange.RandomValueInRange()) / 2;
+        rating = Mathf.RoundToInt((ratingRange.RandomValueInRange() + ratingRange.RandomValueInRange()) / 2);
 
         AddChild(interpolator);
         interpolator.InterruptMode = Interpolator.Mode.Error;
+
+        mouseArea.MouseEntered += OnMouseEntered;
+        mouseArea.MouseExited += OnMouseExited;
 
         Position = PathExtensions.ENTRANCE_POS.ToPos();
         Modulate = Colors.Transparent;
@@ -195,5 +202,18 @@ public abstract partial class ACustomer : Sprite2D
     private void OnToiletTimerOver()
     {
 
+    }
+
+    protected virtual void OnMouseEntered()
+    {
+        if (state == State.Queue)
+        {
+            UITooltipController.Current.ShowTooltip(this, "Rating: " + rating, true);
+        }
+    }
+
+    protected virtual void OnMouseExited()
+    {
+        UITooltipController.Current.HideTooltip();
     }
 }

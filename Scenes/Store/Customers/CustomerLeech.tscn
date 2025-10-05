@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7mkb5s173c6v"]
+[gd_scene load_steps=4 format=3 uid="uid://c7mkb5s173c6v"]
 
 [ext_resource type="Texture2D" uid="uid://ck8e7xct4cxuy" path="res://Sprites/Store/Leech.png" id="1_3dwr4"]
 [ext_resource type="Script" uid="uid://bcv76xa36nnsh" path="res://Scripts/Customers/CustomerLeech.cs" id="2_qragl"]
+[ext_resource type="PackedScene" uid="uid://bskeiye5e0a4n" path="res://Scenes/Store/Customers/CustomerArea.tscn" id="3_vw738"]
 
-[node name="CustomerLeech" type="Sprite2D"]
+[node name="CustomerLeech" type="Sprite2D" node_paths=PackedStringArray("mouseArea")]
 texture = ExtResource("1_3dwr4")
 script = ExtResource("2_qragl")
+mouseArea = NodePath("Area2D")
 Color = Color(0.8352941, 0.8784314, 0.29411766, 1)
+
+[node name="Area2D" parent="." instance=ExtResource("3_vw738")]
