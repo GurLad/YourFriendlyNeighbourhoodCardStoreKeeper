@@ -74,7 +74,7 @@ public partial class Chair : Sprite2D
         chairControl.MouseDefaultCursorShape = Control.CursorShape.Arrow;
     }
 
-    public void CustomerStartBreak()
+    public void CustomerStartBreak(bool showWallet = true)
     {
         if (IsEmpty)
         {
@@ -82,7 +82,7 @@ public partial class Chair : Sprite2D
             return;
         }
         CustomerSitting = false;
-        walletGraphic.Visible = Customer.Inventory.Cards.Count > 0;
+        walletGraphic.Visible = showWallet && Customer.Inventory.Cards.Count > 0;
         PauseGame();
     }
 
@@ -101,6 +101,8 @@ public partial class Chair : Sprite2D
     public void PauseGame() => EmitSignal(SignalName.OnCustomerPaused, Customer);
 
     public void ResumeGame() => EmitSignal(SignalName.OnCustomerResumed, Customer);
+
+    public void ForceHideWallet() => walletGraphic.Visible = false;
 
     protected virtual void OnMouseEntered()
     {

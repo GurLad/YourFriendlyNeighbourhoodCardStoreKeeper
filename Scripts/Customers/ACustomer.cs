@@ -319,6 +319,10 @@ public abstract partial class ACustomer : Sprite2D
 
     public void PrepareForTrade()
     {
+        if (state == State.Trading)
+        {
+            GD.PushWarning("[Customer AI]: Double clicks suck but whatevs");
+        }
         if (state != State.Sitting && state != State.Playing)
         {
             GD.PushError("[Customer AI]: PrepareForTrade when not sitting/Playing!");
@@ -337,9 +341,9 @@ public abstract partial class ACustomer : Sprite2D
 
     public void FinishTrade()
     {
-        if (state != State.Sitting && state != State.Playing)
+        if (state != State.Trading)
         {
-            GD.PushError("[Customer AI]: PrepareForTrade when not sitting/Playing!");
+            GD.PushError("[Customer AI]: FinishTrade when not trading! " + state);
         }
         if (bladderTimer.Paused)
         {

@@ -42,14 +42,11 @@ public partial class Player : Sprite2D
 
     private void OnLeftClick(Chair chair)
     {
-        if (GlobalPosition.DistanceTo(chair.GlobalPosition) <= 0.01f)
-        {
-            return;
-        }
         if (cancelAction != null)
         {
             cancelAction();
         }
+        cancelAction = null;
         if (interpolator.Active)
         {
             interpolator.Stop(false);
@@ -58,9 +55,14 @@ public partial class Player : Sprite2D
         {
             robTimer.Stop();
         }
+        if (GlobalPosition.DistanceTo(chair.GlobalPosition) <= 0.01f)
+        {
+            OnArrive(chair);
+            return;
+        }
         interpolator.InterpolateMoveOnPath(this, 5, GlobalPosition, chair.GlobalPosition +
-            (GlobalPosition.Y < chair.GlobalPosition.Y ? -1 : 1) * Vector2.Up * 32);
-        interpolator.OnFinish = () => LookAt(chair.GlobalPosition);
+            (GlobalPosition.Y < chair.GlobalPosition.Y ? 1 : -1) * Vector2.Up * 32);
+        interpolator.OnFinish = () => OnArrive(chair);
         if (!chair.IsEmpty)
         {
             if (chair.CustomerSitting)
@@ -68,22 +70,27 @@ public partial class Player : Sprite2D
                 // Trade
                 chair.Customer.PrepareForTrade();
                 cancelAction = chair.Customer.FinishTrade;
-                interpolator.OnFinish = () =>
-                {
-                    LookAt(chair.GlobalPosition);
-                    // TBA
-                    chair.Customer.FinishTrade();
-                };
+            }
+        }
+    }
+
+    private void OnArrive(Chair chair)
+    {
+        cancelAction = null;
+        LookAt(chair.GlobalPosition);
+        RotationDegrees += 180;
+        if (!chair.IsEmpty)
+        {
+            if (chair.CustomerSitting)
+            {
+                // TBA
+                chair.Customer.FinishTrade();
             }
             else if (chair.Customer.Inventory.Cards.Count > 0)
             {
                 // Rob
-                interpolator.OnFinish = () =>
-                {
-                    LookAt(chair.GlobalPosition);
-                    robbing = chair.Customer;
-                    RobOneCard();
-                };
+                robbing = chair.Customer;
+                RobOneCard();
             }
         }
     }
@@ -98,12 +105,21 @@ public partial class Player : Sprite2D
 
     private void RobOneCard()
     {
+        if (robbing.Inventory.Cards.Count <= 0) // Failsafe
+        {
+            robbing.Chair.ForceHideWallet();
+            return;
+        }
         AInventoryCard card = robbing.Inventory.Cards[0];
         robbing.Inventory.Cards.RemoveAt(0);
         PlayerInventoryController.AddCard(card);
         if (robbing.CanSeeTheft(this, robbing) || (GetOpponent(robbing)?.CanSeeTheft(this, robbing) ?? false))
         {
             Stats.TheftDetected();
+        }
+        else if (robbing.Inventory.Cards.Count <= 0)
+        {
+            robbing.Chair.ForceHideWallet();
         }
         else
         {
