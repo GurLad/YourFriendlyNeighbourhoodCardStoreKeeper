@@ -29,12 +29,14 @@ public abstract partial class ACustomer : Sprite2D
 
     public Chair Chair { private get; set; } = null;
     public StoreQueue Queue { private get; set; } = null;
+    public InventoryData Inventory { get; } = new InventoryData();
 
     protected abstract Vector2 queueWaitTimeRange { get; }
     protected abstract Vector2 playTimeRange { get; }
     protected abstract Vector2 ratingRange { get; }
     protected abstract Vector2 bladderRange { get; }
     protected abstract Vector2 toiletTimeRange { get; }
+    protected abstract Vector2I cardCountRange { get; }
 
     protected abstract float ratingVariance { get; }
 
@@ -75,6 +77,12 @@ public abstract partial class ACustomer : Sprite2D
         queueTimer.OneShot = playTimer.OneShot = bladderTimer.OneShot = toiletTimer.OneShot = false;
         // Normal dist. is too much for now
         rating = Mathf.RoundToInt((ratingRange.RandomValueInRange() + ratingRange.RandomValueInRange()) / 2);
+
+        int inventoryCount = cardCountRange.RandomValueInRange();
+        for (int i = 0; i < inventoryCount; i++)
+        {
+            Inventory.Cards.Add(new InventoryIDCard(CardsLoader.RandomCard().ID));
+        }
 
         AddChild(interpolator);
         interpolator.InterruptMode = Interpolator.Mode.Error;
@@ -259,7 +267,11 @@ public abstract partial class ACustomer : Sprite2D
         {
             pathing = true;
             interpolator.InterpolateMoveOnPath(this, speed, Position, Chair.GlobalPosition);
-            interpolator.OnFinish = Chair.CustomerEndBreak;
+            interpolator.OnFinish = () =>
+            {
+                ResumeSitting();
+                Chair.CustomerEndBreak();
+            };
         };
     }
 
@@ -294,6 +306,42 @@ public abstract partial class ACustomer : Sprite2D
             GD.PushError("[Customer AI]: StartPlaying when not sitting/trading!");
         }
         fullState = State.Playing;
+    }
+
+    public void PrepareForTrade()
+    {
+        if (state != State.Sitting && state != State.Playing)
+        {
+            GD.PushError("[Customer AI]: PrepareForTrade when not sitting/Playing!");
+        }
+        if (!bladderTimer.Paused)
+        {
+            bladderTimer.Paused = true;
+        }
+        if (!playTimer.Paused)
+        {
+            playTimer.Paused = true;
+        }
+        fullState = State.Trading;
+        Chair.CustomerStartBreak();
+    }
+
+    public void FinishTrade()
+    {
+        if (state != State.Sitting && state != State.Playing)
+        {
+            GD.PushError("[Customer AI]: PrepareForTrade when not sitting/Playing!");
+        }
+        if (bladderTimer.Paused)
+        {
+            bladderTimer.Paused = false;
+        }
+        if (playTimer.Paused)
+        {
+            playTimer.Paused = false;
+        }
+        fullState = State.Sitting;
+        Chair.CustomerEndBreak();
     }
 
     public virtual bool CanSeeTheft(Player player, ACustomer stealingFrom)
@@ -368,6 +416,7 @@ public abstract partial class ACustomer : Sprite2D
         }
         bladderTimer.Stop();
         Chair.CustomerStartBreak();
+        TakeBreak();
     }
 
     private void OnToiletTimerOver()

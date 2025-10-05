@@ -82,9 +82,8 @@ public partial class Chair : Sprite2D
             return;
         }
         CustomerSitting = false;
-        walletGraphic.Visible = true;
+        walletGraphic.Visible = Customer.Inventory.Cards.Count > 0;
         PauseGame();
-        Customer.TakeBreak();
     }
 
     public void CustomerEndBreak()
@@ -96,7 +95,6 @@ public partial class Chair : Sprite2D
         }
         CustomerSitting = true;
         walletGraphic.Visible = false;
-        Customer.ResumeSitting();
         ResumeGame();
     }
 
@@ -112,7 +110,7 @@ public partial class Chair : Sprite2D
             {
                 UITooltipController.Current.ShowTooltip(this, "Trade", true);
             }
-            else
+            else if (Customer.Inventory.Cards.Count > 0)
             {
                 UITooltipController.Current.ShowTooltip(this, "Rob", true);
             }

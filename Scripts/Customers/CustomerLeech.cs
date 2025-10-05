@@ -9,6 +9,8 @@ public partial class CustomerLeech : ACustomer
     protected override Vector2 bladderRange => new Vector2(20, 25);
     protected override Vector2 toiletTimeRange => new Vector2(7, 11);
 
+    protected override Vector2I cardCountRange => new Vector2I(2, 5);
+
     protected override float ratingVariance => 100;
 
     public override bool CanSeeTheft(Player player, ACustomer stealingFrom)

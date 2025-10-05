@@ -86,6 +86,11 @@ public static class ExtensionMethods
         return RNG.NextFloat(v2);
     }
 
+    public static int RandomValueInRange(this Vector2I v2i)
+    {
+        return RNG.Next(v2i.X, v2i.Y);
+    }
+
     public static T RandomItemInList<T>(this List<T> list)
     {
         return list.Count > 0 ? list[RNG.Next(0, list.Count)] : default;

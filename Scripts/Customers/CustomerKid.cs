@@ -9,5 +9,7 @@ public partial class CustomerKid : ACustomer
     protected override Vector2 bladderRange => new Vector2(10, 17);
     protected override Vector2 toiletTimeRange => new Vector2(1, 2);
 
+    protected override Vector2I cardCountRange => new Vector2I(1, 8);
+
     protected override float ratingVariance => 1300;
 }
