@@ -17,6 +17,7 @@ public partial class CustomerSpawner : Node
         spawnTimer.WaitTime = rate.RandomValueInRange();
         spawnTimer.OneShot = false;
         spawnTimer.Timeout += TrySpawn;
+        spawnTimer.Start();
     }
 
     private void TrySpawn()

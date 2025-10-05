@@ -1,9 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://chnoj3xka8xf0"]
+[gd_scene load_steps=11 format=3 uid="uid://chnoj3xka8xf0"]
 
 [ext_resource type="Texture2D" uid="uid://brm0dc7hyynxg" path="res://Sprites/Store/Background/Mockup.png" id="1_8fv3y"]
 [ext_resource type="Script" uid="uid://bnccerywo70ms" path="res://Scripts/Store/Singletons/MoneyController.cs" id="1_avijh"]
 [ext_resource type="Script" uid="uid://ckwdh43etlygo" path="res://Scripts/Store/Singletons/StoreController.cs" id="1_xt8ip"]
 [ext_resource type="Script" uid="uid://clqlybhlmralo" path="res://Scripts/Store/Singletons/PlayerInventoryController.cs" id="2_xt8ip"]
+[ext_resource type="Script" uid="uid://dwrh134jmd4n" path="res://Scripts/Store/CustomerSpawner.cs" id="4_r3bft"]
+[ext_resource type="PackedScene" uid="uid://bf2ceokoata2y" path="res://Scenes/Store/Customers/CustomerCasual.tscn" id="5_3u0ap"]
+[ext_resource type="Script" uid="uid://vsy1bd5y5p5o" path="res://Scripts/Store/StoreQueue.cs" id="5_m1qpk"]
+[ext_resource type="PackedScene" uid="uid://bux7avla14lbb" path="res://Scenes/Store/Customers/CustomerKid.tscn" id="6_r1s76"]
+[ext_resource type="PackedScene" uid="uid://c7mkb5s173c6v" path="res://Scenes/Store/Customers/CustomerLeech.tscn" id="7_47c1y"]
+[ext_resource type="PackedScene" uid="uid://dsbc3p8adxne0" path="res://Scenes/Store/Customers/CustomerPro.tscn" id="8_pgfoo"]
 
 [node name="Store" type="Node"]
 script = ExtResource("1_xt8ip")
@@ -14,10 +20,20 @@ script = ExtResource("1_avijh")
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("2_xt8ip")
 
-[node name="CustomerSpawner" type="Node" parent="."]
+[node name="CustomerSpawner" type="Node" parent="." node_paths=PackedStringArray("queue", "customerHolder")]
+script = ExtResource("4_r3bft")
+queue = NodePath("../Queue")
+customerScenes = Array[PackedScene]([ExtResource("5_3u0ap"), ExtResource("6_r1s76"), ExtResource("7_47c1y"), ExtResource("8_pgfoo")])
+customerHolder = NodePath("../Objects/Customers")
+rate = Vector2(1, 2)
+
+[node name="Queue" type="Node" parent="."]
+script = ExtResource("5_m1qpk")
 
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="Background" type="Sprite2D" parent="Objects"]
 texture = ExtResource("1_8fv3y")
 centered = false
+
+[node name="Customers" type="Node2D" parent="Objects"]

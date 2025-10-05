@@ -6,9 +6,20 @@ using System.Text.Json;
 
 public static class ExtensionMethods
 {
+    private static int PHYSICAL_SIZE => 32;
     public static readonly Random RNG = new Random();
 
     // Math
+
+    public static Vector2 ToPos(this Vector2I tile)
+    {
+        return tile * PHYSICAL_SIZE;
+    }
+
+    public static Vector2I ToTile(this Vector2 pos)
+    {
+        return (pos / PHYSICAL_SIZE).ToV2I();
+    }
 
     public static Vector2I ToV2I(this Vector2 vector2)
     {

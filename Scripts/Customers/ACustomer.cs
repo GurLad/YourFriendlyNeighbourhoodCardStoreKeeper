@@ -47,16 +47,21 @@ public abstract partial class ACustomer : Sprite2D
     private float bladder { get; set; }
     private float toiletTime { get; set; }
 
-    private Timer queueTimer { get; set; }
-    private Timer playTimer { get; set; }
-    private Timer bladderTimer { get; set; }
-    private Timer toiletTimer { get; set; }
+    private Timer queueTimer { get; } = new Timer();
+    private Timer playTimer { get; } = new Timer();
+    private Timer bladderTimer { get; } = new Timer();
+    private Timer toiletTimer { get; } = new Timer();
 
     private Interpolator interpolator { get; } = new Interpolator();
 
     public override void _Ready()
     {
         base._Ready();
+        AddChild(queueTimer);
+        AddChild(playTimer);
+        AddChild(bladderTimer);
+        AddChild(toiletTimer);
+
         queueTimer.WaitTime = queueWaitTime = queueWaitTimeRange.RandomValueInRange();
         playTimer.WaitTime = playTime = playTimeRange.RandomValueInRange();
         bladderTimer.WaitTime = bladder = bladderRange.RandomValueInRange();
@@ -67,6 +72,9 @@ public abstract partial class ACustomer : Sprite2D
 
         AddChild(interpolator);
         interpolator.InterruptMode = Interpolator.Mode.Error;
+
+        Position = PathExtensions.ENTRANCE_POS.ToPos();
+        Modulate = Colors.Transparent;
     }
 
     public void Spawn()
@@ -105,7 +113,7 @@ public abstract partial class ACustomer : Sprite2D
 
     public void UpdateQueuePos(Vector2I newPos)
     {
-        if (newPos.ToV2().DistanceTo(Position) <= 0.01f)
+        if (newPos.ToPos().DistanceTo(Position) <= 0.01f)
         {
             return;
         }
@@ -123,7 +131,7 @@ public abstract partial class ACustomer : Sprite2D
             interpolator.Stop(false);
         }
         pathing = true;
-        interpolator.InterpolateMoveOnPath(this, speed, Position, newPos);
+        interpolator.InterpolateMoveOnPath(this, speed, Position, newPos.ToPos());
         interpolator.OnFinish = () => pathing = false;
     }
 
@@ -138,7 +146,7 @@ public abstract partial class ACustomer : Sprite2D
         {
             Chair.DetachCustomer();
         }
-        interpolator.InterpolateMoveOnPath(this, speed, Position, PathExtensions.ENTRANCE_POS);
+        interpolator.InterpolateMoveOnPath(this, speed, Position, PathExtensions.ENTRANCE_POS.ToPos());
         interpolator.OnFinish = () =>
         {
             interpolator.Interpolate(fadeTime,
