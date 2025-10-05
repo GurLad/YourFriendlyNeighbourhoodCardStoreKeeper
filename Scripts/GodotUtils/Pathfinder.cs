@@ -83,7 +83,7 @@ public static class Pathfinder
         int attempts = 0;
         while (openSet.Count > 0)
         {
-            if (attempts++ >= 100)
+            if (attempts++ >= 500) // WTF is this taking so long
             {
                 break;
             }

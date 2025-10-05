@@ -11,6 +11,7 @@ public abstract partial class ACustomer : Sprite2D
         Queue,
         Sitting,
         Playing,
+        Trading,
         Toilet,
         Crying,
         Fighting,
@@ -208,6 +209,29 @@ public abstract partial class ACustomer : Sprite2D
         playTimer.Start();
     }
 
+    public void ResumeSitting()
+    {
+        if (state != State.Toilet)
+        {
+            GD.PushError("[Customer AI]: ResumeSitting when not toilet!");
+        }
+        fullState = State.Sitting;
+        bladderTimer.Start();
+        if (playTimer.Paused)
+        {
+            playTimer.Paused = false;
+        }
+    }
+
+    public void StartResumePlaying()
+    {
+        if (state != State.Sitting && state != State.Trading)
+        {
+            GD.PushError("[Customer AI]: StartPlaying when not sitting/trading!");
+        }
+        fullState = State.Playing;
+    }
+
     public virtual float GetWinPerformance() => rating + ExtensionMethods.RNG.NextFloat(-1f, 1f) * ratingVariance;
 
     private void TryActionFromQueue()
@@ -235,7 +259,16 @@ public abstract partial class ACustomer : Sprite2D
 
     private void OnPlayTimerOver()
     {
-
+        if (state != State.Playing && state != State.Sitting)
+        {
+            GD.PushError("[Customer AI]: OnQueueTimerOver when not playing!");
+        }
+        if (Chair == null)
+        {
+            GD.PushError("[Customer AI]: OnQueueTimerOver when not sitting!");
+        }
+        playTimer.Stop();
+        LeaveStore();
     }
 
     private void OnBladderTimerOver()
