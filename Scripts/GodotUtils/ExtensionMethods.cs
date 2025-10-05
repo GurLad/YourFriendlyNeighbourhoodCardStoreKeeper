@@ -13,12 +13,12 @@ public static class ExtensionMethods
 
     public static Vector2 ToPos(this Vector2I tile)
     {
-        return tile * PHYSICAL_SIZE;
+        return tile * PHYSICAL_SIZE + Vector2.One * PHYSICAL_SIZE / 2;
     }
 
     public static Vector2I ToTile(this Vector2 pos)
     {
-        return (pos / PHYSICAL_SIZE).ToV2I();
+        return (pos / PHYSICAL_SIZE - Vector2.One * 0.5f).ToV2I();
     }
 
     public static Vector2I ToV2I(this Vector2 vector2)

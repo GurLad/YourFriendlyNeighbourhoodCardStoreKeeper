@@ -43,11 +43,20 @@ public static class PathExtensions
     {
         Vector2I start = startPos.ToTile();
         Vector2I end = targetPos.ToTile();
-        List<Vector2> steps = Pathfinder.GetPath(start, end).ConvertAll(a => a.ToPos());
-        steps[0] = startPos;
-        steps[steps.Count - 1] = targetPos;
+        List<Vector2> steps;
+        if (start != end)
+        {
+            steps = Pathfinder.GetPath(start, end).ConvertAll(a => a.ToPos());
+            steps[0] = startPos;
+            steps[steps.Count - 1] = targetPos;
+        }
+        else
+        {
+            steps = new List<Vector2>() { startPos, targetPos };
+        }
         float totalDist = steps.Sum((a, i) => steps[i].DistanceTo(steps[Mathf.Max(0, i - 1)]));
-        interpolator.Interpolate(moveSpeed / totalDist,
+        moveSpeed *= 32;
+        interpolator.Interpolate(totalDist / moveSpeed,
             new Interpolator.InterpolateObject(
                 a =>
                 {
@@ -62,6 +71,7 @@ public static class PathExtensions
                     if (toMove.Position.DistanceTo(steps[targetStep]) > 0.01f)
                     {
                         toMove.LookAt(steps[targetStep]);
+                        toMove.RotationDegrees += 180;
                     }
                 },
                 0,
