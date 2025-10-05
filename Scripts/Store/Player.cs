@@ -122,14 +122,17 @@ public partial class Player : Sprite2D
         PlayerInventoryController.AddCard(card);
         if (robbing.CanSeeTheft(this, robbing) || (GetOpponent(robbing)?.CanSeeTheft(this, robbing) ?? false))
         {
+        SoundController.Current.PlaySFX("Detected");
             Stats.TheftDetected();
         }
         else if (robbing.Inventory.Cards.Count <= 0)
         {
+        SoundController.Current.PlaySFX("Steal");
             robbing.Chair.ForceHideWallet();
         }
         else
         {
+        SoundController.Current.PlaySFX("Steal");
             robTimer.WaitTime = robRate.RandomValueInRange();
             robTimer.Start();
         }

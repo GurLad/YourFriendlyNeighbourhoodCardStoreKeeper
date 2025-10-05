@@ -54,7 +54,7 @@ vertical_alignment = 1
 layout_mode = 2
 theme_override_constants/outline_size = 2
 bbcode_enabled = true
-text = "Selling cards is the only way to gain money, but it's [wave amp=19 freq=6.5 connected=true]BLASHPHEMY!![/wave]"
+text = "Selling cards is the only way to gain money (does nothing), but it's [wave amp=19 freq=6.5 connected=true]BLASHPHEMY!![/wave]"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1

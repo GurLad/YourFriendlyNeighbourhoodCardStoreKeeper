@@ -5,6 +5,7 @@ public static class Stats
 {
     public static int CardsSold { get; private set; } = 0;
     public static int CardsStolen { get; private set; } = 0;
+    public static int TimesDetected { get; private set; } = 0;
 
     public static event Action OnCardSold;
     public static event Action OnTheftDetected;
@@ -22,6 +23,7 @@ public static class Stats
 
     public static void TheftDetected()
     {
+        TimesDetected++;
         OnTheftDetected?.Invoke();
     }
 }

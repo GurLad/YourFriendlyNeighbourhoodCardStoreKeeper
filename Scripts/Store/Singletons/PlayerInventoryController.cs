@@ -31,6 +31,16 @@ public partial class PlayerInventoryController : Node
         return count;
     }
 
+    public static int CountUniqueFoil()
+    {
+        int count = 0;
+        for (int i = 0; i < CardsLoader.Count; i++)
+        {
+            if (Inventory.Cards.FindIndex(a => a is InventoryIDCard id && id.ID == i && id.Foil) >= 0) count++;
+        }
+        return count;
+    }
+
     public static void AddCard(AInventoryCard card) { Instance.inventory.Cards.Add(card); GainedCard?.Invoke(); }
     public static void LoseCard(AInventoryCard card) => Instance.inventory.Cards.Remove(card);
 
