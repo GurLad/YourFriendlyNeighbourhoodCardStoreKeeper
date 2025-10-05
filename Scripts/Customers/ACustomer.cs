@@ -214,6 +214,6 @@ public abstract partial class ACustomer : Sprite2D
 
     protected virtual void OnMouseExited()
     {
-        UITooltipController.Current.HideTooltip();
+        UITooltipController.Current.HideTooltip(this);
     }
 }

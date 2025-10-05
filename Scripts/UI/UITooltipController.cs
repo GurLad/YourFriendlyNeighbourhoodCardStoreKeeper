@@ -9,28 +9,32 @@ public partial class UITooltipController : Node
     [Export] private UITooltip TooltipSideways;
     [Export] private float delay = 0.1f;
 
+    private Node lastSource = null;
+
     public override void _Ready()
     {
         base._Ready();
         Current = this;
     }
 
-    public void ShowTooltip(Vector2 pos, string text, bool upright)
+    public UITooltip ShowTooltip(Vector2 pos, string text, bool upright)
     {
-        ShowTooltip(pos, Vector2.Zero, text, upright);
+        return ShowTooltip(pos, Vector2.Zero, text, upright);
     }
 
-    public void ShowTooltip(Sprite2D source, string text, bool upright)
+    public UITooltip ShowTooltip(Sprite2D source, string text, bool upright)
     {
-        ShowTooltip(source.GlobalPosition, source.Texture.GetSize(), text, upright);
+        lastSource = source;
+        return ShowTooltip(source.GlobalPosition, source.Texture.GetSize(), text, upright);
     }
 
-    public void ShowTooltip(Control source, string text, bool upright)
+    public UITooltip ShowTooltip(Control source, string text, bool upright)
     {
-        ShowTooltip(source.GlobalPosition, source.Size, text, upright);
+        lastSource = source;
+        return ShowTooltip(source.GlobalPosition, source.Size, text, upright);
     }
 
-    private void ShowTooltip(Vector2 pos, Vector2 size, string text, bool upright)
+    public UITooltip ShowTooltip(Vector2 pos, Vector2 size, string text, bool upright)
     {
         UITooltip tooltip = upright ? TooltipUpright : TooltipSideways;
         tooltip.GlobalPosition = pos + tooltip.Size / 2 - size -
@@ -42,10 +46,15 @@ public partial class UITooltipController : Node
             tooltip.GlobalPosition += size / 2;
         }
         tooltip.ShowTooltip(text, delay);
+        return tooltip;
     }
 
-    public void HideTooltip()
+    public void HideTooltip(Node source = null)
     {
+        if (lastSource != null && lastSource != source)
+        {
+            return;
+        }
         TooltipUpright.HideTooltip();
         TooltipSideways.HideTooltip();
     }

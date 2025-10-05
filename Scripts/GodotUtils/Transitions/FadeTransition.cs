@@ -22,7 +22,7 @@ public partial class FadeTransition : Control, ITransition
         Modulate = new Color(Modulate, 0);
         interpolator.Interpolate(transitionTime, new Interpolator.InterpolateObject(
             a => Modulate = new Color(Modulate, a),
-            0,
+            Modulate.A,
             1));
         interpolator.OnFinish = midTransition;
     }
@@ -32,7 +32,7 @@ public partial class FadeTransition : Control, ITransition
         Modulate = new Color(Modulate, 1);
         interpolator.Interpolate(transitionTime, new Interpolator.InterpolateObject(
             a => Modulate = new Color(Modulate, a),
-            1,
+            Modulate.A,
             0));
         interpolator.OnFinish = () =>
         {

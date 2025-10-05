@@ -11,18 +11,30 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+mouse_behavior_recursive = 1
 script = ExtResource("1_57dv1")
-TooltipUpright = NodePath("UITooltipUpright")
-TooltipSideways = NodePath("UITooltipUpright")
+TooltipUpright = NodePath("CenterContainer")
+TooltipSideways = NodePath("CenterContainer")
+delay = 0.0
 
-[node name="UITooltipUpright" type="PanelContainer" parent="." node_paths=PackedStringArray("Label")]
-layout_mode = 1
+[node name="CenterContainer" type="CenterContainer" parent="." node_paths=PackedStringArray("Label")]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-mouse_filter = 2
 script = ExtResource("1_agtoe")
-Label = NodePath("Text")
+Label = NodePath("MarginContainer/UITooltipUpright/Text")
 transitionTime = 0.1
 
-[node name="Text" type="Label" parent="UITooltipUpright"]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
 layout_mode = 2
+theme_override_constants/margin_top = 24
+
+[node name="UITooltipUpright" type="PanelContainer" parent="CenterContainer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="Text" type="Label" parent="CenterContainer/MarginContainer/UITooltipUpright"]
+layout_mode = 2
+mouse_behavior_recursive = 1
+text = "Test text"
