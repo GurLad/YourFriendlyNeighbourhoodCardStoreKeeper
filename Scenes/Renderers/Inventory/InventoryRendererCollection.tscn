@@ -4,11 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://bvqmhs4j6oojj" path="res://Scenes/UI/MultiPageGird.tscn" id="1_tlkg5"]
 [ext_resource type="PackedScene" uid="uid://bisko1xy6pjyw" path="res://Scenes/Renderers/InventoryCardRenderer.tscn" id="2_u75ti"]
 
-[node name="InventoryRendererCollection" type="Control" node_paths=PackedStringArray("gridContainer")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="InventoryRendererCollection" type="MarginContainer" node_paths=PackedStringArray("gridContainer")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -234.0
+offset_top = -150.0
+offset_right = 234.0
+offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qx1aq")
@@ -16,4 +21,5 @@ gridContainer = NodePath("MultiPageGird")
 sceneCardRenderer = ExtResource("2_u75ti")
 
 [node name="MultiPageGird" parent="." instance=ExtResource("1_tlkg5")]
-layout_mode = 1
+custom_minimum_size = Vector2(468, 300)
+layout_mode = 2

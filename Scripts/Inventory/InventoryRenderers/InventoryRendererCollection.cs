@@ -16,6 +16,12 @@ public partial class InventoryRendererCollection : AInventoryRenderer
         Render(PlayerInventoryController.Inventory);
     }
 
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+        GD.Print(gridContainer.Size);
+    }
+
     public override void Render(InventoryData inventory)
     {
         this.inventory = inventory;
